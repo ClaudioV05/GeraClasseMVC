@@ -29,6 +29,17 @@ body
   padding-bottom: 3%;
 }
 
+#txtArea
+{
+  overflow-y: scroll;
+  resize: none;
+  border: 0;
+  box-shadow: none;
+  background-color: white;
+  color: black;
+  font-weight: bold;
+}
+
 #divCombobox 
 {
   padding-top: 3%;
