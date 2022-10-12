@@ -1,3 +1,35 @@
-body{
-  background-color: grey;
+body
+{
+  background-color: rgb(23, 23, 23);
+}
+
+.container
+{
+  padding-top:10%;
+}
+
+#lblTextoPrincipal
+{
+  color: white;
+  text-align: center;
+}
+
+.lblFormPrincipal 
+{
+  color: white;
+}
+
+.custom-file-label
+{
+  margin-left: 0.5%;
+}
+
+.divEspacoBotton 
+{
+  padding-bottom: 3%;
+}
+
+#divCombobox 
+{
+  padding-top: 3%;
 }

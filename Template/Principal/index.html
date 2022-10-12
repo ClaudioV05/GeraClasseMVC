@@ -4,12 +4,54 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" type="text/css" href="styles.css" />
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+  <link rel="stylesheet" type="text/css" href="styles.css" />
   <title>principal</title>
 </head>
 <body>
-  
+  <div class="container">
+    <form>
+
+      <div class="divEspacoBotton">
+        <h1 id="lblTextoPrincipal">Gera classe MVC V.5</h1>
+      </div>
+
+      <div class="divEspacoBotton">
+        <textarea class="form-control" id="txtArea" rows="10"></textarea>
+      </div>
+
+      <div class="divEspacoBotton">
+        <div class="form-row">
+            <div class="col-11">
+              <label class="custom-file-label" for="customFile">Arquivo Metadados</label>
+              <input type="file" class="custom-file-input" id="customFile" readonly>
+            </div>
+
+          <div class="col-1">
+            <button type="button" class="btn btn-secondary" id="btnGerarClasse">Confirmar</button>
+          </div>
+        </div>
+      </div>
+
+    <div class="divEspacoBotton">
+      <div class="form-row">
+        <div class="col-4">
+          <label class="lblFormPrincipal">Estilo do formulário</label>
+          <select class="form-control" id="cboEstiloFormulario"></select>
+        </div>
+        <div class="col-4">
+          <label class="lblFormPrincipal">IDE desenvolvimento</label>
+          <select class="form-control" id="cboIdeDesenvolvimento"></select>
+        </div>
+        <div class="col-4">
+          <label class="lblFormPrincipal">Banco de dados</label>
+          <select class="form-control" id="cboBancoDeDados"></select>
+        </div>
+      </div>
+    </div>
+
+    </form>
+  </div>
 </body>
 <script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
 <script src="actions.js"></script>
