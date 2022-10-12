@@ -29,7 +29,7 @@ function CarregarCboBancoDeDados()
 
 function CarregarTextArea()
 {
-  let textarea = `This program generates 'MVC' standard class files for the 'Delphi', 'Lazarus' and" '.NET' Development Ide, from a text file containing the metadata of one or more tables.
+  let textarea = `  This program generates 'MVC' standard class files for the 'Delphi', 'Lazarus' and" '.NET' Development Ide, from a text file containing the metadata of one or more tables.
   It is based on GeraClasseDelphi version 6.0. The difference is that it generates the files according to the 'MVC' project pattern,
   generating the Dao, Model, Controller and View files in corresponding folders. Views, Normal and Mdi style forms are created.
          
@@ -48,13 +48,12 @@ function CarregarTextArea()
   04. New version generate class Web in 12.10.2022`
 
   $("#txtArea").empty().append(textarea);
-  
 }
 
-var input = document.querySelector('input');
-var textarea = document.querySelector('textarea');
+var input = document.querySelector("input");
+var textarea = document.querySelector("textarea");
 
-input.addEventListener('change', function ()
+input.addEventListener("change", function ()
 {
   // Nome do arquivo Metadados
   var nomeDoArquivo = $(this).val().split("\\").pop();
@@ -74,9 +73,42 @@ input.addEventListener('change', function ()
         const file = e.target.result;
         const lines = file.split(/\r\n|\n/);
         $("#txtArea").empty();
-        textarea.value = lines.join('\n');
+        textarea.value = lines.join("\n");
     };
   
     reader.onerror = (e) => alert(e.target.error.name);
     reader.readAsText(file);
+});
+
+function SatisfazCritica()
+{
+  let validaCriticas = true;
+  let txtMetadados = $("#txtMetadados").val();
+  let cboEstiloFormulario = $("#cboEstiloFormulario").val();
+  let cboIdeDesenvolvimento = $("#cboIdeDesenvolvimento").val();
+  let cboBancoDeDados = $("#cboBancoDeDados").val();
+  
+  if ((txtMetadados == undefined) || (txtMetadados == null) || (txtMetadados == ""))
+  {
+    alert("Selecione o arquivo Metadados.");
+    validaCriticas = false;
+  }
+
+  if ((cboEstiloFormulario != undefined) && (cboEstiloFormulario != null) && ((cboEstiloFormulario) == "windowsform") || (cboEstiloFormulario == "html"))
+  {
+    alert("Estilo de Formulário sem implementação.");
+    validaCriticas = false;
+  }
+  
+  // fazer o restante das validações.
+  return validaCriticas;
+}
+
+$("#btnGerarClasse").on("click", function ()
+{
+  if (!SatisfazCritica())
+  {
+    // apresentar um modal com as informações e confirmando salvar no localstorage
+    // aqui fazer um método pra guardar no localstorage.
+  }
 });
