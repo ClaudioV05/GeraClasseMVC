@@ -1,35 +1,35 @@
-$(document).ready(() =>
- {
+$(document).ready( function () 
+{
   CarregarCboEstiloFormulario();
   CarregarCboIdeDesenvolvimento();
-  CarregarCboBancoDeDados(); 
+  CarregarCboBancoDeDados();
   CarregarTextArea();
 });
 
-function CarregarCboEstiloFormulario()
+function CarregarCboEstiloFormulario() 
 {
   var EstiloFormulario = ["Normal", "MDI", "Windows Form", "HTML"];
   $("#cboEstiloFormulario").empty();
   $.each(EstiloFormulario, (index, value) => $("#cboEstiloFormulario").append(`<option value=${value.toLowerCase().replace(/\s/g, "")}>${value}</option>`));
 }
 
-function CarregarCboIdeDesenvolvimento()
+function CarregarCboIdeDesenvolvimento() 
 {
   var IdeDesenvolvimento = ["Delphi", "Lazarus", "Visual Studio"];
   $("#cboIdeDesenvolvimento").empty();
   $.each(IdeDesenvolvimento, (index, value) => $("#cboIdeDesenvolvimento").append(`<option value=${value.toLowerCase().replace(/\s/g, "")}>${value}</option>`));
 }
 
-function CarregarCboBancoDeDados()
+function CarregarCboBancoDeDados() 
 {
   var IdeDesenvolvimento = ["SQL Puro", "Firebird"];
   $("#cboBancoDeDados").empty();
   $.each(IdeDesenvolvimento, (index, value) => $("#cboBancoDeDados").append(`<option value=${value.toLowerCase().replace(/\s/g, "")}>${value}</option>`));
 }
 
-function CarregarTextArea()
+function CarregarTextArea() 
 {
-  let textarea = `  This program generates 'MVC' standard class files for the 'Delphi', 'Lazarus' and" '.NET' Development Ide, from a text file containing the metadata of one or more tables.
+  let textArea = `  This program generates 'MVC' standard class files for the 'Delphi', 'Lazarus' and" '.NET' Development Ide, from a text file containing the metadata of one or more tables.
   It is based on GeraClasseDelphi version 6.0. The difference is that it generates the files according to the 'MVC' project pattern,
   generating the Dao, Model, Controller and View files in corresponding folders. Views, Normal and Mdi style forms are created.
          
@@ -47,68 +47,111 @@ function CarregarTextArea()
   
   04. New version generate class Web in 12.10.2022`
 
-  $("#txtArea").empty().append(textarea);
+  $("#txtArea").empty().append(textArea);
 }
 
 var input = document.querySelector("input");
 var textarea = document.querySelector("textarea");
 
-input.addEventListener("change", function ()
-{
+input.addEventListener("change", function () {
   // Nome do arquivo Metadados
   var nomeDoArquivo = $(this).val().split("\\").pop();
   $(this).siblings(".custom-file-label").addClass("selected").html(nomeDoArquivo);
 
   // Carregar o arquivo metadado no TextArea
-    let files = input.files;
+  let files = input.files;
+  if (files.length == 0)
+  { 
+    return;
+  }
   
-    if (files.length == 0) return;
+  const file = files[0];
+  let reader = new FileReader();
 
-    const file = files[0];
-  
-    let reader = new FileReader();
-  
-    reader.onload = (e) =>
-    {
-        const file = e.target.result;
-        const lines = file.split(/\r\n|\n/);
-        $("#txtArea").empty();
-        textarea.value = lines.join("\n");
-    };
-  
-    reader.onerror = (e) => alert(e.target.error.name);
-    reader.readAsText(file);
+  reader.onload = (e) => {
+    const file = e.target.result;
+    const lines = file.split(/\r\n|\n/);
+    $("#txtArea").empty();
+    textarea.value = lines.join("\n");
+  };
+
+  reader.onerror = (e) => alert(e.target.error.name);
+  reader.readAsText(file);
 });
 
 function SatisfazCritica()
 {
+  // Quando ficar pronto para as demais Ide, remover as validações
   let validaCriticas = true;
   let txtMetadados = $("#txtMetadados").val();
   let cboEstiloFormulario = $("#cboEstiloFormulario").val();
   let cboIdeDesenvolvimento = $("#cboIdeDesenvolvimento").val();
   let cboBancoDeDados = $("#cboBancoDeDados").val();
   
-  if ((txtMetadados == undefined) || (txtMetadados == null) || (txtMetadados == ""))
+  
+  if ((txtMetadados != undefined) || (txtMetadados != null))
   {
-    alert("Selecione o arquivo Metadados.");
-    validaCriticas = false;
+    if (validaCriticas == true) 
+    {
+     if (txtMetadados == "")
+      {
+        alert("Selecione o arquivo Metadados.");
+        validaCriticas = false;
+      }
+    }
   }
 
-  if ((cboEstiloFormulario != undefined) && (cboEstiloFormulario != null) && ((cboEstiloFormulario) == "windowsform") || (cboEstiloFormulario == "html"))
+  if ((cboEstiloFormulario != undefined) && (cboEstiloFormulario != null))
   {
-    alert("Estilo de Formulário sem implementação.");
-    validaCriticas = false;
+    if (validaCriticas == true) 
+    {
+      if (cboEstiloFormulario == "windowsform" || cboEstiloFormulario == "html") 
+      {
+        let itemSelecionado = $('#cboEstiloFormulario :selected').text();
+
+        alert(`Estilo de Formulário ${itemSelecionado.toUpperCase()} sem implementação.`);
+        validaCriticas = false;
+      }
+    }
   }
-  
-  // fazer o restante das validações.
+
+  if ((cboIdeDesenvolvimento != undefined) && (cboIdeDesenvolvimento != null))
+  {
+    if (validaCriticas == true) 
+    {
+      if (cboIdeDesenvolvimento == "visualstudio") 
+      {
+        let itemSelecionado = $('#cboIdeDesenvolvimento :selected').text();
+
+        alert(`IDE de desenvolvimento ${itemSelecionado.toUpperCase()} sem implementação.`);
+        validaCriticas = false;
+      }
+    }
+  }
+
+  if (cboBancoDeDados != undefined && cboBancoDeDados != null) 
+  {
+    if (validaCriticas == true) 
+    { 
+      if (cboBancoDeDados == "firebird") 
+      {
+        if (cboIdeDesenvolvimento == "delphi" || cboIdeDesenvolvimento == "lazarus") 
+        {
+          let itemSelecionado = $('#cboBancoDeDados :selected').text();
+
+          alert(`Banco de dados sem implementação para a IDE: ${itemSelecionado.toUpperCase()}.`);
+          validaCriticas = false;
+        }
+      }
+    }
+  }
   return validaCriticas;
 }
 
 $("#btnGerarClasse").on("click", function ()
 {
-  if (!SatisfazCritica())
+  if (SatisfazCritica())
   {
-    // apresentar um modal com as informações e confirmando salvar no localstorage
-    // aqui fazer um método pra guardar no localstorage.
+    alert("tudo ok")
   }
 });
