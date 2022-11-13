@@ -1,0 +1,38 @@
+﻿
+<div class="container">
+    <form>
+        <!-- #region TEXTAREA -->
+        <div>
+            <textarea class="form-control" id="txtArea" rows="20" cols="12" readonly></textarea>
+        </div>
+        <!-- #endregion -->
+        <!-- #region METADADOS -->
+        <div class="form-row mt-4 pl-1">
+            <div class="col-10">
+                <label class="custom-file-label font-weight-bold">Arquivo Metadados</label>
+                <input type="file" class="custom-file-input" id="txtMetadados" readonly>
+            </div>
+
+            <div class="col-2">
+                <button class="btn btn-secondary" id="btnGerarClasse">Confirmar</button>
+            </div>
+        </div>
+        <!-- #endregion -->
+        <!-- #region SELECT -->
+        <div class="form-row mt-3">
+            <div class="col-4">
+                <label class="titulo-label">IDE desenvolvimento</label>
+                <select class="form-control titulo-label-select" id="cboIdeDesenvolvimento"></select>
+            </div>
+            <div class="col-4">
+                <label class="titulo-label">Estilo do formulário</label>
+                <select class="form-control titulo-label-select" id="cboEstiloFormulario"></select>
+            </div>
+            <div class="col-4">
+                <label class="titulo-label">Banco de dados</label>
+                <select class="form-control titulo-label-select" id="cboBancoDeDados"></select>
+            </div>
+        </div>
+        <!-- #endregion -->
+    </form>
+</div>
