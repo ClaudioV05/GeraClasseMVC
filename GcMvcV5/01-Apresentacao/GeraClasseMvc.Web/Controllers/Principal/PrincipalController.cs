@@ -25,10 +25,11 @@ namespace GeraClasseMvc.Web.Controllers.Principal
             ViewData["TituloVersaoAplicacao"] = _utils.NomeDaVersaoAplicacao;
             ViewData["AnoVersaoAplicacao"] = _utils.AnoVersaoAplicacao;
 
-
             var principalViewModel = new PrincipalViewModel()
             {
-                IdeDesenvolvimentoListItem = _utils.IdeDesenvolvimentoListItem
+                IdeDesenvolvimentoListItem = _utils.IdeDesenvolvimentoListItem,
+                EstiloFormularioListItem = _utils.EstiloFormularioListItem,
+                BancoDeDadosListItem = _utils.BancoDeDadosListItem
             };
 
             return View("Principal", principalViewModel);

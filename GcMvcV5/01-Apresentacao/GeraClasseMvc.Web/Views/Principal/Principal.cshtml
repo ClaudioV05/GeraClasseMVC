@@ -24,27 +24,27 @@
         <!-- #endregion -->
         <!-- #region SELECT -->
         <div class="form-row mt-3">
-
             <div class="col-4">
-                <label for="IdeDesenvolvimento" class="titulo-label">IDE desenvolvimento</label>
-                @Html.DropDownList("IdeDesenvolvimento", (IEnumerable<SelectListItem>)Model.IdeDesenvolvimentoListItem, new { id = "cboIdeDesenvolvimento", @class = "form-control titulo-label-select text-uppercase" });
-
+                <label for="IdeDesenvolvimento" class="titulo-label">IDE de desenvolvimento</label>
+                @if (Model.IdeDesenvolvimentoListItem != null)
+                {
+                    @Html.DropDownList("IdeDesenvolvimento", (IEnumerable<SelectListItem>)Model.IdeDesenvolvimentoListItem, new { id = "cboIdeDesenvolvimento", @class = "form-control titulo-label-select", required = "false" });
+                }
             </div>
-
-
-
-            @*<div class="col-4">
-                    <label class="titulo-label">IDE desenvolvimento</label>
-                    <select class="form-control titulo-label-select" id="cboIdeDesenvolvimento"></select>
-                </div>
-                <div class="col-4">
-                    <label class="titulo-label">Estilo do formulário</label>
-                    <select class="form-control titulo-label-select" id="cboEstiloFormulario"></select>
-                </div>
-                <div class="col-4">
-                    <label class="titulo-label">Banco de dados</label>
-                    <select class="form-control titulo-label-select" id="cboBancoDeDados"></select>
-                </div>*@
+            <div class="col-4">
+                <label for="EstiloFormulario" class="titulo-label">Estilo do formulário</label>
+                @if (Model.EstiloFormularioListItem != null)
+                {
+                    @Html.DropDownList("EstiloFormulario", (IEnumerable<SelectListItem>)Model.EstiloFormularioListItem, new { id = "cboEstiloFormulario", @class = "form-control titulo-label-select", required = "false" });
+                }
+            </div>
+            <div class="col-4">
+                <label for="BancoDeDados" class="titulo-label">Banco de dados</label>
+                @if (Model.BancoDeDadosListItem != null)
+                {
+                    @Html.DropDownList("BancoDeDados", (IEnumerable<SelectListItem>)Model.BancoDeDadosListItem, new { id = "cboBancoDeDados", @class = "form-control titulo-label-select", required = "false" });
+                }
+            </div>
         </div>
         <!-- #endregion -->
     }

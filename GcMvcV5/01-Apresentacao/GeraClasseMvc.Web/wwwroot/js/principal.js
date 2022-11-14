@@ -1,27 +1,6 @@
 ﻿$(document).ready(function () {
-    CarregarCboEstiloFormulario();
-    //CarregarCboIdeDesenvolvimento();
-    CarregarCboBancoDeDados();
     CarregarTextArea();
 });
-
-function CarregarCboEstiloFormulario() {
-    var EstiloFormulario = ["Normal", "MDI", "Windows Form", "HTML"];
-    $("#cboEstiloFormulario").empty();
-    $.each(EstiloFormulario, (index, value) => $("#cboEstiloFormulario").append(`<option value=${value.toLowerCase().replace(/\s/g, "")}>${value}</option>`));
-}
-
-function CarregarCboIdeDesenvolvimento() {
-    var IdeDesenvolvimento = ["Delphi", "Lazarus", "Visual Studio"];
-    $("#cboIdeDesenvolvimento").empty();
-    $.each(IdeDesenvolvimento, (index, value) => $("#cboIdeDesenvolvimento").append(`<option value=${value.toLowerCase().replace(/\s/g, "")}>${value}</option>`));
-}
-
-function CarregarCboBancoDeDados() {
-    var IdeDesenvolvimento = ["SQL Puro", "Firebird"];
-    $("#cboBancoDeDados").empty();
-    $.each(IdeDesenvolvimento, (index, value) => $("#cboBancoDeDados").append(`<option value=${value.toLowerCase().replace(/\s/g, "")}>${value}</option>`));
-}
 
 function CarregarTextArea() {
     let textArea = `  This program generates 'MVC' standard class files for the 'Delphi', 'Lazarus' and" '.NET' Development Ide, from a text file containing the metadata of one or more tables.
