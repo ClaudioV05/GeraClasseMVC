@@ -1,10 +1,18 @@
-﻿namespace GeraClasseMvc.Web
+﻿using GeraClasseMvc.Api.Models;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using System.Collections.Generic;
+
+namespace GeraClasseMvc.Web
 {
     public interface IUtils
     {
-        public string NomeDaVersaoAplicacao { get; set; }
-        public string NomeDaAplicacao { get; set; }
+        string NomeDaVersaoAplicacao { get; set; }
 
-        public string AnoVersaoAplicacao { get; set; }
+        string NomeDaAplicacao { get; set; }
+
+        string AnoVersaoAplicacao { get; set; }
+
+        IEnumerable<SelectListItem> IdeDesenvolvimentoListItem { get; set; }
+
     }
 }

@@ -4,4 +4,8 @@
     <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\..\02-Aplicacao\GeraClasseMvc.Api\GeraClasseMvc.Api.csproj" />
+  </ItemGroup>
+
 </Project>

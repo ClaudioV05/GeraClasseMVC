@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using GeraClasseMvc.Web.Models;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Options;
 using System;
@@ -24,7 +25,13 @@ namespace GeraClasseMvc.Web.Controllers.Principal
             ViewData["TituloVersaoAplicacao"] = _utils.NomeDaVersaoAplicacao;
             ViewData["AnoVersaoAplicacao"] = _utils.AnoVersaoAplicacao;
 
-            return View("Principal");
+
+            var principalViewModel = new PrincipalViewModel()
+            {
+                IdeDesenvolvimentoListItem = _utils.IdeDesenvolvimentoListItem
+            };
+
+            return View("Principal", principalViewModel);
         }
 
         [HttpPost]
@@ -33,5 +40,9 @@ namespace GeraClasseMvc.Web.Controllers.Principal
             //Aqui chamar o httpclient e dependendo do retorno chamar a proxima view;
             return null;
         }
+
+        #region Métodos
+
+        #endregion Métodos
     }
 }

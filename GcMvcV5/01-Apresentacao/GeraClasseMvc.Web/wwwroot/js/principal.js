@@ -1,6 +1,6 @@
 ﻿$(document).ready(function () {
     CarregarCboEstiloFormulario();
-    CarregarCboIdeDesenvolvimento();
+    //CarregarCboIdeDesenvolvimento();
     CarregarCboBancoDeDados();
     CarregarTextArea();
 });
@@ -129,6 +129,8 @@ function SatisfazCritica() {
 
 $("#btnGerarClasse").on("click", function () {
     if (SatisfazCritica()) {
+
+
         document.forms[0].onsubmit;
     }
 });

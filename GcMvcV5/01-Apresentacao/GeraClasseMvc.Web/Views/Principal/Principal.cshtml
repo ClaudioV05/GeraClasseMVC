@@ -1,6 +1,10 @@
-﻿<div class="container">
+﻿@model GeraClasseMvc.Web.Models.PrincipalViewModel;
+
+<div class="container">
     @using (Html.BeginForm())
     {
+        @Html.HiddenFor(m => m.IdeDesenvolvimentoListItem);
+
         <!-- #region TEXTAREA -->
         <div>
             <textarea class="form-control" id="txtArea" rows="15" cols="12" readonly></textarea>
@@ -20,18 +24,27 @@
         <!-- #endregion -->
         <!-- #region SELECT -->
         <div class="form-row mt-3">
+
             <div class="col-4">
-                <label class="titulo-label">IDE desenvolvimento</label>
-                <select class="form-control titulo-label-select" id="cboIdeDesenvolvimento"></select>
+                <label for="IdeDesenvolvimento" class="titulo-label">IDE desenvolvimento</label>
+                @Html.DropDownList("IdeDesenvolvimento", (IEnumerable<SelectListItem>)Model.IdeDesenvolvimentoListItem, new { id = "cboIdeDesenvolvimento", @class = "form-control titulo-label-select text-uppercase" });
+
             </div>
-            <div class="col-4">
-                <label class="titulo-label">Estilo do formulário</label>
-                <select class="form-control titulo-label-select" id="cboEstiloFormulario"></select>
-            </div>
-            <div class="col-4">
-                <label class="titulo-label">Banco de dados</label>
-                <select class="form-control titulo-label-select" id="cboBancoDeDados"></select>
-            </div>
+
+
+
+            @*<div class="col-4">
+                    <label class="titulo-label">IDE desenvolvimento</label>
+                    <select class="form-control titulo-label-select" id="cboIdeDesenvolvimento"></select>
+                </div>
+                <div class="col-4">
+                    <label class="titulo-label">Estilo do formulário</label>
+                    <select class="form-control titulo-label-select" id="cboEstiloFormulario"></select>
+                </div>
+                <div class="col-4">
+                    <label class="titulo-label">Banco de dados</label>
+                    <select class="form-control titulo-label-select" id="cboBancoDeDados"></select>
+                </div>*@
         </div>
         <!-- #endregion -->
     }
