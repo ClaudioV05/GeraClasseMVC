@@ -21,6 +21,11 @@ namespace GeraClasseMvc.Web
         string AnoVersaoAplicacao { get; set; }
 
         /// <summary>
+        /// Informação da versão da aplicação.
+        /// </summary>
+        string InformacaoTextArea { get; set; }
+
+        /// <summary>
         /// Lista de Ide de Desenvolvimento.
         /// </summary>
         IEnumerable<SelectListItem> IdeDesenvolvimentoListItem { get; set; }

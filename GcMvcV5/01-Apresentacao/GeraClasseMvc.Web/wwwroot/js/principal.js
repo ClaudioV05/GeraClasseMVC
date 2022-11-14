@@ -1,28 +1,7 @@
 ﻿$(document).ready(function () {
-    CarregarTextArea();
+
+
 });
-
-function CarregarTextArea() {
-    let textArea = `  This program generates 'MVC' standard class files for the 'Delphi', 'Lazarus' and" '.NET' Development Ide, from a text file containing the metadata of one or more tables.
-  It is based on GeraClasseDelphi version 6.0. The difference is that it generates the files according to the 'MVC' project pattern,
-  generating the Dao, Model, Controller and View files in corresponding folders. Views, Normal and Mdi style forms are created.
-         
-  Important:
-  
-  01. Font formatting obeys Delphis automatic formatter with default values, except:
-  Right margin = 135
-  Indent case contents = True
-  
-  02. For Views, there is a problem with accentuation in the display of dialog messages in Lazarus
-  Adjust the Encoding of the code editor.
-  Right click in code editor > File Settings > Encoding > select UTF-8 with BOM
-  
-  03. Version for Visual Studio in date 30.07.2022"
-  
-  04. New version generate class Web in 12.10.2022`
-
-    $("#txtArea").empty().append(textArea);
-}
 
 var input = document.querySelector("input");
 var textarea = document.querySelector("textarea");

@@ -18,12 +18,12 @@
     </header>
 
     <div class="container">
-        <main role="main" class="pb-3">
+        <main role="main" class="pb-2">
             @RenderBody()
         </main>
     </div>
 
-    <footer class="border-top footer text-muted">
+    <footer class="border-top footer text-muted mh-25">
         <div class="container pr-1">
             <span class="pl-3">&copy; @ViewData["AnoVersaoAplicacao"] - @ViewData["TituloVersaoAplicacao"]</span>
         </div>
@@ -32,7 +32,6 @@
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/principal.js" asp-append-version="true"></script>
-    <script src="~/js/utils.js" asp-append-version="true"></script>
     @RenderSection("Scripts", required: false)
 </body>
 </html>

@@ -4,10 +4,12 @@
     @using (Html.BeginForm())
     {
         @Html.HiddenFor(m => m.IdeDesenvolvimentoListItem);
+        @Html.HiddenFor(m => m.EstiloFormularioListItem);
+        @Html.HiddenFor(m => m.BancoDeDadosListItem);
 
         <!-- #region TEXTAREA -->
         <div>
-            <textarea class="form-control" id="txtArea" rows="15" cols="12" readonly></textarea>
+            @Html.TextAreaFor(m => m.InformacaoTextArea, new { id = "txtArea", @class = "form-control", rows = "14", cols = "12" })
         </div>
         <!-- #endregion -->
         <!-- #region METADADOS -->

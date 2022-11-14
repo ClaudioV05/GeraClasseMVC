@@ -12,17 +12,25 @@ namespace GeraClasseMvc.Web.Services
         {
             this.NomeDaVersaoAplicacao = configuration["GeraClasseMvc:NomeDaVersaoAplicacao"];
             this.NomeDaAplicacao = configuration["GeraClasseMvc:NomeDaAplicacao"];
-            this.AnoVersaoAplicacao = DateTime.Now.Year.ToString();
+            this.AnoVersaoAplicacao = CarregarAnoVersaoAplicacao();
+            this.InformacaoTextArea = CarregarInformacaoTextArea();
             this.IdeDesenvolvimentoListItem = CarregarListaIdeDesenvolvimento();
             this.EstiloFormularioListItem = CarregarListaEstiloFormulario();
             this.BancoDeDadosListItem = CarregarListaBancoDeDados();
         }
 
         public string NomeDaVersaoAplicacao { get; set; }
+
         public string NomeDaAplicacao { get; set; }
+
         public string AnoVersaoAplicacao { get; set; }
+
+        public string InformacaoTextArea { get; set; }
+
         public IEnumerable<SelectListItem> IdeDesenvolvimentoListItem { get; set; }
+
         public IEnumerable<SelectListItem> EstiloFormularioListItem { get; set; }
+
         public IEnumerable<SelectListItem> BancoDeDadosListItem { get; set; }
 
         #region CarregarListaIdeDesenvolvimento
@@ -105,5 +113,35 @@ namespace GeraClasseMvc.Web.Services
             return lista;
         }
         #endregion CarregarListaBancoDeDados
+
+        #region CarregarAnoVersaoAplicacao
+        private string CarregarAnoVersaoAplicacao()
+        {
+            return DateTime.Now.Year.ToString();
+        }
+        #endregion CarregarAnoVersaoAplicacao
+
+        #region CarregarInformacaoTextArea
+        private string CarregarInformacaoTextArea()
+        {
+            return "This program generates 'MVC' standard class files for the 'Delphi', 'Lazarus' and '.NET' Development Ide, from a text file containing the metadata of one or more tables.\n" +
+                   "It is based on GeraClasseDelphi version 6.0. The difference is that it generates the files according to the 'MVC' project pattern,\n" +
+                   "generating the Dao, Model, Controller and View files in corresponding folders.Views, Normal and Mdi style forms are created.\n\n" +
+
+                   "Important:\n\n" +
+
+                   "01. Font formatting obeys Delphis automatic formatter with default values, except:\n" +
+                   "Right margin = 135\n" +
+                   "Indent case contents = True\n\n" +
+
+                   "02. For Views, there is a problem with accentuation in the display of dialog messages in Lazarus\n" +
+                   "Adjust the Encoding of the code editor.\n" +
+                   "Right click in code editor > File Settings > Encoding > select UTF-8 with BOM\n\n" +
+
+                   "03. Version for Visual Studio in date 30.07.2022\n\n" +
+
+                   "04. New version generate class Web in 12.10.2022";
+        }
+        #endregion CarregarInformacaoTextArea
     }
 }

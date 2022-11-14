@@ -27,6 +27,7 @@ namespace GeraClasseMvc.Web.Controllers.Principal
 
             var principalViewModel = new PrincipalViewModel()
             {
+                InformacaoTextArea = _utils.InformacaoTextArea,
                 IdeDesenvolvimentoListItem = _utils.IdeDesenvolvimentoListItem,
                 EstiloFormularioListItem = _utils.EstiloFormularioListItem,
                 BancoDeDadosListItem = _utils.BancoDeDadosListItem
