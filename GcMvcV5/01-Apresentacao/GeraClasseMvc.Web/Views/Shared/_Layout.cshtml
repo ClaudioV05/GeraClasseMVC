@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Titulo"]</title>
+    <title>@ViewData["TituloVersaoAplicacao"]</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/layout.css" />
     <link rel="stylesheet" href="~/css/principal.css" />
@@ -13,7 +13,7 @@
 
     <header>
         <div class="titulo-layout">
-            <span>Gera Classe MVC 5</span>
+            <span>@ViewData["NomeDaAplicacao"]</span>
         </div>
     </header>
 
@@ -24,14 +24,15 @@
     </div>
 
     <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2022 - @ViewData["Titulo"]
+        <div class="container pr-1">
+            <span class="pl-3">&copy; @ViewData["AnoVersaoAplicacao"] - @ViewData["TituloVersaoAplicacao"]</span>
         </div>
     </footer>
 
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/principal.js" asp-append-version="true"></script>
+    <script src="~/js/utils.js" asp-append-version="true"></script>
     @RenderSection("Scripts", required: false)
 </body>
 </html>

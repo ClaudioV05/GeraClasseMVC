@@ -17,11 +17,21 @@ namespace GeraClasseMvc.Web.Controllers.Principal
             _utils = utils;
         }
 
+        [HttpGet]
         public IActionResult Index()
         {
-            ViewData["Titulo"] = _utils.NomeDaAplicacao;
+            ViewData["NomeDaAplicacao"] = _utils.NomeDaAplicacao;
+            ViewData["TituloVersaoAplicacao"] = _utils.NomeDaVersaoAplicacao;
+            ViewData["AnoVersaoAplicacao"] = _utils.AnoVersaoAplicacao;
 
             return View("Principal");
+        }
+
+        [HttpPost]
+        public IActionResult Principal()
+        {
+            //Aqui chamar o httpclient e dependendo do retorno chamar a proxima view;
+            return null;
         }
     }
 }

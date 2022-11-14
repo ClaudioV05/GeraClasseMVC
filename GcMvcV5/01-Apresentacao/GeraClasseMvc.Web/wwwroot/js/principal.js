@@ -129,6 +129,6 @@ function SatisfazCritica() {
 
 $("#btnGerarClasse").on("click", function () {
     if (SatisfazCritica()) {
-        alert("tudo ok")
+        document.forms[0].onsubmit;
     }
 });

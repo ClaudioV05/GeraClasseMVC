@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.Configuration;
+using System;
 
 namespace GeraClasseMvc.Web.Services
 {
@@ -6,9 +7,15 @@ namespace GeraClasseMvc.Web.Services
     {
         public Utils(IConfiguration configuration)
         {
+            this.NomeDaVersaoAplicacao = configuration["GeraClasseMvc:NomeDaVersaoAplicacao"];
             this.NomeDaAplicacao = configuration["GeraClasseMvc:NomeDaAplicacao"];
+            this.AnoVersaoAplicacao = DateTime.Now.Year.ToString();
         }
 
+        public string NomeDaVersaoAplicacao { get; set; }
+
         public string NomeDaAplicacao { get; set; }
+
+        public string AnoVersaoAplicacao { get; set; }
     }
 }
