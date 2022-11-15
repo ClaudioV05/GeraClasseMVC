@@ -1,7 +1,7 @@
 ﻿@model GeraClasseMvc.Web.Models.PrincipalViewModel;
 
 <div class="container">
-    @using (Html.BeginForm())
+    @using (Html.BeginForm("Principal", "Principal"))
     {
         @Html.HiddenFor(m => m.IdeDesenvolvimentoListItem);
         @Html.HiddenFor(m => m.EstiloFormularioListItem);
@@ -9,14 +9,14 @@
 
         <!-- #region TEXTAREA -->
         <div>
-            @Html.TextAreaFor(m => m.InformacaoTextArea, new { id = "txtArea", @class = "form-control", rows = "14", cols = "12" })
+            @Html.TextAreaFor(m => m.InformacaoTextArea, new { id = "InformacaoTextArea", @class = "form-control", rows = "15", cols = "12" })
         </div>
         <!-- #endregion -->
         <!-- #region METADADOS -->
         <div class="form-row mt-4 pl-1">
             <div class="col-10">
                 <label class="custom-file-label font-weight-bold">Arquivo Metadados</label>
-                <input type="file" class="custom-file-input" id="txtMetadados" readonly>
+                @Html.EditorFor(m => m.ArquivoMetadata, new { id = "ArquivoMetadata", htmlAttributes = new { type = "file",  @class = "custom-file-input", @readonly = "true" } }) });
             </div>
 
             <div class="col-2">

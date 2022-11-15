@@ -9,6 +9,8 @@ namespace GeraClasseMvc.Web.Models
 {
     public class PrincipalViewModel
     {
+        public string ArquivoMetadata { get; set; }
+
         public string InformacaoTextArea { get; set; }
 
         public IEnumerable<SelectListItem> IdeDesenvolvimentoListItem { get; set; }

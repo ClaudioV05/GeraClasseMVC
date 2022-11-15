@@ -3,13 +3,12 @@
 
 });
 
-var input = document.querySelector("input");
-var textarea = document.querySelector("textarea");
+var input = document.querySelector("input[name=ArquivoMetadata]");
+var textarea = document.querySelector("textarea[name=InformacaoTextArea]");
 
-input.addEventListener("change", function () {
-    // Nome do arquivo Metadados
-    var nomeDoArquivo = $(this).val().split("\\").pop();
-    $(this).siblings(".custom-file-label").addClass("selected").html(nomeDoArquivo);
+$("input[name=ArquivoMetadata]").change(function () {
+     // Nome do arquivo Metadados
+    $(this).siblings(".custom-file-label").addClass("selected").html($(this).val().split("\\").pop());
 
     // Carregar o arquivo metadado no TextArea
     let files = input.files;
@@ -23,7 +22,7 @@ input.addEventListener("change", function () {
     reader.onload = (e) => {
         const file = e.target.result;
         const lines = file.split(/\r\n|\n/);
-        $("#txtArea").empty();
+        $("#InformacaoTextArea").empty();
         textarea.value = lines.join("\n");
     };
 
@@ -34,14 +33,14 @@ input.addEventListener("change", function () {
 function SatisfazCritica() {
     // Quando ficar pronto para as demais Ide, remover as validações
     let validaCriticas = true;
-    let txtMetadados = $("#txtMetadados").val();
+    let txtArquivoMetadata = $("#ArquivoMetadata").val();
     let cboEstiloFormulario = $("#cboEstiloFormulario").val();
     let cboIdeDesenvolvimento = $("#cboIdeDesenvolvimento").val();
     let cboBancoDeDados = $("#cboBancoDeDados").val();
 
-    if ((txtMetadados != undefined) || (txtMetadados != null)) {
+    if ((txtArquivoMetadata != undefined) || (txtArquivoMetadata != null)) {
         if (validaCriticas == true) {
-            if (txtMetadados == "") {
+            if (txtArquivoMetadata == "") {
                 alert("Selecione o arquivo Metadados.");
                 validaCriticas = false;
             }

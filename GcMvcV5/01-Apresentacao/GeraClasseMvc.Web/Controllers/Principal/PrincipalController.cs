@@ -19,7 +19,7 @@ namespace GeraClasseMvc.Web.Controllers.Principal
         }
 
         [HttpGet]
-        public IActionResult Index()
+        public IActionResult Principal()
         {
             ViewData["NomeDaAplicacao"] = _utils.NomeDaAplicacao;
             ViewData["TituloVersaoAplicacao"] = _utils.NomeDaVersaoAplicacao;
@@ -37,14 +37,14 @@ namespace GeraClasseMvc.Web.Controllers.Principal
         }
 
         [HttpPost]
-        public IActionResult Principal()
+        public IActionResult Principal(PrincipalViewModel principalViewModel)
         {
             //Aqui chamar o httpclient e dependendo do retorno chamar a proxima view;
             return null;
         }
 
         #region Métodos
-
+        // aqui ficarão os métodos de chegda e de tratamento de dados.
         #endregion Métodos
     }
 }

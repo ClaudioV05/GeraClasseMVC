@@ -1,17 +1,19 @@
-﻿using Microsoft.Extensions.Configuration;
+﻿using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
-using GeraClasseMvc.Api.Models;
-using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace GeraClasseMvc.Web.Services
 {
     public class Utils : IUtils
     {
+        private readonly IConfiguration _configuration;
         public Utils(IConfiguration configuration)
         {
-            this.NomeDaVersaoAplicacao = configuration["GeraClasseMvc:NomeDaVersaoAplicacao"];
-            this.NomeDaAplicacao = configuration["GeraClasseMvc:NomeDaAplicacao"];
+            _configuration = configuration;
+
+            this.NomeDaVersaoAplicacao = CarregarNomeDaVersaoAplicacao();
+            this.NomeDaAplicacao = CarregarNomeDaAplicacao();
             this.AnoVersaoAplicacao = CarregarAnoVersaoAplicacao();
             this.InformacaoTextArea = CarregarInformacaoTextArea();
             this.IdeDesenvolvimentoListItem = CarregarListaIdeDesenvolvimento();
@@ -115,14 +117,19 @@ namespace GeraClasseMvc.Web.Services
         #endregion CarregarListaBancoDeDados
 
         #region CarregarAnoVersaoAplicacao
-        private string CarregarAnoVersaoAplicacao()
-        {
-            return DateTime.Now.Year.ToString();
-        }
+        private string CarregarAnoVersaoAplicacao() => DateTime.Now.Year.ToString();
         #endregion CarregarAnoVersaoAplicacao
 
+        #region CarregarNomeDaVersaoAplicacao
+        private string CarregarNomeDaVersaoAplicacao() => _configuration["GeraClasseMvc:NomeDaVersaoAplicacao"];
+        #endregion CarregarNomeDaVersaoAplicacao
+
+        #region CarregarNomeDaAplicacao
+        private string CarregarNomeDaAplicacao() => _configuration["GeraClasseMvc:NomeDaAplicacao"];
+        #endregion CarregarNomeDaAplicacao
+
         #region CarregarInformacaoTextArea
-        private string CarregarInformacaoTextArea()
+        private static string CarregarInformacaoTextArea()
         {
             return "This program generates 'MVC' standard class files for the 'Delphi', 'Lazarus' and '.NET' Development Ide, from a text file containing the metadata of one or more tables.\n" +
                    "It is based on GeraClasseDelphi version 6.0. The difference is that it generates the files according to the 'MVC' project pattern,\n" +
