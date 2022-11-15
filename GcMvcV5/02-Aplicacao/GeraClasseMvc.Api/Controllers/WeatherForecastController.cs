@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 
 namespace GeraClasseMvc.Api.Controllers
 {
+    [Produces("application/json")]
     [ApiController]
     [Route("[controller]")]
     public class WeatherForecastController : ControllerBase

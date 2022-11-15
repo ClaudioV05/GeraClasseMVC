@@ -10,6 +10,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Swashbuckle.AspNetCore.Swagger;
+using Microsoft.OpenApi.Models;
 
 namespace GeraClasseMvc.Api
 {
@@ -25,6 +27,28 @@ namespace GeraClasseMvc.Api
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", new OpenApiInfo
+                {
+                    Version = "v1",
+                    Title = "GeraClasseMvc.Api",
+                    Description = "Gerador de classes MVC",
+                    TermsOfService = new Uri("https://claudiomildo.net/terms"),
+                    Contact = new OpenApiContact
+                    {
+                        Name = "Claudiomildo",
+                        Email = "claudiomildo@hotmail.com",
+                        Url = new Uri("https://www.claudiomildo.net"),
+                    },
+                    License = new OpenApiLicense
+                    {
+                        Name = "Usar sobre LICX",
+                        Url = new Uri("https://claudiomildo.net/license"),
+                    }
+                });
+            });
+
             services.AddControllers();
         }
 
@@ -41,6 +65,15 @@ namespace GeraClasseMvc.Api
             app.UseRouting();
 
             app.UseAuthorization();
+
+           // Habilita o middleware para servir o Swagger gerado como um endpoint  JSON
+           app.UseSwagger();
+
+            //Registra o gerador Swagger definindo um ou mais documentos Swagger 
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "Gerador de classes MVC");
+            });
 
             app.UseEndpoints(endpoints =>
             {
