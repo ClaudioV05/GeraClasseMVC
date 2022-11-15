@@ -1,13 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace GeraClasseMvc.Api.Models
+﻿namespace GeraClasseMvc.Api.Models
 {
+    public enum TipoBancodeDados : byte
+    {
+        NaoEncontrado = 0,
+        SqlPuro = 1,
+        Firebird = 2,
+    }
+
     public class BancodeDados
     {
-        public int Id { get; set; }
+        public TipoBancodeDados Id { get; set; }
+
         public string Descricao { get; set; }
     }
 }

@@ -1,13 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace GeraClasseMvc.Api.Models
+﻿namespace GeraClasseMvc.Api.Models
 {
+    public enum TipoEstiloFormulario : byte
+    {
+        NaoEncontrado = 0,
+        Normal = 1,
+        MDI = 2,
+        WindowsForm = 3,
+        Html = 4
+    }
+
     public class EstiloFormulario
     {
-        public int Id { get; set; }
+        public TipoEstiloFormulario Id { get; set; }
+
         public string Descricao { get; set; }
     }
 }

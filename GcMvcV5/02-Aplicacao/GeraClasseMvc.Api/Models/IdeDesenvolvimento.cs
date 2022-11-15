@@ -1,13 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace GeraClasseMvc.Api.Models
+﻿namespace GeraClasseMvc.Api.Models
 {
+    public enum TipoIdeDesenvolvimento : byte
+    {
+        NaoEncontrado = 0,
+        Delphi = 1,
+        Lazarus = 2,
+        VisualStudio = 3
+    }
+
     public class IdeDesenvolvimento
     {
-        public int Id { get; set; }
+        public TipoIdeDesenvolvimento Id { get; set; }
+
         public string Descricao { get; set; }
     }
 }
