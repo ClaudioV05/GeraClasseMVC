@@ -101,13 +101,15 @@ function SalvarDadosLocalStorage() {
     localStorage.setItem('bancodedados', $('#dpdBancoDeDados :selected').val());
 }
 
-$("#btnGerarClasse").on("click", function (e) {
+$("#btnGerarClasse").on("click", function (event) {
     if (SatisfazCritica()) {
         SalvarDadosLocalStorage();
-        e.preventDefault();
-        //document.forms[0].onsubmit;
+
+        $('#BancoDeDados').val() = $('#dpdBancoDeDados :selected').val();
+
+        document.forms[0].onsubmit;
     }
     else {
-        e.preventDefault();
+        event.preventDefault();
     }
 });
