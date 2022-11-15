@@ -31,46 +31,50 @@ $("input[name=ArquivoMetadata]").change(function () {
 });
 
 function SatisfazCritica() {
-    // Quando ficar pronto para as demais Ide, remover as validações
+    // Quando todas as implementações estiverem prontas, remover as validações do DropDown. Manter o arquivo Metadata.
     let validaCriticas = true;
-    let cboEstiloFormulario = $("#cboEstiloFormulario").val();
-    let cboIdeDesenvolvimento = $("#cboIdeDesenvolvimento").val();
-    let cboBancoDeDados = $("#cboBancoDeDados").val();
 
+    //#region Validação do arquivo Metadata.
     if ($("#ArquivoMetadata").val() != undefined || $("#ArquivoMetadata").val() != null) {
         if (validaCriticas == true && $("#ArquivoMetadata").val() == "") {
             alert("Selecione o arquivo Metadados.");
             validaCriticas = false;
         }
     }
+    //#endregion Validação do arquivo Metadata.
 
-    if ((cboEstiloFormulario != undefined) && (cboEstiloFormulario != null)) {
+    //#region Validação do estilo do formulário.
+    if (($("#dpdEstiloFormulario").val() != undefined) && ($("#dpdEstiloFormulario").val() != null)) {
         if (validaCriticas == true) {
-            if (cboEstiloFormulario == "windowsform" || cboEstiloFormulario == "html") {
-                let itemSelecionado = $('#cboEstiloFormulario :selected').text();
+            if ($("#dpdEstiloFormulario").val() == "windowsform" || $("#dpdEstiloFormulario").val() == "html") {
+                let itemSelecionado = $('#dpdEstiloFormulario :selected').text();
 
                 alert(`Estilo de Formulário ${itemSelecionado.toUpperCase()} sem implementação.`);
                 validaCriticas = false;
             }
         }
     }
+    //#endregion Validação do estilo do formulário.
 
-    if ((cboIdeDesenvolvimento != undefined) && (cboIdeDesenvolvimento != null)) {
+    //#region Validação da IDE de desenvolvimento.
+    if (($("#dpdIdeDesenvolvimento").val() != undefined) && ($("#dpdIdeDesenvolvimento").val() != null)) {
         if (validaCriticas == true) {
-            if (cboIdeDesenvolvimento == "visualstudio") {
-                let itemSelecionado = $('#cboIdeDesenvolvimento :selected').text();
+            if ($("#dpdIdeDesenvolvimento").val() == "visualstudio") {
+                let itemSelecionado = $('#dpdIdeDesenvolvimento :selected').text();
 
                 alert(`IDE de desenvolvimento ${itemSelecionado.toUpperCase()} sem implementação.`);
                 validaCriticas = false;
             }
         }
     }
+    //#endregion Validação da IDE de desenvolvimento.
 
-    if (cboBancoDeDados != undefined && cboBancoDeDados != null) {
+    //#region Validação da Engine do banco de dados.
+    if ($("#dpdBancoDeDados").val() != undefined && $("#dpdBancoDeDados").val() != null) {
         if (validaCriticas == true) {
-            if (cboBancoDeDados == "firebird") {
-                if (cboIdeDesenvolvimento == "delphi" || cboIdeDesenvolvimento == "lazarus") {
-                    let itemSelecionado = $('#cboBancoDeDados :selected').text();
+            if ($("#dpdBancoDeDados").val() == "firebird") {
+                if ($("#dpdBancoDeDados").val() == "delphi" || $("#dpdBancoDeDados").val() == "lazarus") {
+                    let itemSelecionado = $('#dpdBancoDeDados :selected').text();
 
                     alert(`Banco de dados sem implementação para a IDE: ${itemSelecionado.toUpperCase()}.`);
                     validaCriticas = false;
@@ -78,13 +82,17 @@ function SatisfazCritica() {
             }
         }
     }
+    //#endregion Validação da Engine do banco de dados.
+
     return validaCriticas;
 }
 
-$("#btnGerarClasse").on("click", function () {
+$("#btnGerarClasse").on("click", function (e) {
     if (SatisfazCritica()) {
-
-
+        // carregar o restante do objeto.
         document.forms[0].onsubmit;
+    }
+    else {
+        e.preventDefault()
     }
 });
