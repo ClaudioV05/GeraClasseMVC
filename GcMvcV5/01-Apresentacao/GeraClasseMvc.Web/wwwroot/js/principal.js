@@ -1,5 +1,5 @@
 ﻿$(document).ready(function () {
-
+    LimparLocalStorage();
 
 });
 
@@ -7,10 +7,10 @@ var input = document.querySelector("input[name=ArquivoMetadata]");
 var textarea = document.querySelector("textarea[name=InformacaoTextArea]");
 
 $("input[name=ArquivoMetadata]").change(function () {
-    // Nome do arquivo Metadados
+    // Nome do arquivo Metadados.
     $(this).siblings(".custom-file-label").addClass("selected").html($(this).val().split("\\").pop());
 
-    // Carregar o arquivo metadado no TextArea
+    // Carregar o arquivo Metadados no TextArea.
     let files = input.files;
     if (files.length == 0) {
         return;
@@ -35,7 +35,7 @@ function SatisfazCritica() {
     let validaCriticas = true;
 
     //#region Validação do arquivo Metadata.
-    if ($("#ArquivoMetadata").val() != undefined || $("#ArquivoMetadata").val() != null) {
+    if ($("#ArquivoMetadata").val() != "undefined" || $("#ArquivoMetadata").val() != null) {
         if (validaCriticas == true && $("#ArquivoMetadata").val() == "") {
             alert("Selecione o arquivo Metadados.");
             validaCriticas = false;
@@ -43,21 +43,8 @@ function SatisfazCritica() {
     }
     //#endregion Validação do arquivo Metadata.
 
-    //#region Validação do estilo do formulário.
-    if (($("#dpdEstiloFormulario").val() != undefined) && ($("#dpdEstiloFormulario").val() != null)) {
-        if (validaCriticas == true) {
-            if ($("#dpdEstiloFormulario").val() == "windowsform" || $("#dpdEstiloFormulario").val() == "html") {
-                let itemSelecionado = $('#dpdEstiloFormulario :selected').text();
-
-                alert(`Estilo de Formulário ${itemSelecionado.toUpperCase()} sem implementação.`);
-                validaCriticas = false;
-            }
-        }
-    }
-    //#endregion Validação do estilo do formulário.
-
     //#region Validação da IDE de desenvolvimento.
-    if (($("#dpdIdeDesenvolvimento").val() != undefined) && ($("#dpdIdeDesenvolvimento").val() != null)) {
+    if (($("#dpdIdeDesenvolvimento").val() != "undefined") && ($("#dpdIdeDesenvolvimento").val() != null)) {
         if (validaCriticas == true) {
             if ($("#dpdIdeDesenvolvimento").val() == "visualstudio") {
                 let itemSelecionado = $('#dpdIdeDesenvolvimento :selected').text();
@@ -69,8 +56,21 @@ function SatisfazCritica() {
     }
     //#endregion Validação da IDE de desenvolvimento.
 
+    //#region Validação do estilo do formulário.
+    if (($("#dpdEstiloFormulario").val() != "undefined") && ($("#dpdEstiloFormulario").val() != null)) {
+        if (validaCriticas == true) {
+            if ($("#dpdEstiloFormulario").val() == "windowsform" || $("#dpdEstiloFormulario").val() == "html") {
+                let itemSelecionado = $('#dpdEstiloFormulario :selected').text();
+
+                alert(`Estilo de Formulário ${itemSelecionado.toUpperCase()} sem implementação.`);
+                validaCriticas = false;
+            }
+        }
+    }
+    //#endregion Validação do estilo do formulário.
+
     //#region Validação da Engine do banco de dados.
-    if ($("#dpdBancoDeDados").val() != undefined && $("#dpdBancoDeDados").val() != null) {
+    if ($("#dpdBancoDeDados").val() != "undefined" && $("#dpdBancoDeDados").val() != null) {
         if (validaCriticas == true) {
             if ($("#dpdBancoDeDados").val() == "firebird") {
                 if ($("#dpdBancoDeDados").val() == "delphi" || $("#dpdBancoDeDados").val() == "lazarus") {
@@ -87,12 +87,27 @@ function SatisfazCritica() {
     return validaCriticas;
 }
 
+function LimparLocalStorage() {
+    if (typeof (window.localStorage) !== "undefined") {
+        window.localStorage.clear();
+    } else {
+        alert("Sem suporte para o Web Storage support..");
+    }
+}
+
+function SalvarDadosLocalStorage() {
+    localStorage.setItem('idedesenvolvimento', $('#dpdIdeDesenvolvimento :selected').val());
+    localStorage.setItem('estiloformulario', $('#dpdEstiloFormulario :selected').val());
+    localStorage.setItem('bancodedados', $('#dpdBancoDeDados :selected').val());
+}
+
 $("#btnGerarClasse").on("click", function (e) {
     if (SatisfazCritica()) {
-        // carregar o restante do objeto.
-        document.forms[0].onsubmit;
+        SalvarDadosLocalStorage();
+        e.preventDefault();
+        //document.forms[0].onsubmit;
     }
     else {
-        e.preventDefault()
+        e.preventDefault();
     }
 });
