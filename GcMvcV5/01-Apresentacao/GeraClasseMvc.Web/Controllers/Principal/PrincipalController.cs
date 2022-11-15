@@ -11,9 +11,9 @@ namespace GeraClasseMvc.Web.Controllers.Principal
 {
     public class PrincipalController : Controller
     {
-        private readonly IUtils _utils;
+        private readonly IUtilsPrincipal _utils;
 
-        public PrincipalController(IUtils utils)
+        public PrincipalController(IUtilsPrincipal utils)
         {
             _utils = utils;
         }
