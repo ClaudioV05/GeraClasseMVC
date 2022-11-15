@@ -7,7 +7,7 @@ var input = document.querySelector("input[name=ArquivoMetadata]");
 var textarea = document.querySelector("textarea[name=InformacaoTextArea]");
 
 $("input[name=ArquivoMetadata]").change(function () {
-     // Nome do arquivo Metadados
+    // Nome do arquivo Metadados
     $(this).siblings(".custom-file-label").addClass("selected").html($(this).val().split("\\").pop());
 
     // Carregar o arquivo metadado no TextArea
@@ -33,17 +33,14 @@ $("input[name=ArquivoMetadata]").change(function () {
 function SatisfazCritica() {
     // Quando ficar pronto para as demais Ide, remover as validações
     let validaCriticas = true;
-    let txtArquivoMetadata = $("#ArquivoMetadata").val();
     let cboEstiloFormulario = $("#cboEstiloFormulario").val();
     let cboIdeDesenvolvimento = $("#cboIdeDesenvolvimento").val();
     let cboBancoDeDados = $("#cboBancoDeDados").val();
 
-    if ((txtArquivoMetadata != undefined) || (txtArquivoMetadata != null)) {
-        if (validaCriticas == true) {
-            if (txtArquivoMetadata == "") {
-                alert("Selecione o arquivo Metadados.");
-                validaCriticas = false;
-            }
+    if ($("#ArquivoMetadata").val() != undefined || $("#ArquivoMetadata").val() != null) {
+        if (validaCriticas == true && $("#ArquivoMetadata").val() == "") {
+            alert("Selecione o arquivo Metadados.");
+            validaCriticas = false;
         }
     }
 
