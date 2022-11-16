@@ -1,4 +1,6 @@
-﻿using GeraClasseMvc.Web.Models;
+﻿using GeraClasseMvc.Api.Models;
+using GeraClasseMvc.Api.Services.Interfaces;
+using GeraClasseMvc.Web.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Options;
@@ -11,36 +13,53 @@ namespace GeraClasseMvc.Web.Controllers.Principal
 {
     public class PrincipalController : Controller
     {
-        private readonly IUtilsPrincipal _utils;
+        private readonly IUtilsMvcWebPrincipal _utilsWeb;
 
-        public PrincipalController(IUtilsPrincipal utils)
+        private readonly IUtilsMvcApiPrincipal _utilsApi;
+
+        private readonly IMetodosGenericos _metodosGenericos;
+
+        public PrincipalController(IUtilsMvcWebPrincipal utilsWeb, IUtilsMvcApiPrincipal utilsApi, IMetodosGenericos metodosGenericos)
         {
-            _utils = utils;
+            _utilsWeb = utilsWeb;
+            _utilsApi = utilsApi;
+            _metodosGenericos = metodosGenericos;
         }
 
         [HttpGet]
         public IActionResult Principal()
         {
-            ViewData["NomeDaAplicacao"] = _utils.NomeDaAplicacao;
-            ViewData["TituloVersaoAplicacao"] = _utils.NomeDaVersaoAplicacao;
-            ViewData["AnoVersaoAplicacao"] = _utils.AnoVersaoAplicacao;
+            ViewData["NomeDaAplicacao"] = _utilsWeb.NomeDaAplicacao;
+            ViewData["TituloVersaoAplicacao"] = _utilsWeb.NomeDaVersaoAplicacao;
+            ViewData["AnoVersaoAplicacao"] = _utilsWeb.AnoVersaoAplicacao;
 
             var principalViewModel = new PrincipalViewModel()
             {
-                InformacaoTextArea = _utils.InformacaoTextArea,
-                IdeDesenvolvimentoListItem = _utils.IdeDesenvolvimentoListItem,
-                EstiloFormularioListItem = _utils.EstiloFormularioListItem,
-                BancoDeDadosListItem = _utils.BancoDeDadosListItem
+                InformacaoTextArea = _utilsWeb.InformacaoTextArea,
+                IdeDesenvolvimentoListItem = _utilsWeb.IdeDesenvolvimentoListItem,
+                EstiloFormularioListItem = _utilsWeb.EstiloFormularioListItem,
+                BancoDeDadosListItem = _utilsWeb.BancoDeDadosListItem
             };
 
             return View("Principal", principalViewModel);
         }
 
         [HttpPost]
-        public IActionResult Principal(PrincipalViewModel principalViewModel)
+        public async Task<IActionResult> Principal(PrincipalViewModel principalViewModel)
         {
-            //Aqui chamar o httpclient e dependendo do retorno chamar a proxima view;
-            return null;
+            Metadata metadata = new Metadata();
+
+            try
+            {
+                metadata.BancodeDados.Id = _metodosGenericos.RetornaTipoBancoDeDados(principalViewModel.BancoDeDados);
+                metadata.ScriptMetadata = principalViewModel.ArquivoMetadata;
+                //metadata = _utilsApi.RetornaDescricaoTabelas("http://localhost:3001/Principal", metadata);
+                return null;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
         }
 
         #region Métodos

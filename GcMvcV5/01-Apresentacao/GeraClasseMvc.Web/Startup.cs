@@ -1,5 +1,6 @@
 using GeraClasseMvc.Web.Controllers.Principal;
 using GeraClasseMvc.Web.Services;
+using GeraClasseMvc.Api.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -10,6 +11,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using GeraClasseMvc.Api.Services.Interfaces;
 
 namespace GeraClasseMvc.Web
 {
@@ -26,7 +28,9 @@ namespace GeraClasseMvc.Web
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
-            services.AddScoped<IUtilsPrincipal, UtilsPrincipal>();
+            services.AddScoped<IUtilsMvcWebPrincipal, UtilsMvcWebPrincipal>();
+            services.AddScoped<IUtilsMvcApiPrincipal, UtilsMvcApiPrincipal>();
+            services.AddScoped<IMetodosGenericos, MetodosGenericos>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

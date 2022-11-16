@@ -12,6 +12,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using Swashbuckle.AspNetCore.Swagger;
 using Microsoft.OpenApi.Models;
+using System.Reflection;
+using System.IO;
 
 namespace GeraClasseMvc.Api
 {
@@ -32,7 +34,7 @@ namespace GeraClasseMvc.Api
                 c.SwaggerDoc("v1", new OpenApiInfo
                 {
                     Version = "v1",
-                    Title = "GeraClasseMvc.Api",
+                    Title = "GeraClasseMvcApi",
                     Description = "Gerador de classes MVC",
                     TermsOfService = new Uri("https://claudiomildo.net/terms"),
                     Contact = new OpenApiContact
@@ -43,10 +45,22 @@ namespace GeraClasseMvc.Api
                     },
                     License = new OpenApiLicense
                     {
-                        Name = "Usar sobre LICX",
+                        Name = "Informações sobre a licença.",
                         Url = new Uri("https://claudiomildo.net/license"),
                     }
                 });
+
+                var diretorioArquivoXml = Path.Combine(AppContext.BaseDirectory, $"{Assembly.GetExecutingAssembly().GetName().Name}.xml");
+
+                if (File.Exists(diretorioArquivoXml))
+                {
+                    c.IncludeXmlComments(diretorioArquivoXml);
+                }
+                else
+                {
+                    File.Create(diretorioArquivoXml).Dispose();
+                    c.IncludeXmlComments(diretorioArquivoXml);
+                }
             });
 
             services.AddControllers();
@@ -60,14 +74,14 @@ namespace GeraClasseMvc.Api
                 app.UseDeveloperExceptionPage();
             }
 
-            app.UseHttpsRedirection();
+            //app.UseHttpsRedirection();
 
             app.UseRouting();
 
             app.UseAuthorization();
 
-           // Habilita o middleware para servir o Swagger gerado como um endpoint  JSON
-           app.UseSwagger();
+            // Habilita o middleware para servir o Swagger gerado como um endpoint  JSON
+            app.UseSwagger();
 
             //Registra o gerador Swagger definindo um ou mais documentos Swagger 
             app.UseSwaggerUI(c =>

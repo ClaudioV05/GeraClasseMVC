@@ -31,6 +31,10 @@ option {
     color: black;
 }
 
+#titulo-botao-confirmar {
+    font-size: 100%;
+}
+
 @media (max-width:768px) {
     #btnGerarClasse {
         font-size: 100%;
@@ -46,5 +50,27 @@ option {
 
     .titulo-label {
         margin-top: 10px;
+    }
+
+    #titulo-botao-confirmar {
+        font-size: 90%;
+    }
+}
+
+@media (max-width:576px) {
+    #titulo-botao-confirmar {
+        font-size: 80%;
+    }
+}
+
+@media (max-width:380px) {
+    #titulo-botao-confirmar {
+        font-size: 70%;
+    }
+}
+
+@media (max-width:300px) {
+    #titulo-botao-confirmar {
+        font-size: 0%;
     }
 }
