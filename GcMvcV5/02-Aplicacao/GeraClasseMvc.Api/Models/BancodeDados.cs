@@ -9,8 +9,8 @@
 
     public class BancodeDados
     {
-        public TipoBancodeDados Id { get; set; }
+        public TipoBancodeDados IdTipoBancodeDados { get; set; }
 
-        public string Descricao { get; set; }
+        public string? Descricao { get; set; }
     }
 }

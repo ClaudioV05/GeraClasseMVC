@@ -4,12 +4,12 @@ namespace GeraClasseMvc.Api.Models
 {
     public class Metadata
     {
-        public string ScriptMetadata { get; set; }
+        public string? ScriptMetadata { get; set; }
 
-        public BancodeDados BancodeDados { get; set; }
+        public BancodeDados? BancodeDados { get; set; }
 
-        public EstiloFormulario EstiloFormulario { get; set; }
+        public EstiloFormulario? EstiloFormulario { get; set; }
 
-        public IdeDesenvolvimento IdeDesenvolvimento { get; set; }
+        public IdeDesenvolvimento? IdeDesenvolvimento { get; set; }
     }
 }

@@ -11,8 +11,8 @@
 
     public class EstiloFormulario
     {
-        public TipoEstiloFormulario Id { get; set; }
+        public TipoEstiloFormulario IdTipoBancodeDados { get; set; }
 
-        public string Descricao { get; set; }
+        public string? Descricao { get; set; }
     }
 }

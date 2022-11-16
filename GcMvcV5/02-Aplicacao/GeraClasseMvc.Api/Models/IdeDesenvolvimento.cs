@@ -10,8 +10,8 @@
 
     public class IdeDesenvolvimento
     {
-        public TipoIdeDesenvolvimento Id { get; set; }
+        public TipoIdeDesenvolvimento IdTipoBancodeDados { get; set; }
 
-        public string Descricao { get; set; }
+        public string? Descricao { get; set; }
     }
 }
