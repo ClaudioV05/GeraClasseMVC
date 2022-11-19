@@ -1,7 +1,7 @@
 ﻿@model GeraClasseMvc.Web.Models.PrincipalViewModel;
 
 <div class="container">
-    @using (Html.BeginForm("GeraDadosPrincipais", "Principal", FormMethod.Post))
+    @using (Html.BeginForm("GeraDadosPrincipais", "Principal"))
     {
         @Html.HiddenFor(m => m.IdeDesenvolvimentoListItem);
         @Html.HiddenFor(m => m.EstiloFormularioListItem);
@@ -23,7 +23,7 @@
             </div>
 
             <div class="col-2">
-                <button class="btn btn-secondary" id="btnGerarClasse">
+                <button type="button" class="btn btn-secondary" id="btnGerarClasse" name="btnGerarClasse">
                     <span id="titulo-botao-confirmar"></span>
                 </button>
             </div>

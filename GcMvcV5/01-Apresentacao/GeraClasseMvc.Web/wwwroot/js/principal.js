@@ -38,7 +38,7 @@ function SatisfazCritica() {
     let validaCriticas = true;
 
     //#region Validação do arquivo Metadata.
-    if ($("#ArquivoMetadata").val() != "undefined" || $("#ArquivoMetadata").val() != null) {
+    if ($("#ArquivoMetadata").val() != undefined || $("#ArquivoMetadata").val() != null) {
         if (validaCriticas == true && $("#ArquivoMetadata").val() == "") {
             alert("Selecione o arquivo Metadados.");
             validaCriticas = false;
@@ -47,7 +47,7 @@ function SatisfazCritica() {
     //#endregion Validação do arquivo Metadata.
 
     //#region Validação da IDE de desenvolvimento.
-    if (($("#dpdIdeDesenvolvimento").val() != "undefined") && ($("#dpdIdeDesenvolvimento").val() != null)) {
+    if (($("#dpdIdeDesenvolvimento").val() != undefined) && ($("#dpdIdeDesenvolvimento").val() != null)) {
         if (validaCriticas == true) {
             if ($("#dpdIdeDesenvolvimento").val() == "visualstudio") {
                 let itemSelecionado = $("#dpdIdeDesenvolvimento :selected").text();
@@ -60,7 +60,7 @@ function SatisfazCritica() {
     //#endregion Validação da IDE de desenvolvimento.
 
     //#region Validação do estilo do formulário.
-    if (($("#dpdEstiloFormulario").val() != "undefined") && ($("#dpdEstiloFormulario").val() != null)) {
+    if (($("#dpdEstiloFormulario").val() != undefined) && ($("#dpdEstiloFormulario").val() != null)) {
         if (validaCriticas == true) {
             if ($("#dpdEstiloFormulario").val() == "windowsform" || $("#dpdEstiloFormulario").val() == "html") {
                 let itemSelecionado = $("#dpdEstiloFormulario :selected").text();
@@ -91,7 +91,7 @@ function SatisfazCritica() {
 }
 
 function LimparLocalStorage() {
-    if (typeof (window.localStorage) !== "undefined") {
+    if (typeof (window.localStorage) !== undefined) {
         window.localStorage.clear();
     } else {
         alert("Sem suporte para o Web Storage...");
@@ -104,13 +104,61 @@ function SalvarDadosLocalStorage() {
     localStorage.setItem("bancodedados", $("#dpdBancoDeDados :selected").val());
 }
 
+window.onresize = function () {
+    let tamanhoTela = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
+
+    if (tamanhoTela < 380) {
+        CarregaTextoBotaoConfirmar(true);
+    }
+    else {
+        CarregaTextoBotaoConfirmar(false);
+    }
+};
+
+function CarregaTextoBotaoConfirmar(carregaTextoDimensionado) {
+
+    if (carregaTextoDimensionado != undefined) {
+        if (carregaTextoDimensionado) {
+            $("#titulo-botao-confirmar").text("Ok!");
+        }
+        else {
+            $("#titulo-botao-confirmar").text("Confirmar");
+        }
+    }
+}
+
+function EnviarDadosGeraClasse(tipoBancoDeDados, metadata) {
+
+    let dadosJson = JSON.stringify({
+        BancoDeDados: $(`#${tipoBancoDeDados}`),
+        InformacaoTextArea: $(`#${metadata}`)
+    });
+
+    $.ajax({
+        url: '/Principal/GeraDadosPrincipais',
+        method: "POST",
+        data: dadosJson,
+        Accept: "application/json",
+        contentType: "application/json",
+
+        success: function (suc) {
+            console.log('Sucesso' + res);
+        },
+        error: function (err) {
+            console.log('Erro!' + err);
+        }
+    });
+}
+
 $("#btnGerarClasse").on("click", function (event) {
     if (SatisfazCritica()) {
         SalvarDadosLocalStorage();
 
-        $("#BancoDeDados").val($("#dpdBancoDeDados :selected").val());
-        $("#InformacaoTextArea").val($("#InformacaoTextArea").val());
-        document.forms[0].onsubmit;
+        EnviarDadosGeraClasse($("#dpdBancoDeDados :selected").val(), $("#InformacaoTextArea").val());
+        // Retirar depois
+        //$("#BancoDeDados").val($("#dpdBancoDeDados :selected").val());
+        //$("#InformacaoTextArea").val($("#InformacaoTextArea").val());
+        //document.forms[0].onsubmit;
     }
     else {
         event.preventDefault();

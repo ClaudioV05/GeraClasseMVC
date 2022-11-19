@@ -28,7 +28,7 @@ namespace GeraClasseMvc.Web.Controllers.Principal
         /// 
         /// </summary>
         /// <returns></returns>
-        [HttpGet]
+        [HttpGet, ActionName("GeraDadosPrincipais")]
         public IActionResult GeraDadosPrincipais()
         {
             PrincipalViewModel principalViewModel = new PrincipalViewModel();
