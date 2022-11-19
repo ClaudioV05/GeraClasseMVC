@@ -14,9 +14,7 @@ namespace GeraClasseMvc.Web.Controllers.Principal
     public class PrincipalController : Controller
     {
         private readonly IUtilsMvcWebPrincipal _utilsWeb;
-
         private readonly IUtilsMvcApiPrincipal _utilsApi;
-
         private readonly IMetodosGenericos _metodosGenericos;
 
         public PrincipalController(IUtilsMvcWebPrincipal utilsWeb, IUtilsMvcApiPrincipal utilsApi, IMetodosGenericos metodosGenericos)
@@ -26,40 +24,54 @@ namespace GeraClasseMvc.Web.Controllers.Principal
             _metodosGenericos = metodosGenericos;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
-        public IActionResult Principal()
+        public IActionResult GeraDadosPrincipais()
         {
-            ViewData["NomeDaAplicacao"] = _utilsWeb.NomeDaAplicacao;
-            ViewData["TituloVersaoAplicacao"] = _utilsWeb.NomeDaVersaoAplicacao;
-            ViewData["AnoVersaoAplicacao"] = _utilsWeb.AnoVersaoAplicacao;
-
-            var principalViewModel = new PrincipalViewModel()
+            PrincipalViewModel principalViewModel = new PrincipalViewModel();
+            try
             {
-                InformacaoTextArea = _utilsWeb.InformacaoTextArea,
-                IdeDesenvolvimentoListItem = _utilsWeb.IdeDesenvolvimentoListItem,
-                EstiloFormularioListItem = _utilsWeb.EstiloFormularioListItem,
-                BancoDeDadosListItem = _utilsWeb.BancoDeDadosListItem
-            };
+                ViewData["NomeDaAplicacao"] = _utilsWeb.NomeDaAplicacao;
+                ViewData["TituloVersaoAplicacao"] = _utilsWeb.NomeDaVersaoAplicacao;
+                ViewData["AnoVersaoAplicacao"] = _utilsWeb.AnoVersaoAplicacao;
+
+                principalViewModel.InformacaoTextArea = _utilsWeb.InformacaoTextArea;
+                principalViewModel.IdeDesenvolvimentoListItem = _utilsWeb.IdeDesenvolvimentoListItem;
+                principalViewModel.EstiloFormularioListItem = _utilsWeb.EstiloFormularioListItem;
+                principalViewModel.BancoDeDadosListItem = _utilsWeb.BancoDeDadosListItem;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Erro: " + ex.Message);
+            }
 
             return View("Principal", principalViewModel);
         }
 
-        [HttpPost]
-        public async Task<IActionResult> Principal(PrincipalViewModel principalViewModel)
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="principalViewModel"></param>
+        /// <returns></returns>
+        [HttpPost, ActionName("GeraDadosPrincipais")]
+        public IActionResult GeraDadosPrincipais(PrincipalViewModel principalViewModel)
         {
             Metadata metadata = new Metadata();
 
-            try
-            {
-                metadata.BancodeDados.IdTipoBancodeDados = _metodosGenericos.RetornaTipoBancoDeDados(principalViewModel.BancoDeDados);
-                metadata.ScriptMetadata = principalViewModel.ArquivoMetadata;
-                //metadata = _utilsApi.RetornaDescricaoTabelas("http://localhost:3001/Principal", metadata);
+            //try
+            //{
+            //    metadata.BancodeDados.IdTipoBancodeDados = _metodosGenericos.RetornaTipoBancoDeDados(principalViewModel.BancoDeDados);
+            //    metadata.ScriptMetadata = principalViewModel.ArquivoMetadata;
+            //    //metadata = _utilsApi.RetornaDescricaoTabelas("http://localhost:3001/Principal", metadata);
                 return null;
-            }
-            catch (Exception ex)
-            {
-                throw new Exception(ex.Message);
-            }
+            //}
+            //catch (Exception ex)
+            //{
+            //    throw new Exception(ex.Message);
+            //}
         }
 
         #region Métodos

@@ -1,6 +1,9 @@
 ﻿$(document).ready(function () {
     LimparLocalStorage();
 
+    CarregaTextoBotaoConfirmar(false);
+
+    var baseUrl = "http://127.0.0.1:3000/Principal/Principal";
 });
 
 var input = document.querySelector("input[name=ArquivoMetadata]");
@@ -47,7 +50,7 @@ function SatisfazCritica() {
     if (($("#dpdIdeDesenvolvimento").val() != "undefined") && ($("#dpdIdeDesenvolvimento").val() != null)) {
         if (validaCriticas == true) {
             if ($("#dpdIdeDesenvolvimento").val() == "visualstudio") {
-                let itemSelecionado = $('#dpdIdeDesenvolvimento :selected').text();
+                let itemSelecionado = $("#dpdIdeDesenvolvimento :selected").text();
 
                 alert(`IDE de desenvolvimento ${itemSelecionado.toUpperCase()} sem implementação.`);
                 validaCriticas = false;
@@ -60,7 +63,7 @@ function SatisfazCritica() {
     if (($("#dpdEstiloFormulario").val() != "undefined") && ($("#dpdEstiloFormulario").val() != null)) {
         if (validaCriticas == true) {
             if ($("#dpdEstiloFormulario").val() == "windowsform" || $("#dpdEstiloFormulario").val() == "html") {
-                let itemSelecionado = $('#dpdEstiloFormulario :selected').text();
+                let itemSelecionado = $("#dpdEstiloFormulario :selected").text();
 
                 alert(`Estilo de Formulário ${itemSelecionado.toUpperCase()} sem implementação.`);
                 validaCriticas = false;
@@ -74,7 +77,7 @@ function SatisfazCritica() {
         if (validaCriticas == true) {
             if ($("#dpdBancoDeDados").val() == "firebird") {
                 if ($("#dpdBancoDeDados").val() == "delphi" || $("#dpdBancoDeDados").val() == "lazarus") {
-                    let itemSelecionado = $('#dpdBancoDeDados :selected').text();
+                    let itemSelecionado = $("#dpdBancoDeDados :selected").text();
 
                     alert(`Banco de dados sem implementação para a IDE: ${itemSelecionado.toUpperCase()}.`);
                     validaCriticas = false;
@@ -91,22 +94,22 @@ function LimparLocalStorage() {
     if (typeof (window.localStorage) !== "undefined") {
         window.localStorage.clear();
     } else {
-        alert("Sem suporte para o Web Storage support..");
+        alert("Sem suporte para o Web Storage...");
     }
 }
 
 function SalvarDadosLocalStorage() {
-    localStorage.setItem('idedesenvolvimento', $('#dpdIdeDesenvolvimento :selected').val());
-    localStorage.setItem('estiloformulario', $('#dpdEstiloFormulario :selected').val());
-    localStorage.setItem('bancodedados', $('#dpdBancoDeDados :selected').val());
+    localStorage.setItem("idedesenvolvimento", $("#dpdIdeDesenvolvimento :selected").val());
+    localStorage.setItem("estiloformulario", $("#dpdEstiloFormulario :selected").val());
+    localStorage.setItem("bancodedados", $("#dpdBancoDeDados :selected").val());
 }
 
 $("#btnGerarClasse").on("click", function (event) {
     if (SatisfazCritica()) {
         SalvarDadosLocalStorage();
 
-        $('#BancoDeDados').val() = $('#dpdBancoDeDados :selected').val();
-
+        $("#BancoDeDados").val($("#dpdBancoDeDados :selected").val());
+        $("#InformacaoTextArea").val($("#InformacaoTextArea").val());
         document.forms[0].onsubmit;
     }
     else {
