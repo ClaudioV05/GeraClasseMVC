@@ -1,13 +1,13 @@
-﻿$(document).ready(function () {
+﻿var input = document.querySelector("input[name=ArquivoMetadata]");
+var textarea = document.querySelector("textarea[name=InformacaoTextArea]");
+var baseUrl = "/Principal/GeraDadosPrincipais/";
+
+$(document).ready(function () {
     LimparLocalStorage();
-
     CarregaTextoBotaoConfirmar(false);
-
-    var baseUrl = "http://127.0.0.1:3000/Principal/Principal";
 });
 
-var input = document.querySelector("input[name=ArquivoMetadata]");
-var textarea = document.querySelector("textarea[name=InformacaoTextArea]");
+
 
 $("input[name=ArquivoMetadata]").change(function () {
     // Nome do arquivo Metadados.
@@ -129,18 +129,11 @@ function CarregaTextoBotaoConfirmar(carregaTextoDimensionado) {
 
 function EnviarDadosGeraClasse(tipoBancoDeDados, metadata) {
 
-    let dadosJson = JSON.stringify({
-        BancoDeDados: $(`#${tipoBancoDeDados}`),
-        InformacaoTextArea: $(`#${metadata}`)
-    });
-
     $.ajax({
-        url: '/Principal/GeraDadosPrincipais',
+        url: baseUrl + "?BancoDeDados=" + tipoBancoDeDados + "&InformacaoTextArea=" + metadata,
         method: "POST",
-        data: dadosJson,
         Accept: "application/json",
         contentType: "application/json",
-
         success: function (suc) {
             console.log('Sucesso' + res);
         },
@@ -155,10 +148,6 @@ $("#btnGerarClasse").on("click", function (event) {
         SalvarDadosLocalStorage();
 
         EnviarDadosGeraClasse($("#dpdBancoDeDados :selected").val(), $("#InformacaoTextArea").val());
-        // Retirar depois
-        //$("#BancoDeDados").val($("#dpdBancoDeDados :selected").val());
-        //$("#InformacaoTextArea").val($("#InformacaoTextArea").val());
-        //document.forms[0].onsubmit;
     }
     else {
         event.preventDefault();

@@ -61,21 +61,18 @@ namespace GeraClasseMvc.Web.Controllers.Principal
         {
             Metadata metadata = new Metadata();
 
-            //try
-            //{
-            //    metadata.BancodeDados.IdTipoBancodeDados = _metodosGenericos.RetornaTipoBancoDeDados(principalViewModel.BancoDeDados);
-            //    metadata.ScriptMetadata = principalViewModel.ArquivoMetadata;
-            //    //metadata = _utilsApi.RetornaDescricaoTabelas("http://localhost:3001/Principal", metadata);
-                return null;
-            //}
-            //catch (Exception ex)
-            //{
-            //    throw new Exception(ex.Message);
-            //}
-        }
+            try
+            {
+                //    metadata.BancodeDados.IdTipoBancodeDados = _metodosGenericos.RetornaTipoBancoDeDados(principalViewModel.BancoDeDados);
+                //    metadata.ScriptMetadata = principalViewModel.ArquivoMetadata;
+                //    //metadata = _utilsApi.RetornaDescricaoTabelas("http://localhost:3001/Principal", metadata);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
 
-        #region Métodos
-        // aqui ficarão os métodos de chegda e de tratamento de dados.
-        #endregion Métodos
+            return null;
+        }
     }
 }
