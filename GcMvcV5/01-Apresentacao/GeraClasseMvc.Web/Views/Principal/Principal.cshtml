@@ -14,7 +14,7 @@
         <!-- #region METADADOS -->
         <div class="form-row mt-4 pl-1">
             <div class="col-10">
-                <label class="custom-file-label font-weight-bold">Arquivo Metadados</label>
+                <label class="custom-file-label font-weight-bold"></label>
                 @Html.EditorFor(m => m.ArquivoMetadados, new { id = "ArquivoMetadados", htmlAttributes = new { type = "file", @class = "custom-file-input", @readonly = "true" } }) });
             </div>
 
@@ -42,7 +42,7 @@
                 }
             </div>
             <div class="col-4">
-                <label for="BancoDeDados" class="titulo-label">Sistema Gerenciador de Banco de Dados</label>
+                <label for="BancoDeDados" class="titulo-label">Banco de Dados</label>
                 @if (Model.ListaDeBancoDeDados != null)
                 {
                     @Html.DropDownList("BancoDeDados", (IEnumerable<SelectListItem>)Model.ListaDeBancoDeDados, new { id = "dpdBancoDeDados", @class = "form-control titulo-label-select", required = "false" });

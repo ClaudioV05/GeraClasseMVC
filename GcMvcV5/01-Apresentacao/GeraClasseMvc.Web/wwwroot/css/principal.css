@@ -75,4 +75,14 @@ option {
     #titulo-botao-confirmar {
         font-size: 0%;
     }
+
+    .custom-file-label {
+        display: none;
+    }
+}
+
+@media (max-width:150px) {
+    .custom-file-label {
+        display: none;
+    }
 }

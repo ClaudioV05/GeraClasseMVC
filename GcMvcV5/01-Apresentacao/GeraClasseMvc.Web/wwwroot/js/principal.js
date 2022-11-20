@@ -1,10 +1,13 @@
-﻿var input = document.querySelector("input[name=ArquivoMetadados]");
+﻿//#region Var Globais.
+var input = document.querySelector("input[name=ArquivoMetadados]");
 var textarea = document.querySelector("textarea[name=InformacaoTextArea]");
 var baseUrl = "/Principal/GeraDadosPrincipais/";
+//#endregion Var Globais.
 
 $(document).ready(function () {
     LimparLocalStorage();
     CarregaTextoBotaoConfirmar(false);
+    CarregaTextoArquivoMetadados(false);
 });
 
 $("input[name=ArquivoMetadados]").change(function () {
@@ -102,29 +105,6 @@ function SalvarDadosLocalStorage() {
     localStorage.setItem("bancodedados", $("#dpdBancoDeDados :selected").val());
 }
 
-window.onresize = function () {
-    let tamanhoTela = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
-
-    if (tamanhoTela < 380) {
-        CarregaTextoBotaoConfirmar(true);
-    }
-    else {
-        CarregaTextoBotaoConfirmar(false);
-    }
-};
-
-function CarregaTextoBotaoConfirmar(carregaTextoDimensionado) {
-
-    if (carregaTextoDimensionado != undefined) {
-        if (carregaTextoDimensionado) {
-            $("#titulo-botao-confirmar").text("Ok!");
-        }
-        else {
-            $("#titulo-botao-confirmar").text("Confirmar");
-        }
-    }
-}
-
 function EnviarDadosGeraClasse(tipoBancoDeDados, metadata) {
 
     $.ajax({
@@ -152,3 +132,48 @@ $("#btnGerarClasse").on("click", function (event) {
         event.preventDefault();
     }
 });
+
+window.onresize = function () {
+    let tamanhoTela = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
+    RedimensionaTela(tamanhoTela);
+};
+
+function RedimensionaTela(tamanhoTela) {
+    //#region Texto Botão Confirmar.
+    if (tamanhoTela < 380) {
+        CarregaTextoBotaoConfirmar(true);
+    }
+    else {
+        CarregaTextoBotaoConfirmar(false);
+    }
+    //#endregion Texto Botão Confirmar.
+
+    //#region Texto Arquivo Metadados.
+    if (tamanhoTela < 380) {
+        CarregaTextoArquivoMetadados(true);
+    }
+    else {
+        CarregaTextoArquivoMetadados(false);
+    }
+    //#endregion Texto Arquivo Metadados.
+}
+
+function CarregaTextoBotaoConfirmar(textoDimensionado) {
+
+    if (textoDimensionado != undefined && textoDimensionado == true) {
+        $("#titulo-botao-confirmar").text("Ok!");
+    }
+    else {
+        $("#titulo-botao-confirmar").text("Confirmar");
+    }
+}
+
+function CarregaTextoArquivoMetadados(textoDimensionado) {
+
+    if (textoDimensionado != undefined && textoDimensionado == true) {
+        $(".custom-file-label").text("Arquivo");
+    }
+    else {
+        $(".custom-file-label").text("Arquivo Metadados");
+    }
+}
