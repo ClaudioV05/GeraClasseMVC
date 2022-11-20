@@ -34,10 +34,8 @@ namespace GeraClasseMvc.Web.Controllers.Principal
             PrincipalViewModel principalViewModel = new PrincipalViewModel();
             try
             {
-                ViewData["NomeDaAplicacao"] = _utilsWeb.NomeDaAplicacao;
-                ViewData["TituloVersaoAplicacao"] = _utilsWeb.NomeDaVersaoAplicacao;
-                ViewData["AnoVersaoAplicacao"] = _utilsWeb.AnoVersaoAplicacao;
-
+                CarregaDadosTemplateGeral();
+                
                 principalViewModel.InformacaoTextArea = _utilsWeb.InformacaoTextArea;
                 principalViewModel.ListaDeIdeDesenvolvimento = _utilsWeb.ListaDeIdeDesenvolvimento;
                 principalViewModel.ListaDeEstiloFormulario = _utilsWeb.ListaDeEstiloFormulario;
@@ -74,5 +72,14 @@ namespace GeraClasseMvc.Web.Controllers.Principal
 
             return null;
         }
+
+        #region Métodos Generícos
+        private void CarregaDadosTemplateGeral()
+        {
+            ViewData["NomeAplicacao"] = _utilsWeb.NomeAplicacao;
+            ViewData["NomeVersaoAplicacao"] = _utilsWeb.NomeVersaoAplicacao;
+            ViewData["AnoVersaoAplicacao"] = _utilsWeb.AnoVersaoAplicacao;
+        }
+        #endregion Métodos Generícos
     }
 }
