@@ -39,9 +39,9 @@ namespace GeraClasseMvc.Web.Controllers.Principal
                 ViewData["AnoVersaoAplicacao"] = _utilsWeb.AnoVersaoAplicacao;
 
                 principalViewModel.InformacaoTextArea = _utilsWeb.InformacaoTextArea;
-                principalViewModel.IdeDesenvolvimentoListItem = _utilsWeb.IdeDesenvolvimentoListItem;
-                principalViewModel.EstiloFormularioListItem = _utilsWeb.EstiloFormularioListItem;
-                principalViewModel.BancoDeDadosListItem = _utilsWeb.BancoDeDadosListItem;
+                principalViewModel.ListaDeIdeDesenvolvimento = _utilsWeb.ListaDeIdeDesenvolvimento;
+                principalViewModel.ListaDeEstiloFormulario = _utilsWeb.ListaDeEstiloFormulario;
+                principalViewModel.ListaDeBancoDeDados = _utilsWeb.ListaDeBancoDeDados;
             }
             catch (Exception ex)
             {
@@ -63,7 +63,7 @@ namespace GeraClasseMvc.Web.Controllers.Principal
 
             try
             {
-                //    metadata.BancodeDados.IdTipoBancodeDados = _metodosGenericos.RetornaTipoBancoDeDados(principalViewModel.BancoDeDados);
+                metadata.BancodeDados.IdTipoBancodeDados = _metodosGenericos.RetornaTipoBancoDeDados(principalViewModel.BancoDeDados);
                 //    metadata.ScriptMetadata = principalViewModel.ArquivoMetadata;
                 //    //metadata = _utilsApi.RetornaDescricaoTabelas("http://localhost:3001/Principal", metadata);
             }

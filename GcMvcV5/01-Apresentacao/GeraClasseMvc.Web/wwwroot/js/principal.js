@@ -1,4 +1,4 @@
-﻿var input = document.querySelector("input[name=ArquivoMetadata]");
+﻿var input = document.querySelector("input[name=ArquivoMetadados]");
 var textarea = document.querySelector("textarea[name=InformacaoTextArea]");
 var baseUrl = "/Principal/GeraDadosPrincipais/";
 
@@ -7,9 +7,7 @@ $(document).ready(function () {
     CarregaTextoBotaoConfirmar(false);
 });
 
-
-
-$("input[name=ArquivoMetadata]").change(function () {
+$("input[name=ArquivoMetadados]").change(function () {
     // Nome do arquivo Metadados.
     $(this).siblings(".custom-file-label").addClass("selected").html($(this).val().split("\\").pop());
 
@@ -38,8 +36,8 @@ function SatisfazCritica() {
     let validaCriticas = true;
 
     //#region Validação do arquivo Metadata.
-    if ($("#ArquivoMetadata").val() != undefined || $("#ArquivoMetadata").val() != null) {
-        if (validaCriticas == true && $("#ArquivoMetadata").val() == "") {
+    if ($("#ArquivoMetadados").val() != undefined || $("#ArquivoMetadados").val() != null) {
+        if (validaCriticas == true && $("#ArquivoMetadados").val() == "") {
             alert("Selecione o arquivo Metadados.");
             validaCriticas = false;
         }
@@ -62,7 +60,7 @@ function SatisfazCritica() {
     //#region Validação do estilo do formulário.
     if (($("#dpdEstiloFormulario").val() != undefined) && ($("#dpdEstiloFormulario").val() != null)) {
         if (validaCriticas == true) {
-            if ($("#dpdEstiloFormulario").val() == "windowsform" || $("#dpdEstiloFormulario").val() == "html") {
+            if ($("#dpdEstiloFormulario").val() == "windowsform" || $("#dpdEstiloFormulario").val() == "aspnetmvc") {
                 let itemSelecionado = $("#dpdEstiloFormulario :selected").text();
 
                 alert(`Estilo de Formulário ${itemSelecionado.toUpperCase()} sem implementação.`);
@@ -130,20 +128,21 @@ function CarregaTextoBotaoConfirmar(carregaTextoDimensionado) {
 function EnviarDadosGeraClasse(tipoBancoDeDados, metadata) {
 
     $.ajax({
-        url: baseUrl + "?BancoDeDados=" + tipoBancoDeDados + "&InformacaoTextArea=" + metadata,
+        url: baseUrl + "?BancoDeDados=" + tipoBancoDeDados + "&ArquivoMetadados=" + metadata,
         method: "POST",
         Accept: "application/json",
         contentType: "application/json",
         success: function (suc) {
-            console.log('Sucesso' + res);
+            console.log(`Sucesso ${res}`);
         },
         error: function (err) {
-            console.log('Erro!' + err);
+            alert(`Sem conexão com o servidor.\n ${err}`);
         }
     });
 }
 
 $("#btnGerarClasse").on("click", function (event) {
+
     if (SatisfazCritica()) {
         SalvarDadosLocalStorage();
 

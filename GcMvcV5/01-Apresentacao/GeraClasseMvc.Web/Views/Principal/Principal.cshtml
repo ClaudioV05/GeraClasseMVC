@@ -3,10 +3,6 @@
 <div class="container">
     @using (Html.BeginForm("GeraDadosPrincipais", "Principal"))
     {
-        @Html.HiddenFor(m => m.IdeDesenvolvimentoListItem);
-        @Html.HiddenFor(m => m.EstiloFormularioListItem);
-        @Html.HiddenFor(m => m.BancoDeDadosListItem);
-
         <!-- #region TEXTAREA -->
         <div>
             @if (!string.IsNullOrEmpty(Model.InformacaoTextArea))
@@ -19,7 +15,7 @@
         <div class="form-row mt-4 pl-1">
             <div class="col-10">
                 <label class="custom-file-label font-weight-bold">Arquivo Metadados</label>
-                @Html.EditorFor(m => m.ArquivoMetadata, new { id = "ArquivoMetadata", htmlAttributes = new { type = "file", @class = "custom-file-input", @readonly = "true" } }) });
+                @Html.EditorFor(m => m.ArquivoMetadados, new { id = "ArquivoMetadados", htmlAttributes = new { type = "file", @class = "custom-file-input", @readonly = "true" } }) });
             </div>
 
             <div class="col-2">
@@ -32,24 +28,24 @@
         <!-- #region SELECT -->
         <div class="form-row mt-3 container-dropdown">
             <div class="col-4">
-                <label for="IdeDesenvolvimento" class="titulo-label">IDE de desenvolvimento</label>
-                @if (Model.IdeDesenvolvimentoListItem != null)
+                <label for="IdeDesenvolvimento" class="titulo-label">IDE de Desenvolvimento</label>
+                @if (Model.ListaDeIdeDesenvolvimento != null)
                 {
-                    @Html.DropDownList("IdeDesenvolvimento", (IEnumerable<SelectListItem>)Model.IdeDesenvolvimentoListItem, new { id = "dpdIdeDesenvolvimento", @class = "form-control titulo-label-select", required = "false" });
+                    @Html.DropDownList("IdeDesenvolvimento", (IEnumerable<SelectListItem>)Model.ListaDeIdeDesenvolvimento, new { id = "dpdIdeDesenvolvimento", @class = "form-control titulo-label-select", required = "false" });
                 }
             </div>
             <div class="col-4">
-                <label for="EstiloFormulario" class="titulo-label">Estilo do formulário</label>
-                @if (Model.EstiloFormularioListItem != null)
+                <label for="EstiloFormulario" class="titulo-label">Estilo do Formulário</label>
+                @if (Model.ListaDeEstiloFormulario != null)
                 {
-                    @Html.DropDownList("EstiloFormulario", (IEnumerable<SelectListItem>)Model.EstiloFormularioListItem, new { id = "dpdEstiloFormulario", @class = "form-control titulo-label-select", required = "false" });
+                    @Html.DropDownList("EstiloFormulario", (IEnumerable<SelectListItem>)Model.ListaDeEstiloFormulario, new { id = "dpdEstiloFormulario", @class = "form-control titulo-label-select", required = "false" });
                 }
             </div>
             <div class="col-4">
-                <label for="BancoDeDados" class="titulo-label">Banco de dados</label>
-                @if (Model.BancoDeDadosListItem != null)
+                <label for="BancoDeDados" class="titulo-label">Sistema Gerenciador de Banco de Dados</label>
+                @if (Model.ListaDeBancoDeDados != null)
                 {
-                    @Html.DropDownList("BancoDeDados", (IEnumerable<SelectListItem>)Model.BancoDeDadosListItem, new { id = "dpdBancoDeDados", @class = "form-control titulo-label-select", required = "false" });
+                    @Html.DropDownList("BancoDeDados", (IEnumerable<SelectListItem>)Model.ListaDeBancoDeDados, new { id = "dpdBancoDeDados", @class = "form-control titulo-label-select", required = "false" });
                 }
             </div>
         </div>
