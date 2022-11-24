@@ -2,12 +2,7 @@
 using GeraClasseMvc.Api.Services.Interfaces;
 using GeraClasseMvc.Web.Models;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.Options;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace GeraClasseMvc.Web.Controllers.Principal
 {
@@ -35,11 +30,11 @@ namespace GeraClasseMvc.Web.Controllers.Principal
             try
             {
                 CarregaDadosTemplateGeral();
-                
+
                 principalViewModel.InformacaoTextArea = _utilsWeb.InformacaoTextArea;
-                principalViewModel.ListaDeIdeDesenvolvimento = _utilsWeb.ListaDeIdeDesenvolvimento;
-                principalViewModel.ListaDeEstiloFormulario = _utilsWeb.ListaDeEstiloFormulario;
                 principalViewModel.ListaDeBancoDeDados = _utilsWeb.ListaDeBancoDeDados;
+                principalViewModel.ListaDeEstiloFormulario = _utilsWeb.ListaDeEstiloFormulario;
+                principalViewModel.ListaDeIdeDesenvolvimento = _utilsWeb.ListaDeIdeDesenvolvimento;
             }
             catch (Exception ex)
             {
@@ -61,9 +56,9 @@ namespace GeraClasseMvc.Web.Controllers.Principal
 
             try
             {
-                metadata.BancodeDados.IdTipoBancodeDados = _metodosGenericos.RetornaTipoBancoDeDados(principalViewModel.BancoDeDados);
-                //    metadata.ScriptMetadata = principalViewModel.ArquivoMetadata;
-                //    //metadata = _utilsApi.RetornaDescricaoTabelas("http://localhost:3001/Principal", metadata);
+                metadata.BancodeDados.IdTipoBancodeDados = _metodosGenericos.TipoBancoDeDados(principalViewModel.BancoDeDados);
+                metadata.ScriptMetadata = principalViewModel.ArquivoMetadados;
+                /*metadata =*/ _utilsApi.RetornaDescricaoTabelas("http://localhost:3001/Principal", metadata);
             }
             catch (Exception ex)
             {
@@ -73,13 +68,13 @@ namespace GeraClasseMvc.Web.Controllers.Principal
             return null;
         }
 
-        #region Métodos Generícos
+        #region Métodos Genéricos
         private void CarregaDadosTemplateGeral()
         {
             ViewData["NomeAplicacao"] = _utilsWeb.NomeAplicacao;
             ViewData["NomeVersaoAplicacao"] = _utilsWeb.NomeVersaoAplicacao;
             ViewData["AnoVersaoAplicacao"] = _utilsWeb.AnoVersaoAplicacao;
         }
-        #endregion Métodos Generícos
+        #endregion Métodos Genéricos
     }
 }

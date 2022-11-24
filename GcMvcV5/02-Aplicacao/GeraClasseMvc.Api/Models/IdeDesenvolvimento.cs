@@ -1,17 +1,24 @@
-﻿namespace GeraClasseMvc.Api.Models
+﻿using System.Collections.Generic;
+
+namespace GeraClasseMvc.Api.Models
 {
     public enum TipoIdeDesenvolvimento : byte
     {
-        NaoEncontrado = 0,
-        Delphi = 1,
+        NaoDefinido = 0,
+        DelphiXe10 = 1,
         Lazarus = 2,
-        VisualStudio = 3
+        NetVisualStudio = 3
     }
 
     public class IdeDesenvolvimento
     {
-        public TipoIdeDesenvolvimento IdTipoBancodeDados { get; set; }
+        public IdeDesenvolvimento()
+        {
+            this.IdTipoIdeDesenvolvimento = TipoIdeDesenvolvimento.NaoDefinido;
+            this.Descricao = new List<string>() { "NaoDefinido", "Delphi", "Lazarus", "Visual Studio" };
+        }
 
-        public string? Descricao { get; set; }
+        public TipoIdeDesenvolvimento IdTipoIdeDesenvolvimento { get; set; }
+        public List<string> Descricao { get; set; }
     }
 }

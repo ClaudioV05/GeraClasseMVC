@@ -1,18 +1,25 @@
-﻿namespace GeraClasseMvc.Api.Models
+﻿using System.Collections.Generic;
+
+namespace GeraClasseMvc.Api.Models
 {
     public enum TipoEstiloFormulario : byte
     {
-        NaoEncontrado = 0,
-        Normal = 1,
-        MDI = 2,
-        WindowsForm = 3,
-        Html = 4
+        NaoDefinido = 0,
+        DelphiNormalMdi = 1,
+        LazarusNormalMdi = 2,
+        DotnetWindowsForm = 3,
+        DotnetAspNetMvc = 4
     }
 
     public class EstiloFormulario
     {
-        public TipoEstiloFormulario IdTipoBancodeDados { get; set; }
+        public EstiloFormulario()
+        {
+            this.IdTipoEstiloFormulario = TipoEstiloFormulario.NaoDefinido;
+            this.Descricao = new List<string>() { "NaoDefinido", "Normal", "MDI", "Windows Form", "Asp Net MVC" };
+        }
 
-        public string? Descricao { get; set; }
+        public TipoEstiloFormulario IdTipoEstiloFormulario { get; set; }
+        public List<string> Descricao { get; set; }
     }
 }

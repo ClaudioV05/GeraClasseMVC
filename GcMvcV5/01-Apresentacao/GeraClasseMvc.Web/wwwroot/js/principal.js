@@ -34,6 +34,23 @@ $("input[name=ArquivoMetadados]").change(function () {
     reader.readAsText(file);
 });
 
+$("#btnGerarClasse").on("click", function (event) {
+
+    if (SatisfazCritica()) {
+        SalvarDadosLocalStorage();
+
+        EnviarDadosGeraClasse($("#dpdBancoDeDados :selected").val(), $("#InformacaoTextArea").val());
+    }
+    else {
+        event.preventDefault();
+    }
+});
+
+window.onresize = function () {
+    let tamanhoTela = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
+    RedimensionaTela(tamanhoTela);
+};
+
 function SatisfazCritica() {
     // Quando todas as implementações estiverem prontas, remover as validações do DropDown. Manter o arquivo Metadata.
     let validaCriticas = true;
@@ -120,23 +137,6 @@ function EnviarDadosGeraClasse(tipoBancoDeDados, metadata) {
         }
     });
 }
-
-$("#btnGerarClasse").on("click", function (event) {
-
-    if (SatisfazCritica()) {
-        SalvarDadosLocalStorage();
-
-        EnviarDadosGeraClasse($("#dpdBancoDeDados :selected").val(), $("#InformacaoTextArea").val());
-    }
-    else {
-        event.preventDefault();
-    }
-});
-
-window.onresize = function () {
-    let tamanhoTela = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
-    RedimensionaTela(tamanhoTela);
-};
 
 function RedimensionaTela(tamanhoTela) {
     //#region Texto Botão Confirmar.

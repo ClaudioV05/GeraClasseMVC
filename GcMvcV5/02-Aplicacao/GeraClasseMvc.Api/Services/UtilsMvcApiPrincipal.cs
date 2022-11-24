@@ -14,7 +14,7 @@ namespace GeraClasseMvc.Api.Services
     {
         public async Task<Metadata> RetornaDescricaoTabelas(string baseURL, Metadata metadata)
         {
-            // Pegar o de macorrai
+            // Pegar o de macorrati
             return null;
         }
     }

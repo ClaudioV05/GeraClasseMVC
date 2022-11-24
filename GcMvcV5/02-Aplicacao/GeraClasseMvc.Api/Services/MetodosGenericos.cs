@@ -1,24 +1,63 @@
 ﻿using GeraClasseMvc.Api.Models;
 using GeraClasseMvc.Api.Services.Interfaces;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace GeraClasseMvc.Api.Services
 {
     public class MetodosGenericos : IMetodosGenericos
     {
-        public TipoBancodeDados RetornaTipoBancoDeDados(string bancodedados)
+        private readonly BancodeDados _bancodeDados;
+        private readonly EstiloFormulario _estiloFormulario;
+        private readonly IdeDesenvolvimento _ideDesenvolvimento;
+
+        public MetodosGenericos()
         {
-            switch (bancodedados)
+            _bancodeDados = new BancodeDados();
+            _estiloFormulario = new EstiloFormulario();
+            _ideDesenvolvimento = new IdeDesenvolvimento();
+        }
+
+        public List<string> DescricaoBancoDeDados() => _bancodeDados.Descricao;
+
+        public List<string> DescricaoEstiloFormulario() => _estiloFormulario.Descricao;
+
+        public List<string> DescricaoIdeDesenvolvimento() => _ideDesenvolvimento.Descricao;
+
+        public TipoBancodeDados TipoBancoDeDados(string? bancodedados)
+        {
+            object? tpBancodeDados;
+            TipoBancodeDados tipoBancoDeDados;
+            string? descBancoDeDados = string.Empty;
+
+            try
             {
-                case "sqlpuro":
-                    return TipoBancodeDados.SqlPuro;
-                    break;
-                case "firebird":
-                    return TipoBancodeDados.Firebird;
-                    break;
-                default:
-                    return TipoBancodeDados.NaoEncontrado;
-                    break;
+                if (!string.IsNullOrEmpty(bancodedados))
+                {
+                    var idBancoDeDados = _bancodeDados.Descricao.FindIndex(e => e.ToLower().Equals(bancodedados.Trim()));
+
+                    if (idBancoDeDados > 0)
+                    {
+                        descBancoDeDados = Enum.GetName(typeof(TipoBancodeDados), idBancoDeDados);
+                        tpBancodeDados = Enum.Parse(typeof(TipoBancodeDados), descBancoDeDados);
+                    }
+                    else
+                    {
+                        tpBancodeDados = TipoBancodeDados.NaoDefinido;
+                    }
+                }
+                else
+                {
+                    tpBancodeDados = TipoBancodeDados.NaoDefinido;
+                }
             }
+            catch (Exception)
+            {
+                tpBancodeDados = TipoBancodeDados.NaoDefinido;
+            }
+
+            return (TipoBancodeDados)tpBancodeDados;
         }
     }
 }
