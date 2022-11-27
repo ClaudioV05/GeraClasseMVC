@@ -27,10 +27,8 @@ namespace GeraClasseMvc.Api.Services
 
         public TipoBancodeDados TipoBancoDeDados(string? bancodedados)
         {
-            object? tpBancodeDados;
-            TipoBancodeDados tipoBancoDeDados;
+            object? tpBancodeDados = TipoBancodeDados.NaoDefinido;
             string? descBancoDeDados = string.Empty;
-
             try
             {
                 if (!string.IsNullOrEmpty(bancodedados))
@@ -42,21 +40,12 @@ namespace GeraClasseMvc.Api.Services
                         descBancoDeDados = Enum.GetName(typeof(TipoBancodeDados), idBancoDeDados);
                         tpBancodeDados = Enum.Parse(typeof(TipoBancodeDados), descBancoDeDados);
                     }
-                    else
-                    {
-                        tpBancodeDados = TipoBancodeDados.NaoDefinido;
-                    }
-                }
-                else
-                {
-                    tpBancodeDados = TipoBancodeDados.NaoDefinido;
                 }
             }
             catch (Exception)
             {
                 tpBancodeDados = TipoBancodeDados.NaoDefinido;
             }
-
             return (TipoBancodeDados)tpBancodeDados;
         }
     }

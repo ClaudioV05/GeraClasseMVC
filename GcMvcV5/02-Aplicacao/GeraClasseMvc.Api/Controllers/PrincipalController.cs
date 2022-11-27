@@ -21,5 +21,15 @@ namespace GeraClasseMvc.Api.Controllers
         {
             return metadata;
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        public TipoBancodeDados TipoBancoDeDados(Metadata metadata)
+        {
+            return TipoBancodeDados.NaoDefinido;
+        }
     }
 }

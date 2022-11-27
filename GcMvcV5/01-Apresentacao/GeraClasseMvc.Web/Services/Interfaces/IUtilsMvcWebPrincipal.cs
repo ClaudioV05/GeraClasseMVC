@@ -6,17 +6,17 @@ namespace GeraClasseMvc.Web
     /// <summary>
     /// Classe básica referente aos utilitários da classe principal.
     /// </summary>
-    public interface IUtilsPrincipal
+    public interface IUtilsMvcWebPrincipal
     {
         /// <summary>
         /// Descrição do nome da versão da aplicação.
         /// </summary>
-        string NomeDaVersaoAplicacao { get; set; }
+        string NomeVersaoAplicacao { get; set; }
 
         /// <summary>
         /// Descrição do nome da aplicação.
         /// </summary>
-        string NomeDaAplicacao { get; set; }
+        string NomeAplicacao { get; set; }
 
         /// <summary>
         /// Descrição do ano corrente da versão da aplicação.
@@ -31,28 +31,28 @@ namespace GeraClasseMvc.Web
         /// <summary>
         /// Lista de Ide(s) de Desenvolvimento.
         /// </summary>
-        IEnumerable<SelectListItem> IdeDesenvolvimentoListItem { get; set; }
+        IEnumerable<SelectListItem> ListaDeIdeDesenvolvimento { get; set; }
 
         /// <summary>
         /// Lista de Estilos do Formulário.
         /// </summary>
-        IEnumerable<SelectListItem> EstiloFormularioListItem { get; set; }
+        IEnumerable<SelectListItem> ListaDeEstiloFormulario { get; set; }
 
         /// <summary>
         /// Lista de Banco(s) de Dados.
         /// </summary>
-        IEnumerable<SelectListItem> BancoDeDadosListItem { get; set; }
+        IEnumerable<SelectListItem> ListaDeBancoDeDados { get; set; }
 
         /// <summary>
         /// Método para carregar o nome da versão da aplicação.
         /// </summary>
         /// <returns></returns>
-        string CarregarNomeDaVersaoAplicacao();
+        string CarregarNomeVersaoAplicacao();
 
         /// <summary>
         /// Método para carregar o nome da aplicação.
         /// </summary>
-        string CarregarNomeDaAplicacao();
+        string CarregarNomeAplicacao();
 
         /// <summary>
         /// Método para carregar o ano corrente da versão da aplicação.
@@ -70,6 +70,6 @@ namespace GeraClasseMvc.Web
         /// </summary>
         /// <param name="items"></param>
         /// <returns></returns>
-        IEnumerable<SelectListItem> CarregarListItem(string[] items);
+        IEnumerable<SelectListItem> CarregarListaDeItemsSelecionado(List<string> items);
     }
 }

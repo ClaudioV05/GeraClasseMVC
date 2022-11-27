@@ -12,10 +12,14 @@ namespace GeraClasseMvc.Api.Services
 {
     public class UtilsMvcApiPrincipal : IUtilsMvcApiPrincipal
     {
-        public async Task<Metadata> RetornaDescricaoTabelas(string baseURL, Metadata metadata)
+        //public async Task<Metadata> RetornaDescricaoTabelas(string baseURL, Metadata metadata)
+        //{
+        //    // Pegar o de macorrati
+        //    return null;
+        //}
+        public Task<Metadata> RetornaDescricaoTabelas(string baseURL, Metadata metadata)
         {
-            // Pegar o de macorrati
-            return null;
+            throw new NotImplementedException();
         }
     }
 }

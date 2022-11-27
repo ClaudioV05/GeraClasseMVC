@@ -1,50 +1,47 @@
-﻿using Microsoft.AspNetCore.Mvc.Rendering;
+﻿using GeraClasseMvc.Api.Services.Interfaces;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
 
 namespace GeraClasseMvc.Web.Services
 {
-    public class UtilsPrincipal : IUtilsPrincipal
+    public class UtilsMvcWebPrincipal : IUtilsMvcWebPrincipal
     {
         private readonly IConfiguration _configuration;
+        private readonly IMetodosGenericos _metodosGenericos;
 
-        public UtilsPrincipal(IConfiguration configuration)
+        public UtilsMvcWebPrincipal(IConfiguration configuration, IMetodosGenericos metodosGenericos)
         {
             _configuration = configuration;
+            _metodosGenericos = metodosGenericos;
 
-            this.NomeDaVersaoAplicacao = CarregarNomeDaVersaoAplicacao();
-            this.NomeDaAplicacao = CarregarNomeDaAplicacao();
+            this.NomeAplicacao = CarregarNomeAplicacao();
+            this.NomeVersaoAplicacao = CarregarNomeVersaoAplicacao();
             this.AnoVersaoAplicacao = CarregarAnoVersaoAplicacao();
             this.InformacaoTextArea = CarregarInformacaoTextArea();
-            this.IdeDesenvolvimentoListItem = CarregarListItem(new[] { "Delphi", "Lazarus", "Visual Studio" });
-            this.EstiloFormularioListItem = CarregarListItem(new[] { "Normal", "MDI", "Windows Form", "HTML" });
-            this.BancoDeDadosListItem = CarregarListItem(new[] { "SQL Puro", "Firebird" });
+            this.ListaDeBancoDeDados = CarregarListaDeItemsSelecionado(_metodosGenericos.DescricaoBancoDeDados());
+            this.ListaDeEstiloFormulario = CarregarListaDeItemsSelecionado(_metodosGenericos.DescricaoEstiloFormulario());
+            this.ListaDeIdeDesenvolvimento = CarregarListaDeItemsSelecionado(_metodosGenericos.DescricaoIdeDesenvolvimento());
         }
 
-        public string NomeDaVersaoAplicacao { get; set; }
-
-        public string NomeDaAplicacao { get; set; }
-
+        public string NomeVersaoAplicacao { get; set; }
+        public string NomeAplicacao { get; set; }
         public string AnoVersaoAplicacao { get; set; }
-
         public string InformacaoTextArea { get; set; }
-
-        public IEnumerable<SelectListItem> IdeDesenvolvimentoListItem { get; set; }
-
-        public IEnumerable<SelectListItem> EstiloFormularioListItem { get; set; }
-
-        public IEnumerable<SelectListItem> BancoDeDadosListItem { get; set; }
+        public IEnumerable<SelectListItem> ListaDeIdeDesenvolvimento { get; set; }
+        public IEnumerable<SelectListItem> ListaDeEstiloFormulario { get; set; }
+        public IEnumerable<SelectListItem> ListaDeBancoDeDados { get; set; }
 
         #region Carregar Lista de items da Ide de Desenvolvimento, Estilo do Formulário e Banco de Dados.
-        public IEnumerable<SelectListItem> CarregarListItem(string[] items)
+        public IEnumerable<SelectListItem> CarregarListaDeItemsSelecionado(List<string> items)
         {
             List<SelectListItem> lista = new List<SelectListItem>();
             try
             {
-                if (items.Length > 0)
+                if (items.Count > 0)
                 {
-                    for (int i = 0; i < items.Length; i++)
+                    for (int i = 1; i < items.Count; i++)
                     {
                         if (!string.IsNullOrEmpty(items[i]))
                         {
@@ -65,19 +62,19 @@ namespace GeraClasseMvc.Web.Services
         }
         #endregion Carregar Lista de items da Ide de Desenvolvimento, Estilo do Formulário e Banco de Dados.
 
-        #region CarregarAnoVersaoAplicacao
+        #region CarregarAnoVersaoAplicacao.
         public string CarregarAnoVersaoAplicacao() => DateTime.Now.Year.ToString();
         #endregion CarregarAnoVersaoAplicacao
 
-        #region CarregarNomeDaVersaoAplicacao
-        public string CarregarNomeDaVersaoAplicacao() => _configuration["GeraClasseMvc:NomeDaVersaoAplicacao"];
+        #region CarregarNomeDaVersaoAplicacao.
+        public string CarregarNomeVersaoAplicacao() => _configuration["GeraClasseMvc:NomeVersaoAplicacao"];
         #endregion CarregarNomeDaVersaoAplicacao
 
-        #region CarregarNomeDaAplicacao
-        public string CarregarNomeDaAplicacao() => _configuration["GeraClasseMvc:NomeDaAplicacao"];
+        #region CarregarNomeDaAplicacao.
+        public string CarregarNomeAplicacao() => _configuration["GeraClasseMvc:NomeAplicacao"];
         #endregion CarregarNomeDaAplicacao
 
-        #region CarregarInformacaoTextArea
+        #region CarregarInformacaoTextArea.
         public string CarregarInformacaoTextArea()
         {
             return "This program generates 'MVC' standard class files for the 'Delphi', 'Lazarus' and '.NET' Development Ide, from a text file containing the metadata of one or more tables.\n" +

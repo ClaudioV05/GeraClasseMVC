@@ -12,6 +12,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using GeraClasseMvc.Api.Services.Interfaces;
+using GeraClasseMvc.Web.Services.Interfaces;
 
 namespace GeraClasseMvc.Web
 {
@@ -31,6 +32,14 @@ namespace GeraClasseMvc.Web
             services.AddScoped<IUtilsMvcWebPrincipal, UtilsMvcWebPrincipal>();
             services.AddScoped<IUtilsMvcApiPrincipal, UtilsMvcApiPrincipal>();
             services.AddScoped<IMetodosGenericos, MetodosGenericos>();
+            services.AddScoped<ILinksApi, LinksApi>();
+
+            // Adiciona o IHttpClientFactory e os serviços relacionados ao container para assim poder 
+            // Injetar a instancia no construtor.
+            services.AddHttpClient("GeraClasseApi", c =>
+            {
+                c.BaseAddress = new Uri(Configuration["Uri:GeraClasseMvcApi"]);
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

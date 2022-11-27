@@ -5,6 +5,11 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Services\Interfaces\IUtilsPrincipal.cs" />
+    <Compile Remove="Services\UtilsPrincipal.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\..\02-Aplicacao\GeraClasseMvc.Api\GeraClasseMvc.Api.csproj" />
   </ItemGroup>
 

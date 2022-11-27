@@ -1,6 +1,7 @@
 ﻿using GeraClasseMvc.Api.Models;
 using GeraClasseMvc.Api.Services.Interfaces;
 using GeraClasseMvc.Web.Models;
+using GeraClasseMvc.Web.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using System;
 
@@ -10,13 +11,15 @@ namespace GeraClasseMvc.Web.Controllers.Principal
     {
         private readonly IUtilsMvcWebPrincipal _utilsWeb;
         private readonly IUtilsMvcApiPrincipal _utilsApi;
-        private readonly IMetodosGenericos _metodosGenericos;
+        private readonly IMetodosGenericos _metodosGenericos; // retirar depois
+        private readonly ILinksApi _linksApi;
 
-        public PrincipalController(IUtilsMvcWebPrincipal utilsWeb, IUtilsMvcApiPrincipal utilsApi, IMetodosGenericos metodosGenericos)
+        public PrincipalController(IUtilsMvcWebPrincipal utilsWeb, IUtilsMvcApiPrincipal utilsApi, IMetodosGenericos metodosGenericos, ILinksApi linksapi)
         {
             _utilsWeb = utilsWeb;
             _utilsApi = utilsApi;
             _metodosGenericos = metodosGenericos;
+            _linksApi = linksapi;
         }
 
         /// <summary>
@@ -56,7 +59,8 @@ namespace GeraClasseMvc.Web.Controllers.Principal
 
             try
             {
-                metadata.BancodeDados.IdTipoBancodeDados = _metodosGenericos.TipoBancoDeDados(principalViewModel.BancoDeDados);
+                //metadata.BancodeDados.IdTipoBancodeDados = _metodosGenericos.TipoBancoDeDados(principalViewModel.BancoDeDados);
+                var aux = _linksApi.TipoBancoDeDados(principalViewModel.BancoDeDados);
                 metadata.ScriptMetadata = principalViewModel.ArquivoMetadados;
                 /*metadata =*/ _utilsApi.RetornaDescricaoTabelas("http://localhost:3001/Principal", metadata);
             }
