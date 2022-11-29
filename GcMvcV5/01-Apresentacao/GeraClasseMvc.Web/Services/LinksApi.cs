@@ -1,8 +1,6 @@
 ﻿using GeraClasseMvc.Api.Models;
 using GeraClasseMvc.Web.Services.Interfaces;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Net.Http;
 using System.Text.Json;
 using System.Threading.Tasks;
@@ -11,28 +9,50 @@ namespace GeraClasseMvc.Web.Services
 {
     public class LinksApi : ILinksApi
     {
-        private const string _BASEURI = "/Principal";
         private readonly JsonSerializerOptions _options;
         private readonly IHttpClientFactory _httpClientFactory;
-
         public LinksApi(IHttpClientFactory httpClientFactory)
         {
             _options = new JsonSerializerOptions() { PropertyNameCaseInsensitive = true };
             _httpClientFactory = httpClientFactory;
         }
 
-        public async Task<TipoBancodeDados> TipoBancoDeDados(string bancoDeDados)
+        #region Formulário Principal.
+        public async Task<TipoBancodeDados> RetornaTipoBancoDeDados(string bancoDeDados)
         {
             var client = _httpClientFactory.CreateClient("GeraClasseApi");
-
-            using (var response = await client.GetAsync(_BASEURI))
+            try
             {
-                if (response.IsSuccessStatusCode)
+                using (var response = await client.GetAsync("RetornaTipoBancoDeDados?tipoBancoDeDados=" + bancoDeDados))
                 {
-                    var apiResponse = await response.Content.ReadAsStringAsync();
+                    if (response.IsSuccessStatusCode)
+                    {
+                        var apiResponse = await response.Content.ReadAsStringAsync();
+                    }
+                    else
+                    {
+                        throw new Exception(response.ReasonPhrase);
+                    }
                 }
+            }
+            catch (Exception)
+            {
+                return TipoBancodeDados.NaoDefinido;
             }
             return TipoBancodeDados.NaoDefinido;
         }
+        #endregion Formulário Principal.
+
+        #region Formulário Escolhe Tabelas.
+        // Aqui para formulário de escolha de tabela.
+        #endregion Formulário Escolhe Tabelas.
+
+        #region Formulário Escolhe Campos.
+        // Aqui para formulário de campos.
+        #endregion Formulário Escolhe Campos.
+
+        #region Métodos Genéricos.
+        // Aqui para os métodos genéricos.
+        #endregion Métodos Genéricos.
     }
 }

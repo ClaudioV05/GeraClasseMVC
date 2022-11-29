@@ -5,6 +5,6 @@ namespace GeraClasseMvc.Web.Services.Interfaces
 {
     public interface ILinksApi
     {
-        Task<TipoBancodeDados> TipoBancoDeDados(string bancoDeDados);
+        Task<TipoBancodeDados> RetornaTipoBancoDeDados(string bancoDeDados);
     }
 }

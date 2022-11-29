@@ -62,6 +62,10 @@ namespace GeraClasseMvc.Web.Services
         }
         #endregion Carregar Lista de items da Ide de Desenvolvimento, Estilo do Formulário e Banco de Dados.
 
+        #region CarregarNomeDaAplicacao.
+        public string CarregarNomeAplicacao() => _configuration["GeraClasseMvc:NomeAplicacao"];
+        #endregion CarregarNomeDaAplicacao
+
         #region CarregarAnoVersaoAplicacao.
         public string CarregarAnoVersaoAplicacao() => DateTime.Now.Year.ToString();
         #endregion CarregarAnoVersaoAplicacao
@@ -69,10 +73,6 @@ namespace GeraClasseMvc.Web.Services
         #region CarregarNomeDaVersaoAplicacao.
         public string CarregarNomeVersaoAplicacao() => _configuration["GeraClasseMvc:NomeVersaoAplicacao"];
         #endregion CarregarNomeDaVersaoAplicacao
-
-        #region CarregarNomeDaAplicacao.
-        public string CarregarNomeAplicacao() => _configuration["GeraClasseMvc:NomeAplicacao"];
-        #endregion CarregarNomeDaAplicacao
 
         #region CarregarInformacaoTextArea.
         public string CarregarInformacaoTextArea()

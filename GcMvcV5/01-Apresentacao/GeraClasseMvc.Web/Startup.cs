@@ -29,8 +29,8 @@ namespace GeraClasseMvc.Web
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
+
             services.AddScoped<IUtilsMvcWebPrincipal, UtilsMvcWebPrincipal>();
-            services.AddScoped<IUtilsMvcApiPrincipal, UtilsMvcApiPrincipal>();
             services.AddScoped<IMetodosGenericos, MetodosGenericos>();
             services.AddScoped<ILinksApi, LinksApi>();
 

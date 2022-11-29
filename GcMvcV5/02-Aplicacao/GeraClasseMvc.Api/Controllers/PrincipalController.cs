@@ -1,35 +1,33 @@
-﻿using GeraClasseMvc.Api.Models;
+﻿using GeraClasseMvc.Api.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using GeraClasseMvc.Api.Models;
 
 namespace GeraClasseMvc.Api.Controllers
 {
+    /// <summary>
+    /// Classe básica do form Principal.
+    /// </summary>
     [Produces("application/json")]
     [ApiController]
     [Route("[controller]")]
-    public class PrincipalController : ControllerBase
+    public class PrincipalController : Controller
     {
-        /// <summary>
-        /// Método responsável por retornar as tabelas que serão utilizadas no gera classe.
-        /// </summary>
-        /// <returns></returns>
-        [HttpPost]
-        public Metadata Principal(Metadata metadata)
+        private readonly IMetodosGenericos _metodosGenericos;
+        public PrincipalController(IMetodosGenericos metodosGenericos)
         {
-            return metadata;
+            _metodosGenericos = metodosGenericos;
         }
 
         /// <summary>
-        /// 
+        /// Método responsável por retornar o tipo do banco de dados.
         /// </summary>
-        /// <returns></returns>
+        /// <param name="tipoBancoDeDados"></param>
+        /// <returns>Tipo do banco de dados</returns>
         [HttpGet]
-        public TipoBancodeDados TipoBancoDeDados(Metadata metadata)
+        [Route("/RetornaTipoBancoDeDados")]
+        public TipoBancodeDados RetornaTipoBancoDeDados(string tipoBancoDeDados)
         {
-            return TipoBancodeDados.NaoDefinido;
+            return _metodosGenericos.RetornaTipoBancoDeDados(tipoBancoDeDados);
         }
     }
 }

@@ -1,5 +1,4 @@
 ﻿using GeraClasseMvc.Api.Models;
-using GeraClasseMvc.Api.Services.Interfaces;
 using GeraClasseMvc.Web.Models;
 using GeraClasseMvc.Web.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
@@ -10,15 +9,10 @@ namespace GeraClasseMvc.Web.Controllers.Principal
     public class PrincipalController : Controller
     {
         private readonly IUtilsMvcWebPrincipal _utilsWeb;
-        private readonly IUtilsMvcApiPrincipal _utilsApi;
-        private readonly IMetodosGenericos _metodosGenericos; // retirar depois
         private readonly ILinksApi _linksApi;
-
-        public PrincipalController(IUtilsMvcWebPrincipal utilsWeb, IUtilsMvcApiPrincipal utilsApi, IMetodosGenericos metodosGenericos, ILinksApi linksapi)
+        public PrincipalController(IUtilsMvcWebPrincipal utilsWeb, ILinksApi linksapi)
         {
             _utilsWeb = utilsWeb;
-            _utilsApi = utilsApi;
-            _metodosGenericos = metodosGenericos;
             _linksApi = linksapi;
         }
 
@@ -26,7 +20,8 @@ namespace GeraClasseMvc.Web.Controllers.Principal
         /// 
         /// </summary>
         /// <returns></returns>
-        [HttpGet, ActionName("GeraDadosPrincipais")]
+        [HttpGet]
+        [ActionName("GeraDadosPrincipais")]
         public IActionResult GeraDadosPrincipais()
         {
             PrincipalViewModel principalViewModel = new PrincipalViewModel();
@@ -52,7 +47,8 @@ namespace GeraClasseMvc.Web.Controllers.Principal
         /// </summary>
         /// <param name="principalViewModel"></param>
         /// <returns></returns>
-        [HttpPost, ActionName("GeraDadosPrincipais")]
+        [HttpPost]
+        [ActionName("GeraDadosPrincipais")]
         public IActionResult GeraDadosPrincipais(PrincipalViewModel principalViewModel)
         {
             Metadata metadata = new Metadata();
@@ -60,13 +56,13 @@ namespace GeraClasseMvc.Web.Controllers.Principal
             try
             {
                 //metadata.BancodeDados.IdTipoBancodeDados = _metodosGenericos.TipoBancoDeDados(principalViewModel.BancoDeDados);
-                var aux = _linksApi.TipoBancoDeDados(principalViewModel.BancoDeDados);
+                var aux = _linksApi.RetornaTipoBancoDeDados(principalViewModel.BancoDeDados);
                 metadata.ScriptMetadata = principalViewModel.ArquivoMetadados;
-                /*metadata =*/ _utilsApi.RetornaDescricaoTabelas("http://localhost:3001/Principal", metadata);
+                /*metadata = _utilsApi.RetornaDescricaoTabelas("http://localhost:3001/Principal", metadata);*/
             }
             catch (Exception ex)
             {
-                throw new Exception(ex.Message);
+               Redirect(ex.Message);
             }
 
             return null;

@@ -25,7 +25,7 @@ namespace GeraClasseMvc.Api.Services
 
         public List<string> DescricaoIdeDesenvolvimento() => _ideDesenvolvimento.Descricao;
 
-        public TipoBancodeDados TipoBancoDeDados(string? bancodedados)
+        public TipoBancodeDados RetornaTipoBancoDeDados(string? bancodedados)
         {
             object? tpBancodeDados = TipoBancodeDados.NaoDefinido;
             string? descBancoDeDados = string.Empty;
