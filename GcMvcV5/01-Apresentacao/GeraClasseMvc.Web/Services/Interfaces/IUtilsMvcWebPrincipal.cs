@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc.Rendering;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace GeraClasseMvc.Web
 {
@@ -70,6 +71,6 @@ namespace GeraClasseMvc.Web
         /// </summary>
         /// <param name="items"></param>
         /// <returns></returns>
-        IEnumerable<SelectListItem> CarregarListaDeItemsSelecionado(List<string> items);
+        IEnumerable<SelectListItem> CarregarListaDeItems(Task<IEnumerable<string>> items);
     }
 }

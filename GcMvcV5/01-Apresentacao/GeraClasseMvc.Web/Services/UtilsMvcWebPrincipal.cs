@@ -1,28 +1,30 @@
 ﻿using GeraClasseMvc.Api.Services.Interfaces;
+using GeraClasseMvc.Web.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace GeraClasseMvc.Web.Services
 {
     public class UtilsMvcWebPrincipal : IUtilsMvcWebPrincipal
     {
         private readonly IConfiguration _configuration;
-        private readonly IMetodosGenericos _metodosGenericos;
+        private readonly ILinksApi _linksApi;
 
-        public UtilsMvcWebPrincipal(IConfiguration configuration, IMetodosGenericos metodosGenericos)
+        public UtilsMvcWebPrincipal(IConfiguration configuration, ILinksApi linksApi)
         {
             _configuration = configuration;
-            _metodosGenericos = metodosGenericos;
+            _linksApi = linksApi;
 
             this.NomeAplicacao = CarregarNomeAplicacao();
             this.NomeVersaoAplicacao = CarregarNomeVersaoAplicacao();
             this.AnoVersaoAplicacao = CarregarAnoVersaoAplicacao();
             this.InformacaoTextArea = CarregarInformacaoTextArea();
-            this.ListaDeBancoDeDados = CarregarListaDeItemsSelecionado(_metodosGenericos.DescricaoBancoDeDados());
-            this.ListaDeEstiloFormulario = CarregarListaDeItemsSelecionado(_metodosGenericos.DescricaoEstiloFormulario());
-            this.ListaDeIdeDesenvolvimento = CarregarListaDeItemsSelecionado(_metodosGenericos.DescricaoIdeDesenvolvimento());
+            this.ListaDeBancoDeDados = CarregarListaDeItems(_linksApi.DescricaoBancosDeDados());
+            this.ListaDeEstiloFormulario = CarregarListaDeItems(_linksApi.DescricaoEstiloFormulario());
+            this.ListaDeIdeDesenvolvimento = CarregarListaDeItems(_linksApi.DescricaoIdeDesenvolvimento());
         }
 
         public string NomeVersaoAplicacao { get; set; }
@@ -34,31 +36,32 @@ namespace GeraClasseMvc.Web.Services
         public IEnumerable<SelectListItem> ListaDeBancoDeDados { get; set; }
 
         #region Carregar Lista de items da Ide de Desenvolvimento, Estilo do Formulário e Banco de Dados.
-        public IEnumerable<SelectListItem> CarregarListaDeItemsSelecionado(List<string> items)
+        public IEnumerable<SelectListItem> CarregarListaDeItems(Task<IEnumerable<string>> items)
         {
-            List<SelectListItem> lista = new List<SelectListItem>();
-            try
-            {
-                if (items.Count > 0)
-                {
-                    for (int i = 1; i < items.Count; i++)
-                    {
-                        if (!string.IsNullOrEmpty(items[i]))
-                        {
-                            lista.Add(new SelectListItem() { Value = items[i].Replace(" ", "").ToLower(), Text = items[i] });
-                        }
-                    }
-                }
-                else
-                {
-                    lista.Add(new SelectListItem() { Value = "Sem Valor".Replace(" ", "").ToLower(), Text = "Sem Valor" });
-                }
-            }
-            catch (Exception ex)
-            {
-                throw new Exception(ex.Message);
-            }
-            return lista;
+            //List<SelectListItem> lista = new List<SelectListItem>();
+            //try
+            //{
+            //    if (items.ToString().Length > 0)
+            //    {
+            //        for (int i = 1; i < items.ToString().Length; i++)
+            //        {
+            //            if (!string.IsNullOrEmpty(items[i]))
+            //            {
+            //                lista.Add(new SelectListItem() { Value = items[i].Replace(" ", "").ToLower(), Text = items[i] });
+            //            }
+            //        }
+            //    }
+            //    else
+            //    {
+            //        lista.Add(new SelectListItem() { Value = "Sem Valor".Replace(" ", "").ToLower(), Text = "Sem Valor" });
+            //    }
+            //}
+            //catch (Exception ex)
+            //{
+            //    throw new Exception(ex.Message);
+            //}
+            //return lista;
+            return null;
         }
         #endregion Carregar Lista de items da Ide de Desenvolvimento, Estilo do Formulário e Banco de Dados.
 

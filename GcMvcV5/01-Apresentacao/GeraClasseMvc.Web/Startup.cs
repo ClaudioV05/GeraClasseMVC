@@ -31,7 +31,6 @@ namespace GeraClasseMvc.Web
             services.AddControllersWithViews();
 
             services.AddScoped<IUtilsMvcWebPrincipal, UtilsMvcWebPrincipal>();
-            services.AddScoped<IMetodosGenericos, MetodosGenericos>();
             services.AddScoped<ILinksApi, LinksApi>();
 
             // Adiciona o IHttpClientFactory e os serviços relacionados ao container para assim poder 

@@ -19,12 +19,13 @@ namespace GeraClasseMvc.Api.Services
             _ideDesenvolvimento = new IdeDesenvolvimento();
         }
 
-        public List<string> DescricaoBancoDeDados() => _bancodeDados.Descricao;
+        public IEnumerable<string> DescricaoBancosDeDados() => _bancodeDados.Descricao;
 
-        public List<string> DescricaoEstiloFormulario() => _estiloFormulario.Descricao;
+        public IEnumerable<string> DescricaoEstiloFormulario() => _estiloFormulario.Descricao;
 
-        public List<string> DescricaoIdeDesenvolvimento() => _ideDesenvolvimento.Descricao;
+        public IEnumerable<string> DescricaoIdeDesenvolvimento() => _ideDesenvolvimento.Descricao;
 
+        // esse não vai fazer chamada
         public TipoBancodeDados RetornaTipoBancoDeDados(string? bancodedados)
         {
             object? tpBancodeDados = TipoBancodeDados.NaoDefinido;

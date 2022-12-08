@@ -1,9 +1,11 @@
 ﻿using GeraClasseMvc.Api.Models;
 using GeraClasseMvc.Web.Services.Interfaces;
 using System;
+using System.Collections.Generic;
 using System.Net.Http;
 using System.Text.Json;
 using System.Threading.Tasks;
+using System.Net;
 
 namespace GeraClasseMvc.Web.Services
 {
@@ -18,28 +20,73 @@ namespace GeraClasseMvc.Web.Services
         }
 
         #region Formulário Principal.
-        public async Task<TipoBancodeDados> RetornaTipoBancoDeDados(string bancoDeDados)
+        public async Task<IEnumerable<string>> DescricaoBancosDeDados()
         {
-            var client = _httpClientFactory.CreateClient("GeraClasseApi");
+            var httpClient = NovaInstacia();
+            IEnumerable<string> items = null;
             try
             {
-                using (var response = await client.GetAsync("RetornaTipoBancoDeDados?tipoBancoDeDados=" + bancoDeDados))
+                using (var resposta = await httpClient.GetAsync("DescricaoBancosDeDados"))
                 {
-                    if (response.IsSuccessStatusCode)
+                    if (resposta.StatusCode == HttpStatusCode.OK)
                     {
-                        var apiResponse = await response.Content.ReadAsStringAsync();
-                    }
-                    else
-                    {
-                        throw new Exception(response.ReasonPhrase);
+                        var resultadoApi = await resposta.Content.ReadAsStreamAsync();
+                        items = await JsonSerializer.DeserializeAsync<IEnumerable<string>>(resultadoApi, _options);
                     }
                 }
             }
             catch (Exception)
             {
-                return TipoBancodeDados.NaoDefinido;
+                items = null;
             }
-            return TipoBancodeDados.NaoDefinido;
+
+            return items;
+        }
+
+        public async Task<IEnumerable<string>> DescricaoEstiloFormulario()
+        {
+            var httpClient = NovaInstacia();
+            IEnumerable<string> items = null;
+            try
+            {
+                using (var resposta = await httpClient.GetAsync("DescricaoEstiloFormulario"))
+                {
+                    if (resposta.StatusCode == HttpStatusCode.OK)
+                    {
+                        var resultadoApi = await resposta.Content.ReadAsStreamAsync();
+                        items = await JsonSerializer.DeserializeAsync<IEnumerable<string>>(resultadoApi, _options);
+                    }
+                }
+            }
+            catch (Exception)
+            {
+                items = null;
+            }
+
+            return items;
+        }
+
+        public async Task<IEnumerable<string>> DescricaoIdeDesenvolvimento()
+        {
+            var httpClient = NovaInstacia();
+            IEnumerable<string> items = null;
+            try
+            {
+                using (var resposta = await httpClient.GetAsync("DescricaoIdeDesenvolvimento"))
+                {
+                    if (resposta.StatusCode == HttpStatusCode.OK)
+                    {
+                        var resultadoApi = await resposta.Content.ReadAsStreamAsync();
+                        items = await JsonSerializer.DeserializeAsync<IEnumerable<string>>(resultadoApi, _options);
+                    }
+                }
+            }
+            catch (Exception)
+            {
+                items = null;
+            }
+
+            return items;
         }
         #endregion Formulário Principal.
 
@@ -51,8 +98,7 @@ namespace GeraClasseMvc.Web.Services
         // Aqui para formulário de campos.
         #endregion Formulário Escolhe Campos.
 
-        #region Métodos Genéricos.
-        // Aqui para os métodos genéricos.
-        #endregion Métodos Genéricos.
+        private HttpClient NovaInstacia() => _httpClientFactory.CreateClient("GeraClasseApi");
+
     }
 }

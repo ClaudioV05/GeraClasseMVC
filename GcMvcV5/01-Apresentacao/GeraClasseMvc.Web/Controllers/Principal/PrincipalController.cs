@@ -56,7 +56,7 @@ namespace GeraClasseMvc.Web.Controllers.Principal
             try
             {
                 //metadata.BancodeDados.IdTipoBancodeDados = _metodosGenericos.TipoBancoDeDados(principalViewModel.BancoDeDados);
-                var aux = _linksApi.RetornaTipoBancoDeDados(principalViewModel.BancoDeDados);
+                //var aux = _linksApi.RetornaTipoBancoDeDados(principalViewModel.BancoDeDados);
                 metadata.ScriptMetadata = principalViewModel.ArquivoMetadados;
                 /*metadata = _utilsApi.RetornaDescricaoTabelas("http://localhost:3001/Principal", metadata);*/
             }

@@ -12,6 +12,7 @@ namespace GeraClasseMvc.Api.Controllers
     [Route("[controller]")]
     public class PrincipalController : Controller
     {
+        // vai retirar esse método generico daqui.
         private readonly IMetodosGenericos _metodosGenericos;
         public PrincipalController(IMetodosGenericos metodosGenericos)
         {

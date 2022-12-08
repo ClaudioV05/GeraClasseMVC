@@ -1,0 +1,43 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>GeraClasseMvc.Api</name>
+    </assembly>
+    <members>
+        <member name="T:GeraClasseMvc.Api.Controllers.MetodosGenericosController">
+            <summary>
+            Classe básica do form MetodosGenericosController.
+            </summary>
+        </member>
+        <member name="M:GeraClasseMvc.Api.Controllers.MetodosGenericosController.DescricaoDosBancosDeDados">
+            <summary>
+            Método responsável por retornar lista de descrição de todos os bancos de dados.
+            </summary>
+            <returns>Lista de descrição de todos os bancos de dados.</returns>
+        </member>
+        <member name="M:GeraClasseMvc.Api.Controllers.MetodosGenericosController.DescricaoDosEstiloFormulario">
+            <summary>
+            Método responsável por retornar lista de descrição de todos os estilos de formulários.
+            </summary>
+            <returns>Lista de descrição de todos os estilos de formulários.</returns>
+        </member>
+        <member name="M:GeraClasseMvc.Api.Controllers.MetodosGenericosController.DescricaoDasIdeDesenvolvimento">
+            <summary>
+            Método responsável por retornar lista de descrição de todas as IDE de desenvolvimento.
+            </summary>
+            <returns>Lista de descrição de todas as IDE de desenvolvimento.</returns>
+        </member>
+        <member name="T:GeraClasseMvc.Api.Controllers.PrincipalController">
+            <summary>
+            Classe básica do form Principal.
+            </summary>
+        </member>
+        <member name="M:GeraClasseMvc.Api.Controllers.PrincipalController.RetornaTipoBancoDeDados(System.String)">
+            <summary>
+            Método responsável por retornar o tipo do banco de dados.
+            </summary>
+            <param name="tipoBancoDeDados"></param>
+            <returns>Tipo do banco de dados</returns>
+        </member>
+    </members>
+</doc>
