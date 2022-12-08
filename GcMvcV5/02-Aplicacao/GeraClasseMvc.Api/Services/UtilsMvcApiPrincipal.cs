@@ -17,7 +17,7 @@ namespace GeraClasseMvc.Api.Services
         //    // Pegar o de macorrati
         //    return null;
         //}
-        public Task<Metadata> RetornaDescricaoTabelas(string baseURL, Metadata metadata)
+        public Task<GeraClasse> RetornaDescricaoTabelas(string baseURL, GeraClasse metadata)
         {
             throw new NotImplementedException();
         }

@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace GeraClasseMvc.Api.Models
 {
@@ -10,15 +11,16 @@ namespace GeraClasseMvc.Api.Models
         NetVisualStudio = 3
     }
 
+    [ComplexType]
     public class IdeDesenvolvimento
     {
         public IdeDesenvolvimento()
         {
-            this.IdTipoIdeDesenvolvimento = TipoIdeDesenvolvimento.NaoDefinido;
+            this.Id = TipoIdeDesenvolvimento.NaoDefinido;
             this.Descricao = new List<string>() { "NaoDefinido", "Delphi", "Lazarus", "Visual Studio" };
         }
 
-        public TipoIdeDesenvolvimento IdTipoIdeDesenvolvimento { get; set; }
+        public TipoIdeDesenvolvimento Id { get; set; }
         public List<string> Descricao { get; set; }
     }
 }

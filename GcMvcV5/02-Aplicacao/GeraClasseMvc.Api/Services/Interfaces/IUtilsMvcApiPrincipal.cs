@@ -5,6 +5,6 @@ namespace GeraClasseMvc.Api.Services.Interfaces
 {
     public interface IUtilsMvcApiPrincipal
     {
-        Task<Metadata> RetornaDescricaoTabelas(string baseURL, Metadata metadata);
+        Task<GeraClasse> RetornaDescricaoTabelas(string baseURL, GeraClasse metadata);
     }
 }

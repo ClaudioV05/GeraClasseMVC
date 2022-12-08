@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace GeraClasseMvc.Api.Models
 {
@@ -9,15 +10,16 @@ namespace GeraClasseMvc.Api.Models
         SgdbFirebird = 2,
     }
 
+    [ComplexType]
     public class BancodeDados
     {
         public BancodeDados()
         {
-            this.IdTipoBancodeDados = TipoBancodeDados.NaoDefinido;
+            this.Id = TipoBancodeDados.NaoDefinido;
             this.Descricao = new List<string>() { "NaoDefinido", "MySql", "Firebird" };
         }
 
-        public TipoBancodeDados IdTipoBancodeDados { get; set; }
+        public TipoBancodeDados Id { get; set; }
         public List<string> Descricao { get; set; }
     }
 }

@@ -51,7 +51,7 @@ namespace GeraClasseMvc.Web.Controllers.Principal
         [ActionName("GeraDadosPrincipais")]
         public IActionResult GeraDadosPrincipais(PrincipalViewModel principalViewModel)
         {
-            Metadata metadata = new Metadata();
+            GeraClasse metadata = new GeraClasse();
 
             try
             {

@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace GeraClasseMvc.Api.Models
 {
@@ -11,15 +12,16 @@ namespace GeraClasseMvc.Api.Models
         DotnetAspNetMvc = 4
     }
 
+    [ComplexType]
     public class EstiloFormulario
     {
         public EstiloFormulario()
         {
-            this.IdTipoEstiloFormulario = TipoEstiloFormulario.NaoDefinido;
+            this.Id = TipoEstiloFormulario.NaoDefinido;
             this.Descricao = new List<string>() { "NaoDefinido", "Normal", "MDI", "Windows Form", "Asp Net MVC" };
         }
 
-        public TipoEstiloFormulario IdTipoEstiloFormulario { get; set; }
+        public TipoEstiloFormulario Id { get; set; }
         public List<string> Descricao { get; set; }
     }
 }
