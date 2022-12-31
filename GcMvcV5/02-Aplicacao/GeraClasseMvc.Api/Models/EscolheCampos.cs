@@ -1,7 +1,7 @@
 ﻿namespace GeraClasseMvc.Api.Models
 {
     /// <summary>
-    /// Entidade EscolheCampos.
+    /// Entidade Escolhe Campos.
     /// </summary>
     public class EscolheCampos
     {

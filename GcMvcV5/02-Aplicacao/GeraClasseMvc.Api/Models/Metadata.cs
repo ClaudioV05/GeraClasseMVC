@@ -1,7 +1,7 @@
 ﻿namespace GeraClasseMvc.Api.Models
 {
     /// <summary>
-    /// Entidade Metadata
+    /// Entidade Metadata.
     /// </summary>
     public class Metadata
     {
@@ -16,17 +16,14 @@
         /// Contém o script do metadata.
         /// </summary>
         public string? ScriptMetadata { get; set; }
-
         /// <summary>
         /// Entidade Banco de Dados.
         /// </summary>
         public BancodeDados? BancodeDados { get; set; }
-
         /// <summary>
         /// Entidade Estilo do Formulário.
         /// </summary>
         public EstiloFormulario? EstiloFormulario { get; set; }
-
         /// <summary>
         /// Entidade IDE de Desenvolvimento.
         /// </summary>

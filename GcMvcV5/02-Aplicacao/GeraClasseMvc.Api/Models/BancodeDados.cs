@@ -14,7 +14,7 @@ namespace GeraClasseMvc.Api.Models
     }
 
     /// <summary>
-    /// Entidade BancodeDados.
+    /// Entidade Banco de Dados.
     /// </summary>
     [ComplexType]
     public class BancodeDados
@@ -22,14 +22,13 @@ namespace GeraClasseMvc.Api.Models
         public BancodeDados()
         {
             this.Id = TipoBancodeDados.NaoDefinido;
-            this.Descricao = new List<string> { "NaoDefinido", "MySql", "Firebird" };
+            this.Descricao = new List<string>() { "NaoDefinido", "MySql", "Firebird" };
         }
 
         /// <summary>
         /// Id do TipoBancodeDados.
         /// </summary>
         public TipoBancodeDados Id { get; set; }
-
         /// <summary>
         /// Descrição do Banco de dados.
         /// </summary>

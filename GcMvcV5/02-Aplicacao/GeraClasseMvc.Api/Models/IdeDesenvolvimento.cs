@@ -30,7 +30,6 @@ namespace GeraClasseMvc.Api.Models
         /// Id do TipoIdeDesenvolvimento.
         /// </summary>
         public TipoIdeDesenvolvimento Id { get; set; }
-
         /// <summary>
         /// Descrição da IDE de Desenvolvimento.
         /// </summary>

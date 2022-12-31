@@ -16,7 +16,7 @@ namespace GeraClasseMvc.Api.Models
     }
 
     /// <summary>
-    /// Entidade Estilo Formulário.
+    /// Entidade Estilo do Formulário.
     /// </summary>
     [ComplexType]
     public class EstiloFormulario
@@ -31,7 +31,6 @@ namespace GeraClasseMvc.Api.Models
         /// Id do TipoEstiloFormulario.
         /// </summary>
         public TipoEstiloFormulario Id { get; set; }
-
         /// <summary>
         /// Descrição do Estilo do Formulário.
         /// </summary>
