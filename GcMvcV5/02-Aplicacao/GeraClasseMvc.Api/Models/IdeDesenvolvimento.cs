@@ -3,6 +3,9 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace GeraClasseMvc.Api.Models
 {
+    /// <summary>
+    /// Tipo Enumerado TipoIdeDesenvolvimento para a Entidade IDE de Desenvolvimento.
+    /// </summary>
     public enum TipoIdeDesenvolvimento : byte
     {
         NaoDefinido = 0,
@@ -11,6 +14,9 @@ namespace GeraClasseMvc.Api.Models
         NetVisualStudio = 3
     }
 
+    /// <summary>
+    /// Entidade IDE de Desenvolvimento.
+    /// </summary>
     [ComplexType]
     public class IdeDesenvolvimento
     {
@@ -20,7 +26,14 @@ namespace GeraClasseMvc.Api.Models
             this.Descricao = new List<string>() { "NaoDefinido", "Delphi", "Lazarus", "Visual Studio" };
         }
 
+        /// <summary>
+        /// Id do TipoIdeDesenvolvimento.
+        /// </summary>
         public TipoIdeDesenvolvimento Id { get; set; }
+
+        /// <summary>
+        /// Descrição da IDE de Desenvolvimento.
+        /// </summary>
         public List<string> Descricao { get; set; }
     }
 }

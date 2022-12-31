@@ -1,7 +1,6 @@
-﻿using System.Collections.Generic;
-
-namespace GeraClasseMvc.Api.Models
+﻿namespace GeraClasseMvc.Api.Models
 {
+   
     public class Metadata
     {
         public Metadata()
