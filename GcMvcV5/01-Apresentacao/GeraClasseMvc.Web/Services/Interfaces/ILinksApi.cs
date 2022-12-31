@@ -3,6 +3,9 @@ using System.Threading.Tasks;
 
 namespace GeraClasseMvc.Web.Services.Interfaces
 {
+    /// <summary>
+    /// Interface ILinksApi Responsável pela comunicação entre o Front-End e o API.
+    /// </summary>
     public interface ILinksApi
     {
         /// <summary>

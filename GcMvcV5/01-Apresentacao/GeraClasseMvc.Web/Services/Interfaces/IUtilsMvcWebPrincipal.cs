@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 namespace GeraClasseMvc.Web
 {
     /// <summary>
-    /// Classe básica referente aos utilitários da classe principal.
+    /// Interface IUtilsMvcWebPrincipal referente aos utilitários da classe principal.
     /// </summary>
     public interface IUtilsMvcWebPrincipal
     {
@@ -55,10 +55,18 @@ namespace GeraClasseMvc.Web
         /// Método para carregar o texto Informativo da versão da aplicação.
         /// </summary>
         string CarregarPropriedadeInformacaoTextArea();
+        /// <summary>
+        /// Listagem do Banco de Dados.
+        /// </summary>
         Task CarregarPropriedadeListaBancoDeDados();
+        /// <summary>
+        /// Listagm do Estilo do Formulário.
+        /// </summary>
         Task CarregarPropriedadeListaEstiloFormulario();
+        /// <summary>
+        /// Listagem da IDE de Desenvolvimento.
+        /// </summary>
         Task CarregarPropriedadeListaIdeDesenvolvimento();
-
         /// <summary>
         /// Método generico para carregar a lista de items de IDE de desenvolvimento, estilo do formulário e banco de dados.
         /// </summary>
