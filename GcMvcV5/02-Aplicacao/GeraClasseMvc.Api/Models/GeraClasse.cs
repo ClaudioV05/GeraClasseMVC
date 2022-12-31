@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 
 namespace GeraClasseMvc.Api.Models
 {
@@ -25,9 +24,9 @@ namespace GeraClasseMvc.Api.Models
         }
 
         /// <summary>
-        /// Contém o script do metadata.
+        /// Contém o script do metadados.
         /// </summary>
-        public string? ScriptMetadata { get; set; }
+        public string? Metadados { get; set; }
         /// <summary>
         /// Contém o script do metadata no formato Base64.
         /// </summary>

@@ -5,17 +5,16 @@ var baseUrl = "/Principal/GeraDadosPrincipais/";
 //#endregion Var Globais.
 
 $(document).ready(function () {
-    LimparLocalStorage();
     CarregaTextoBotaoConfirmar(false);
     CarregaTextoArquivoMetadados(false);
 });
 
-$("input[name=ArquivoMetadados]").change(function () {
+$("input[name=Metadados]").change(function () {
     // Nome do arquivo Metadados.
     $(this).siblings(".custom-file-label").addClass("selected").html($(this).val().split("\\").pop());
 
     // Carregar o arquivo Metadados no TextArea.
-    let files = input.files;
+    let files = input.files.length;
     if (files.length == 0) {
         return;
     }
@@ -37,19 +36,15 @@ $("input[name=ArquivoMetadados]").change(function () {
 $("#btnGerarClasse").on("click", function (event) {
 
     if (SatisfazCritica()) {
-        SalvarDadosLocalStorage();
-
-        EnviarDadosGeraClasse($("#dpdBancoDeDados :selected").val(), $("#InformacaoTextArea").val());
+        EnviarDadosGeraClasse($("#dpdBancoDeDados :selected").val(),
+            $("#dpdEstiloFormulario :selected").val(),
+            $("#InformacaoTextArea").val(),
+            $("#dpdIdeDesenvolvimento :selected").val());
     }
     else {
         event.preventDefault();
     }
 });
-
-window.onresize = function () {
-    let tamanhoTela = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
-    RedimensionaTela(tamanhoTela);
-};
 
 function SatisfazCritica() {
     // Quando todas as implementações estiverem prontas, remover as validações do DropDown. Manter o arquivo Metadata.
@@ -108,28 +103,14 @@ function SatisfazCritica() {
     return validaCriticas;
 }
 
-function LimparLocalStorage() {
-    if (typeof (window.localStorage) !== undefined) {
-        window.localStorage.clear();
-    } else {
-        alert("Sem suporte para o Web Storage...");
-    }
-}
-
-function SalvarDadosLocalStorage() {
-    localStorage.setItem("idedesenvolvimento", $("#dpdIdeDesenvolvimento :selected").val());
-    localStorage.setItem("estiloformulario", $("#dpdEstiloFormulario :selected").val());
-    localStorage.setItem("bancodedados", $("#dpdBancoDeDados :selected").val());
-}
-
-function EnviarDadosGeraClasse(tipoBancoDeDados, metadata) {
+function EnviarDadosGeraClasse(tipoBancoDeDados, tipoEstiloFormulario, tipoIdeDesenvolvimento, metadados) {
 
     $.ajax({
-        url: baseUrl + "?BancoDeDados=" + tipoBancoDeDados + "&ArquivoMetadados=" + metadata,
+        url: baseUrl + "?TipoBancoDeDados=" + tipoBancoDeDados + "&TipoEstiloFormulario=" + tipoEstiloFormulario + "&TipoIdeDesenvolvimento=" + tipoIdeDesenvolvimento + "&Metadados=" + metadados,
         method: "POST",
         Accept: "application/json",
         contentType: "application/json",
-        success: function (suc) {
+        success: function (res) {
             console.log(`Sucesso ${res}`);
         },
         error: function (err) {
@@ -137,6 +118,11 @@ function EnviarDadosGeraClasse(tipoBancoDeDados, metadata) {
         }
     });
 }
+
+window.onresize = function () {
+    let tamanhoTela = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
+    RedimensionaTela(tamanhoTela);
+};
 
 function RedimensionaTela(tamanhoTela) {
     //#region Texto Botão Confirmar.

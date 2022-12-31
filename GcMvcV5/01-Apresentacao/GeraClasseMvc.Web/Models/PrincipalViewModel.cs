@@ -9,9 +9,11 @@ namespace GeraClasseMvc.Web.Models
 {
     public class PrincipalViewModel
     {
-        public string ArquivoMetadados { get; set; }
+        public string Metadados { get; set; }
         public string InformacaoTextArea { get; set; }
-        public string BancoDeDados { get; set; }
+        public string TipoBancoDeDados { get; set; }
+        public string TipoEstiloFormulario { get; set; }
+        public string TipoIdeDesenvolvimento { get; set; }
         public IEnumerable<SelectListItem> ListaDeIdeDesenvolvimento { get; set; }
         public IEnumerable<SelectListItem> ListaDeEstiloFormulario { get; set; }
         public IEnumerable<SelectListItem> ListaDeBancoDeDados { get; set; }
