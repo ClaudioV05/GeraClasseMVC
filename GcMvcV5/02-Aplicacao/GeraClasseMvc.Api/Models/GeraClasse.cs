@@ -4,7 +4,7 @@ using System.Collections.Generic;
 namespace GeraClasseMvc.Api.Models
 {
     /// <summary>
-    /// Entidade Gera Classe.
+    /// Entidade Principal Gera Classe Responsável por Criar Todos os arquivos.
     /// </summary>
     public class GeraClasse
     {
