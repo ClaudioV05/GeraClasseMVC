@@ -7,16 +7,46 @@ using System.Threading.Tasks;
 
 namespace GeraClasseMvc.Web.Services
 {
+    /// <summary>
+    /// Entidade UtilsMvcWebPrincipal.
+    /// </summary>
     public class UtilsMvcWebPrincipal : IUtilsMvcWebPrincipal
     {
+        /// <summary>
+        /// Propriedade de Injeção de dependência para IConfiguration.
+        /// </summary>
         private readonly IConfiguration _configuration;
+        /// <summary>
+        /// Propriedade de Injeção de dependência para ILinksApi.
+        /// </summary>
         private readonly ILinksApi _linksApi;
+        /// <summary>
+        /// Propriedade que contém o nome da aplicação.
+        /// </summary>
         public string NomeVersaoAplicacao { get; set; }
+        /// <summary>
+        /// Propriedade que contém o nome da aplicação.
+        /// </summary>
         public string NomeAplicacao { get; set; }
+        /// <summary>
+        /// Propriedade que contém o ano versão da aplicação.
+        /// </summary>
         public string AnoVersaoAplicacao { get; set; }
+        /// <summary>
+        /// Propriedade que contém a informação do TextArea.
+        /// </summary>
         public string InformacaoTextArea { get; set; }
+        /// <summary>
+        /// Listagem da IDE de Desenvolvimento.
+        /// </summary>
         public List<SelectListItem> ListaDeIdeDesenvolvimento { get; set; }
+        /// <summary>
+        /// Listagem do Estilo do Formulário.
+        /// </summary>
         public List<SelectListItem> ListaDeEstiloFormulario { get; set; }
+        /// <summary>
+        /// Listagem do Banco de Dados.
+        /// </summary>
         public List<SelectListItem> ListaDeBancoDeDados { get; set; }
 
         public UtilsMvcWebPrincipal(IConfiguration configuration, ILinksApi linksApi)

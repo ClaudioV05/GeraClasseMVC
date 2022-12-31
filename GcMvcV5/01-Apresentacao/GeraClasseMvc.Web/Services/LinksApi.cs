@@ -8,9 +8,18 @@ using System.Threading.Tasks;
 
 namespace GeraClasseMvc.Web.Services
 {
+    /// <summary>
+    /// Entidade LinksApi.
+    /// </summary>
     public class LinksApi : ILinksApi
     {
+        /// <summary>
+        /// Propriedade de Injeção de dependência para JsonSerializerOptions.
+        /// </summary>
         private readonly JsonSerializerOptions _options;
+        /// <summary>
+        /// Propriedade de Injeção de dependência para IHttpClientFactory.
+        /// </summary>
         private readonly IHttpClientFactory _httpClientFactory;
 
         public LinksApi(IHttpClientFactory httpClientFactory)
@@ -24,7 +33,7 @@ namespace GeraClasseMvc.Web.Services
             return _httpClientFactory.CreateClient("GeraClasseApi");
         }
 
-        #region Métodos para o Formulário Principal
+        #region Métodos para o Formulário Principal.
         public async Task<List<string>> CarregaObjetos(string NomeEndpoint)
         {
             var httpClient = InicializaInstacia();
