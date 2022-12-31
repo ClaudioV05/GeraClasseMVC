@@ -2,7 +2,6 @@
 using GeraClasseMvc.Api.Services.Interfaces;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace GeraClasseMvc.Api.Services
 {
@@ -19,11 +18,11 @@ namespace GeraClasseMvc.Api.Services
             _ideDesenvolvimento = new IdeDesenvolvimento();
         }
 
-        public IEnumerable<string> DescricaoBancosDeDados() => _bancodeDados.Descricao;
+        public List<string> ListagemBancosDeDados() => _bancodeDados.Descricao;
 
-        public IEnumerable<string> DescricaoEstiloFormulario() => _estiloFormulario.Descricao;
+        public List<string> ListagemEstiloFormulario() => _estiloFormulario.Descricao;
 
-        public IEnumerable<string> DescricaoIdeDesenvolvimento() => _ideDesenvolvimento.Descricao;
+        public List<string> ListagemIdeDesenvolvimento() => _ideDesenvolvimento.Descricao;
 
         // esse não vai fazer chamada
         public TipoBancodeDados RetornaTipoBancoDeDados(string? bancodedados)

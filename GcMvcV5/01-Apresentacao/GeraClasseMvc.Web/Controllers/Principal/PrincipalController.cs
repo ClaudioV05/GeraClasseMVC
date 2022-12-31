@@ -1,38 +1,34 @@
 ﻿using GeraClasseMvc.Api.Models;
 using GeraClasseMvc.Web.Models;
-using GeraClasseMvc.Web.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using System;
+using System.Threading.Tasks;
 
 namespace GeraClasseMvc.Web.Controllers.Principal
 {
     public class PrincipalController : Controller
     {
         private readonly IUtilsMvcWebPrincipal _utilsWeb;
-        private readonly ILinksApi _linksApi;
-        public PrincipalController(IUtilsMvcWebPrincipal utilsWeb, ILinksApi linksapi)
+        public PrincipalController(IUtilsMvcWebPrincipal utilsWeb)
         {
             _utilsWeb = utilsWeb;
-            _linksApi = linksapi;
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <returns></returns>
         [HttpGet]
         [ActionName("GeraDadosPrincipais")]
-        public IActionResult GeraDadosPrincipais()
+        public async Task<IActionResult> GeraDadosPrincipais()
         {
             PrincipalViewModel principalViewModel = new PrincipalViewModel();
             try
             {
-                CarregaDadosTemplateGeral();
+                await _utilsWeb.CarregarPropriedadeListaBancoDeDados();
+                await _utilsWeb.CarregarPropriedadeListaEstiloFormulario();
+                await _utilsWeb.CarregarPropriedadeListaIdeDesenvolvimento();
+
+                CarregarDadosViewModelListagem(ref principalViewModel);
+                CarregaDadosViewModelTemplateGeral();
 
                 principalViewModel.InformacaoTextArea = _utilsWeb.InformacaoTextArea;
-                principalViewModel.ListaDeBancoDeDados = _utilsWeb.ListaDeBancoDeDados;
-                principalViewModel.ListaDeEstiloFormulario = _utilsWeb.ListaDeEstiloFormulario;
-                principalViewModel.ListaDeIdeDesenvolvimento = _utilsWeb.ListaDeIdeDesenvolvimento;
             }
             catch (Exception ex)
             {
@@ -42,11 +38,6 @@ namespace GeraClasseMvc.Web.Controllers.Principal
             return View("Principal", principalViewModel);
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="principalViewModel"></param>
-        /// <returns></returns>
         [HttpPost]
         [ActionName("GeraDadosPrincipais")]
         public IActionResult GeraDadosPrincipais(PrincipalViewModel principalViewModel)
@@ -69,11 +60,18 @@ namespace GeraClasseMvc.Web.Controllers.Principal
         }
 
         #region Métodos Genéricos
-        private void CarregaDadosTemplateGeral()
+        private void CarregaDadosViewModelTemplateGeral()
         {
             ViewData["NomeAplicacao"] = _utilsWeb.NomeAplicacao;
             ViewData["NomeVersaoAplicacao"] = _utilsWeb.NomeVersaoAplicacao;
             ViewData["AnoVersaoAplicacao"] = _utilsWeb.AnoVersaoAplicacao;
+        }
+
+        private void CarregarDadosViewModelListagem(ref PrincipalViewModel principalViewModel)
+        {
+            principalViewModel.ListaDeBancoDeDados = _utilsWeb.ListaDeBancoDeDados;
+            principalViewModel.ListaDeEstiloFormulario = _utilsWeb.ListaDeEstiloFormulario;
+            principalViewModel.ListaDeIdeDesenvolvimento = _utilsWeb.ListaDeIdeDesenvolvimento;
         }
         #endregion Métodos Genéricos
     }

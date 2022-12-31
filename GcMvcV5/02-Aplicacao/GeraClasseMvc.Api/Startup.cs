@@ -26,6 +26,36 @@ namespace GeraClasseMvc.Api
         {
             services.AddScoped<IMetodosGenericos, MetodosGenericos>();
 
+            ConfiguraSwagger(services);
+
+            services.AddControllers();
+        }
+
+        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        {
+            if (env.IsDevelopment())
+            {
+                app.UseDeveloperExceptionPage();
+            }
+
+            app.UseRouting();
+
+            app.UseAuthorization();
+
+            // Habilita o middleware para servir o Swagger gerado como um endpoint JSON.
+            app.UseSwagger();
+
+            // Registra o gerador Swagger definindo um ou mais documentos Swagger.
+            app.UseSwaggerUI(s => s.SwaggerEndpoint("/swagger/v1/swagger.json", "Gerador de classes MVC"));
+
+            app.UseEndpoints(endpoints => endpoints.MapControllers());
+        }
+        #region Métodos.
+
+        #region Configura Swagger.
+        private void ConfiguraSwagger(IServiceCollection services)
+        {
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo
@@ -49,45 +79,20 @@ namespace GeraClasseMvc.Api
 
                 var diretorioArquivoXml = Path.Combine(AppContext.BaseDirectory, $"{Assembly.GetExecutingAssembly().GetName().Name}.xml");
 
-                if (File.Exists(diretorioArquivoXml))
+                if (!File.Exists(diretorioArquivoXml))
                 {
-                    c.IncludeXmlComments(diretorioArquivoXml);
+                    File.Create(diretorioArquivoXml).Dispose();
                 }
                 else
                 {
-                    File.Create(diretorioArquivoXml).Dispose();
                     c.IncludeXmlComments(diretorioArquivoXml);
                 }
-            });
 
-            services.AddControllers();
-        }
-
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
-        {
-            if (env.IsDevelopment())
-            {
-                app.UseDeveloperExceptionPage();
-            }
-
-            app.UseRouting();
-
-            app.UseAuthorization();
-
-            // Habilita o middleware para servir o Swagger gerado como um endpoint  JSON
-            app.UseSwagger();
-
-            //Registra o gerador Swagger definindo um ou mais documentos Swagger 
-            app.UseSwaggerUI(c =>
-            {
-                c.SwaggerEndpoint("/swagger/v1/swagger.json", "Gerador de classes MVC");
-            });
-
-            app.UseEndpoints(endpoints =>
-            {
-                endpoints.MapControllers();
+                c.IncludeXmlComments(diretorioArquivoXml);
             });
         }
+        #endregion Configura Swagger.
+
+        #endregion Métodos.
     }
 }

@@ -1,10 +1,6 @@
 ﻿using GeraClasseMvc.Api.Services.Interfaces;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace GeraClasseMvc.Api.Controllers
 {
@@ -14,9 +10,10 @@ namespace GeraClasseMvc.Api.Controllers
     [Produces("application/json")]
     [ApiController]
     [Route("[controller]")]
-    public class MetodosGenericosController : Controller
+    public class MetodosGenericosController : ControllerBase
     {
         private readonly IMetodosGenericos _metodosGenericos;
+
         public MetodosGenericosController(IMetodosGenericos metodosGenericos)
         {
             _metodosGenericos = metodosGenericos;
@@ -27,20 +24,10 @@ namespace GeraClasseMvc.Api.Controllers
         /// </summary>
         /// <returns>Lista de descrição de todos os bancos de dados.</returns>
         [HttpGet]
-        [Route("/DescricaoBancosDeDados")]
-        public IEnumerable<string> DescricaoBancosDeDados()
+        [Route("/ListagemBancosDeDados")]
+        public List<string> ListagemBancosDeDados()
         {
-            IEnumerable<string> descricaoDosBancosDeDados = null;
-            try
-            {
-                descricaoDosBancosDeDados = _metodosGenericos.DescricaoBancosDeDados();
-            }
-            catch (Exception)
-            {
-                //return StatusCode(StatusCodes.Status500InternalServerError);
-            }
-
-            return descricaoDosBancosDeDados;
+            return _metodosGenericos.ListagemBancosDeDados();
         }
 
         /// <summary>
@@ -48,20 +35,10 @@ namespace GeraClasseMvc.Api.Controllers
         /// </summary>
         /// <returns>Lista de descrição de todos os estilos de formulários.</returns>
         [HttpGet]
-        [Route("/DescricaoEstiloFormulario")]
-        public IEnumerable<string> DescricaoEstiloFormulario()
+        [Route("/ListagemEstiloFormulario")]
+        public List<string> ListagemEstiloFormulario()
         {
-            IEnumerable<string> descricaoDosEstiloFormulario = null;
-            try
-            {
-                descricaoDosEstiloFormulario = _metodosGenericos.DescricaoEstiloFormulario();
-            }
-            catch (Exception)
-            {
-                //return StatusCode(StatusCodes.Status500InternalServerError);
-            }
-
-            return descricaoDosEstiloFormulario;
+            return _metodosGenericos.ListagemEstiloFormulario();
         }
 
         /// <summary>
@@ -69,20 +46,10 @@ namespace GeraClasseMvc.Api.Controllers
         /// </summary>
         /// <returns>Lista de descrição de todas as IDE de desenvolvimento.</returns>
         [HttpGet]
-        [Route("/DescricaoIdeDesenvolvimento")]
-        public IEnumerable<string> DescricaoIdeDesenvolvimento()
+        [Route("/ListagemIdeDesenvolvimento")]
+        public List<string> ListagemIdeDesenvolvimento()
         {
-            IEnumerable<string> descricaoDasIdeDesenvolvimento = null;
-            try
-            {
-                descricaoDasIdeDesenvolvimento = _metodosGenericos.DescricaoIdeDesenvolvimento();
-            }
-            catch (Exception)
-            {
-                //return StatusCode(StatusCodes.Status500InternalServerError);
-            }
-
-            return descricaoDasIdeDesenvolvimento;
+            return _metodosGenericos.ListagemIdeDesenvolvimento();
         }
     }
 }

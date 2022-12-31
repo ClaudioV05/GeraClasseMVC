@@ -30,15 +30,15 @@ namespace GeraClasseMvc.Web
         {
             services.AddControllersWithViews();
 
-            services.AddScoped<IUtilsMvcWebPrincipal, UtilsMvcWebPrincipal>();
-            services.AddScoped<ILinksApi, LinksApi>();
-
             // Adiciona o IHttpClientFactory e os serviços relacionados ao container para assim poder 
             // Injetar a instancia no construtor.
             services.AddHttpClient("GeraClasseApi", c =>
             {
                 c.BaseAddress = new Uri(Configuration["Uri:GeraClasseMvcApi"]);
             });
+
+            services.AddScoped<ILinksApi, LinksApi>();
+            services.AddScoped<IUtilsMvcWebPrincipal, UtilsMvcWebPrincipal>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

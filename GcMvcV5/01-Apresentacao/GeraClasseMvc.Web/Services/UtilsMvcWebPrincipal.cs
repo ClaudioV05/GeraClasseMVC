@@ -1,5 +1,4 @@
-﻿using GeraClasseMvc.Api.Services.Interfaces;
-using GeraClasseMvc.Web.Services.Interfaces;
+﻿using GeraClasseMvc.Web.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.Extensions.Configuration;
 using System;
@@ -12,73 +11,39 @@ namespace GeraClasseMvc.Web.Services
     {
         private readonly IConfiguration _configuration;
         private readonly ILinksApi _linksApi;
+        public string NomeVersaoAplicacao { get; set; }
+        public string NomeAplicacao { get; set; }
+        public string AnoVersaoAplicacao { get; set; }
+        public string InformacaoTextArea { get; set; }
+        public List<SelectListItem> ListaDeIdeDesenvolvimento { get; set; }
+        public List<SelectListItem> ListaDeEstiloFormulario { get; set; }
+        public List<SelectListItem> ListaDeBancoDeDados { get; set; }
 
         public UtilsMvcWebPrincipal(IConfiguration configuration, ILinksApi linksApi)
         {
             _configuration = configuration;
             _linksApi = linksApi;
 
-            this.NomeAplicacao = CarregarNomeAplicacao();
-            this.NomeVersaoAplicacao = CarregarNomeVersaoAplicacao();
-            this.AnoVersaoAplicacao = CarregarAnoVersaoAplicacao();
-            this.InformacaoTextArea = CarregarInformacaoTextArea();
-            this.ListaDeBancoDeDados = CarregarListaDeItems(_linksApi.DescricaoBancosDeDados());
-            this.ListaDeEstiloFormulario = CarregarListaDeItems(_linksApi.DescricaoEstiloFormulario());
-            this.ListaDeIdeDesenvolvimento = CarregarListaDeItems(_linksApi.DescricaoIdeDesenvolvimento());
+            this.NomeAplicacao = CarregarPropriedadeNomeAplicacao();
+            this.NomeVersaoAplicacao = CarregarPropriedadeNomeVersaoAplicacao();
+            this.AnoVersaoAplicacao = CarregarPropriedadeAnoVersaoAplicacao();
+            this.InformacaoTextArea = CarregarPropriedadeInformacaoTextArea();
         }
 
-        public string NomeVersaoAplicacao { get; set; }
-        public string NomeAplicacao { get; set; }
-        public string AnoVersaoAplicacao { get; set; }
-        public string InformacaoTextArea { get; set; }
-        public IEnumerable<SelectListItem> ListaDeIdeDesenvolvimento { get; set; }
-        public IEnumerable<SelectListItem> ListaDeEstiloFormulario { get; set; }
-        public IEnumerable<SelectListItem> ListaDeBancoDeDados { get; set; }
+        #region Carregar Nome da Aplicacao.
+        public string CarregarPropriedadeNomeAplicacao() => _configuration["GeraClasseMvc:NomeAplicacao"];
+        #endregion Carregar Nome da Aplicacao
 
-        #region Carregar Lista de items da Ide de Desenvolvimento, Estilo do Formulário e Banco de Dados.
-        public IEnumerable<SelectListItem> CarregarListaDeItems(Task<IEnumerable<string>> items)
-        {
-            //List<SelectListItem> lista = new List<SelectListItem>();
-            //try
-            //{
-            //    if (items.ToString().Length > 0)
-            //    {
-            //        for (int i = 1; i < items.ToString().Length; i++)
-            //        {
-            //            if (!string.IsNullOrEmpty(items[i]))
-            //            {
-            //                lista.Add(new SelectListItem() { Value = items[i].Replace(" ", "").ToLower(), Text = items[i] });
-            //            }
-            //        }
-            //    }
-            //    else
-            //    {
-            //        lista.Add(new SelectListItem() { Value = "Sem Valor".Replace(" ", "").ToLower(), Text = "Sem Valor" });
-            //    }
-            //}
-            //catch (Exception ex)
-            //{
-            //    throw new Exception(ex.Message);
-            //}
-            //return lista;
-            return null;
-        }
-        #endregion Carregar Lista de items da Ide de Desenvolvimento, Estilo do Formulário e Banco de Dados.
+        #region Carregar Ano Versão Aplicacao.
+        public string CarregarPropriedadeAnoVersaoAplicacao() => DateTime.Now.Year.ToString();
+        #endregion Carregar Ano Versão Aplicacao.
 
-        #region CarregarNomeDaAplicacao.
-        public string CarregarNomeAplicacao() => _configuration["GeraClasseMvc:NomeAplicacao"];
-        #endregion CarregarNomeDaAplicacao
+        #region Carregar Nome da Versão Aplicacão.
+        public string CarregarPropriedadeNomeVersaoAplicacao() => _configuration["GeraClasseMvc:NomeVersaoAplicacao"];
+        #endregion Carregar Nome da Versão Aplicacão.
 
-        #region CarregarAnoVersaoAplicacao.
-        public string CarregarAnoVersaoAplicacao() => DateTime.Now.Year.ToString();
-        #endregion CarregarAnoVersaoAplicacao
-
-        #region CarregarNomeDaVersaoAplicacao.
-        public string CarregarNomeVersaoAplicacao() => _configuration["GeraClasseMvc:NomeVersaoAplicacao"];
-        #endregion CarregarNomeDaVersaoAplicacao
-
-        #region CarregarInformacaoTextArea.
-        public string CarregarInformacaoTextArea()
+        #region Carregar Informação TextArea.
+        public string CarregarPropriedadeInformacaoTextArea()
         {
             return "This program generates 'MVC' standard class files for the 'Delphi', 'Lazarus' and '.NET' Development Ide, from a text file containing the metadata of one or more tables.\n" +
                    "It is based on GeraClasseDelphi version 6.0. The difference is that it generates the files according to the 'MVC' project pattern,\n" +
@@ -98,6 +63,69 @@ namespace GeraClasseMvc.Web.Services
 
                    "04. New version generate class Web in 12.10.2022";
         }
-        #endregion CarregarInformacaoTextArea
+        #endregion Carregar Informação TextArea.
+
+        #region Carregar Propriedade Lista Banco de Dados.
+        public async Task CarregarPropriedadeListaBancoDeDados()
+        {
+            var listaObjetos = await _linksApi.CarregaObjetos("BancosDeDados");
+            this.ListaDeBancoDeDados = CarregaObjetosSelectListItem(listaObjetos);
+        }
+        #endregion Carregar Propriedade Lista Banco de Dados.
+
+        #region Carregar Propriedade Lista Estilo Formulário.
+        public async Task CarregarPropriedadeListaEstiloFormulario()
+        {
+            var listaObjetos = await _linksApi.CarregaObjetos("EstiloFormulario");
+            this.ListaDeEstiloFormulario = CarregaObjetosSelectListItem(listaObjetos);
+        }
+        #endregion Carregar Propriedade Lista Estilo Formulário.
+
+        #region Carregar Propriedade Lista IDE Desenvolvimento.
+        public async Task CarregarPropriedadeListaIdeDesenvolvimento()
+        {
+            var listaObjetos = await _linksApi.CarregaObjetos("IdeDesenvolvimento");
+            this.ListaDeIdeDesenvolvimento = CarregaObjetosSelectListItem(listaObjetos);
+        }
+        #endregion Carregar Propriedade Lista IDE Desenvolvimento.
+
+        #region Carregar Lista de items da IDE de Desenvolvimento, Estilo do Formulário e Banco de Dados.
+        public List<SelectListItem> CarregaObjetosSelectListItem(List<string> items)
+        {
+            List<SelectListItem> lista = new List<SelectListItem>();
+            try
+            {
+                if (items != null && items.Count > 0)
+                {
+                    for (int i = 1; i < items.Count; i++)
+                    {
+                        if (!string.IsNullOrEmpty(items[i]))
+                        {
+                            lista.Add(new SelectListItem()
+                            {
+                                Value = items[i].Replace(" ", "").ToLower(),
+                                Text = items[i],
+                                Selected = (i > 0 && i == 1)
+                            });
+                        }
+                    }
+                }
+                else
+                {
+                    lista.Add(new SelectListItem()
+                    {
+                        Value = "Sem Valor".Replace(" ", "").ToLower(),
+                        Text = "Sem Valor",
+                        Selected = true
+                    });
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            return lista;
+        }
+        #endregion Carregar Lista de items da IDE de Desenvolvimento, Estilo do Formulário e Banco de Dados.
     }
 }
