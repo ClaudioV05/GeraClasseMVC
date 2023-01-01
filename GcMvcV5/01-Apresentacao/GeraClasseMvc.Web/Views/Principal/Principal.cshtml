@@ -7,7 +7,7 @@
         <div>
             @if (!string.IsNullOrEmpty(Model.InformacaoTextArea))
             {
-                @Html.TextAreaFor(m => m.InformacaoTextArea, new { id = "InformacaoTextArea", @class = "form-control", rows = "15", cols = "12" })
+                @Html.TextAreaFor(m => m.InformacaoTextArea, new { id = "textAreaMetadados", @class = "form-control", rows = "15", cols = "12" })
             }
         </div>
         <!-- #endregion -->

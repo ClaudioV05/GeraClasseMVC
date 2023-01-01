@@ -1,5 +1,5 @@
 ﻿//#region Var Globais.
-var input = document.querySelector("input[name=ArquivoMetadados]");
+var input = document.querySelector("input[name=Metadados]");
 var textarea = document.querySelector("textarea[name=InformacaoTextArea]");
 var baseUrl = "/Principal/GeraDadosPrincipais/";
 //#endregion Var Globais.
@@ -10,27 +10,26 @@ $(document).ready(function () {
 });
 
 $("input[name=Metadados]").change(function () {
-    // Nome do arquivo Metadados.
+    // Carrega o nome do arquivo Metadados.
     $(this).siblings(".custom-file-label").addClass("selected").html($(this).val().split("\\").pop());
 
-    // Carregar o arquivo Metadados no TextArea.
-    let files = input.files.length;
-    if (files.length == 0) {
-        return;
+    // Carrega o texto contido no arquivo Metadados no TextArea.
+    if (input != null && input != undefined) {
+        let files = input.files;
+        if (files.length == 0) return;
+
+        const file = files[0];
+        let reader = new FileReader();
+
+        reader.onload = (e) => {
+            const file = e.target.result;
+            const lines = file.split(/\r\n|\n/);
+            textarea.value = lines.join('\n');
+        };
+
+        reader.onerror = (e) => alert(e.target.error.name);
+        reader.readAsText(file);
     }
-
-    const file = files[0];
-    let reader = new FileReader();
-
-    reader.onload = (e) => {
-        const file = e.target.result;
-        const lines = file.split(/\r\n|\n/);
-        $("#InformacaoTextArea").empty();
-        textarea.value = lines.join("\n");
-    };
-
-    reader.onerror = (e) => alert(e.target.error.name);
-    reader.readAsText(file);
 });
 
 $("#btnGerarClasse").on("click", function (event) {
@@ -38,8 +37,8 @@ $("#btnGerarClasse").on("click", function (event) {
     if (SatisfazCritica()) {
         EnviarDadosGeraClasse($("#dpdBancoDeDados :selected").val(),
             $("#dpdEstiloFormulario :selected").val(),
-            $("#InformacaoTextArea").val(),
-            $("#dpdIdeDesenvolvimento :selected").val());
+            $("#dpdIdeDesenvolvimento :selected").val(),
+            $("#textAreaMetadados").val());
     }
     else {
         event.preventDefault();
@@ -51,8 +50,8 @@ function SatisfazCritica() {
     let validaCriticas = true;
 
     //#region Validação do arquivo Metadata.
-    if ($("#ArquivoMetadados").val() != undefined || $("#ArquivoMetadados").val() != null) {
-        if (validaCriticas == true && $("#ArquivoMetadados").val() == "") {
+    if ($("#textAreaMetadados").val() != undefined || $("#textAreaMetadados").val() != null) {
+        if (validaCriticas == true && $("#textAreaMetadados").val() == "") {
             alert("Selecione o arquivo Metadados.");
             validaCriticas = false;
         }
