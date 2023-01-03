@@ -45,19 +45,16 @@ namespace GeraClasseMvc.Web.Controllers.Principal
         [ActionName("GeraDadosPrincipais")]
         public IActionResult GeraDadosPrincipais(PrincipalViewModel principalViewModel)
         {
-            // igual como tem a função de banco de dados fazer a de retornar os outor
-            GeraClasse geraClasse = new GeraClasse() 
-            {
-                ScriptMetadataBase64 = _conversor.CodificaParaBase64(principalViewModel.Metadados),
-                BancodeDados = 
-            };
-
             try
             {
-                var aux = _conversor.CodificaParaBase64(principalViewModel.Metadados);
-                //metadata.BancodeDados.IdTipoBancodeDados = _metodosGenericos.TipoBancoDeDados(principalViewModel.BancoDeDados);
-                //var aux = _linksApi.RetornaTipoBancoDeDados(principalViewModel.BancoDeDados);
-                geraClasse.Metadados = principalViewModel.Metadados;
+                GeraClasse geraClasse = new GeraClasse()
+                {
+                    MetadadosBase64 = _conversor.CodificaParaBase64(principalViewModel.Metadados),
+                    BancodeDadosBase64 = _conversor.CodificaParaBase64(principalViewModel.TipoBancoDeDados),
+                    EstiloFormularioBase64 = _conversor.CodificaParaBase64(principalViewModel.TipoEstiloFormulario),
+                    IdeDesenvolvimentoBase64 = _conversor.CodificaParaBase64(principalViewModel.TipoIdeDesenvolvimento)
+                };
+
                 /*metadata = _utilsApi.RetornaDescricaoTabelas("http://localhost:3001/Principal", metadata);*/
             }
             catch (Exception ex)

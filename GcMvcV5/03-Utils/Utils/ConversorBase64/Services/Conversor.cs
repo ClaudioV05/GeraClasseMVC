@@ -13,9 +13,9 @@ namespace Utils.ConversorBase64.Services
                 var bytes = Encoding.ASCII.GetBytes(data);
                 return Convert.ToBase64String(bytes);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                throw;
+                throw new Exception(ex.Message);
             }
         }
 
@@ -26,9 +26,9 @@ namespace Utils.ConversorBase64.Services
                 var bytes = Convert.FromBase64String(data);
                 return ASCIIEncoding.ASCII.GetString(bytes);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                throw;
+                throw new Exception(ex.Message);
             }
         }
     }
