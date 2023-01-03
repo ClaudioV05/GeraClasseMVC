@@ -6,6 +6,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using System;
+using Utils.ConversorBase64.Interfaces;
+using Utils.ConversorBase64.Services;
 
 namespace GeraClasseMvc.Web
 {
@@ -32,6 +34,7 @@ namespace GeraClasseMvc.Web
 
             services.AddScoped<ILinksApi, LinksApi>();
             services.AddScoped<IUtilsMvcWebPrincipal, UtilsMvcWebPrincipal>();
+            services.AddScoped<IConversor, Conversor>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

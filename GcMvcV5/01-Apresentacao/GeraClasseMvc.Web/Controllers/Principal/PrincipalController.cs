@@ -3,15 +3,18 @@ using GeraClasseMvc.Web.Models;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Threading.Tasks;
+using Utils.ConversorBase64.Interfaces;
 
 namespace GeraClasseMvc.Web.Controllers.Principal
 {
     public class PrincipalController : Controller
     {
         private readonly IUtilsMvcWebPrincipal _utilsWeb;
-        public PrincipalController(IUtilsMvcWebPrincipal utilsWeb)
+        private readonly IConversor _conversor;
+        public PrincipalController(IUtilsMvcWebPrincipal utilsWeb, IConversor conversor)
         {
             _utilsWeb = utilsWeb;
+            _conversor = conversor;
         }
 
         [HttpGet]
@@ -42,13 +45,19 @@ namespace GeraClasseMvc.Web.Controllers.Principal
         [ActionName("GeraDadosPrincipais")]
         public IActionResult GeraDadosPrincipais(PrincipalViewModel principalViewModel)
         {
-            GeraClasse metadata = new GeraClasse();
+            // igual como tem a função de banco de dados fazer a de retornar os outor
+            GeraClasse geraClasse = new GeraClasse() 
+            {
+                ScriptMetadataBase64 = _conversor.CodificaParaBase64(principalViewModel.Metadados),
+                BancodeDados = 
+            };
 
             try
             {
+                var aux = _conversor.CodificaParaBase64(principalViewModel.Metadados);
                 //metadata.BancodeDados.IdTipoBancodeDados = _metodosGenericos.TipoBancoDeDados(principalViewModel.BancoDeDados);
                 //var aux = _linksApi.RetornaTipoBancoDeDados(principalViewModel.BancoDeDados);
-                metadata.Metadados = principalViewModel.Metadados;
+                geraClasse.Metadados = principalViewModel.Metadados;
                 /*metadata = _utilsApi.RetornaDescricaoTabelas("http://localhost:3001/Principal", metadata);*/
             }
             catch (Exception ex)

@@ -11,6 +11,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\02-Aplicacao\GeraClasseMvc.Api\GeraClasseMvc.Api.csproj" />
+    <ProjectReference Include="..\..\03-Utils\Utils\Utils.csproj" />
   </ItemGroup>
 
 </Project>
