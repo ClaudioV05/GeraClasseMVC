@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc.Rendering;
+﻿using GeraClasseMvc.Api.Models;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -67,6 +68,12 @@ namespace GeraClasseMvc.Web
         /// Listagem da IDE de Desenvolvimento.
         /// </summary>
         Task CarregarPropriedadeListaIdeDesenvolvimento();
+        /// <summary>
+        /// Método responsável por retornar todas as tabelas contidas no metadata.
+        /// </summary>
+        /// <param name="geraClasse"></param>
+        /// <returns>Listage dos nomes das tabelas.</returns>
+        Task<List<string>> RetornaDescricaoTabelas(GeraClasse geraClasse);
         /// <summary>
         /// Método generico para carregar a lista de items de IDE de desenvolvimento, estilo do formulário e banco de dados.
         /// </summary>

@@ -7,9 +7,9 @@ namespace GeraClasseMvc.Api.Controllers
     /// <summary>
     /// Classe básica do form MetodosGenericosController.
     /// </summary>
-    [Produces("application/json")]
     [ApiController]
     [Route("[controller]")]
+    [Produces("application/json")]
     public class MetodosGenericosController : ControllerBase
     {
         private readonly IMetodosGenericos _metodosGenericos;

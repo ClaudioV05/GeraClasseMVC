@@ -7,27 +7,6 @@ namespace GeraClasseMvc.Api.Models
     /// </summary>
     public class GeraClasse
     {
-        public GeraClasse()
-        {
-            try
-            {
-                this.Metadados = string.Empty;
-                this.MetadadosBase64 = string.Empty;
-                this.BancodeDadosBase64 = string.Empty;
-                this.EstiloFormularioBase64 = string.Empty;
-                this.IdeDesenvolvimentoBase64 = string.Empty;
-                this.BancodeDados = new BancodeDados();
-                this.EscolheCampos = new EscolheCampos();
-                this.EscolheTabelas = new EscolheTabelas();
-                this.EstiloFormulario = new EstiloFormulario();
-                this.IdeDesenvolvimento = new IdeDesenvolvimento();
-            }
-            catch (Exception)
-            {
-                throw new Exception("Erro na criação do" + this.ToString());
-            }
-        }
-
         /// <summary>
         /// Contém o script do metadados.
         /// </summary>
@@ -68,5 +47,26 @@ namespace GeraClasseMvc.Api.Models
         /// Entidade IDE de Desenvolvimento.
         /// </summary>
         public IdeDesenvolvimento? IdeDesenvolvimento { get; set; }
+
+        public GeraClasse()
+        {
+            try
+            {
+                this.Metadados = string.Empty;
+                this.MetadadosBase64 = string.Empty;
+                this.BancodeDadosBase64 = string.Empty;
+                this.EstiloFormularioBase64 = string.Empty;
+                this.IdeDesenvolvimentoBase64 = string.Empty;
+                this.BancodeDados = new BancodeDados();
+                this.EscolheCampos = new EscolheCampos();
+                this.EscolheTabelas = new EscolheTabelas();
+                this.EstiloFormulario = new EstiloFormulario();
+                this.IdeDesenvolvimento = new IdeDesenvolvimento();
+            }
+            catch (Exception)
+            {
+                throw new Exception("Erro na criação do" + this.ToString());
+            }
+        }
     }
 }

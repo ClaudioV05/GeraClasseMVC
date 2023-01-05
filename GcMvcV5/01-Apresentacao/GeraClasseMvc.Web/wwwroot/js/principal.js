@@ -103,11 +103,9 @@ function SatisfazCritica() {
 }
 
 function EnviarDadosGeraClasse(tipoBancoDeDados, tipoEstiloFormulario, tipoIdeDesenvolvimento, metadados) {
-
     $.ajax({
         url: baseUrl + "?TipoBancoDeDados=" + tipoBancoDeDados + "&TipoEstiloFormulario=" + tipoEstiloFormulario + "&TipoIdeDesenvolvimento=" + tipoIdeDesenvolvimento + "&Metadados=" + metadados,
         method: "POST",
-        Accept: "application/json",
         contentType: "application/json",
         success: function (res) {
             console.log(`Sucesso ${res}`);

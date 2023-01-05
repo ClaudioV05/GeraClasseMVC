@@ -1,4 +1,5 @@
-﻿using GeraClasseMvc.Web.Services.Interfaces;
+﻿using GeraClasseMvc.Api.Models;
+using GeraClasseMvc.Web.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.Extensions.Configuration;
 using System;
@@ -119,6 +120,10 @@ namespace GeraClasseMvc.Web.Services
         }
         #endregion Carregar Propriedade Lista IDE Desenvolvimento.
 
+        public async Task<List<string>> RetornaDescricaoTabelas(GeraClasse geraClasse)
+        {
+            return await _linksApi.RetornaDescricaoTabelas(geraClasse);
+        }
         #region Carregar Lista de items da IDE de Desenvolvimento, Estilo do Formulário e Banco de Dados.
         public List<SelectListItem> CarregaObjetosSelectListItem(List<string> items)
         {

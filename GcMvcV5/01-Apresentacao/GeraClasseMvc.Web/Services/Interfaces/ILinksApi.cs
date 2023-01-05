@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using GeraClasseMvc.Api.Models;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace GeraClasseMvc.Web.Services.Interfaces
@@ -14,5 +15,11 @@ namespace GeraClasseMvc.Web.Services.Interfaces
         /// <param name="tipo"></param>
         /// <returns>Listagem com o nome dos objetos a serem carregados</returns>
         Task<List<string>> CarregaObjetos(string tipo);
+        /// <summary>
+        /// Método responsável por retornar todas as tabelas contidas no metadata.
+        /// </summary>
+        /// <param name="geraClasse"></param>
+        /// <returns>Listage dos nomes das tabelas.</returns>
+        Task<List<string>> RetornaDescricaoTabelas(GeraClasse geraClasse);
     }
 }

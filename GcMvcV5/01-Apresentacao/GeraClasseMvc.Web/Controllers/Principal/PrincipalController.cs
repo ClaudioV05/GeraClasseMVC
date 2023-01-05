@@ -43,23 +43,24 @@ namespace GeraClasseMvc.Web.Controllers.Principal
 
         [HttpPost]
         [ActionName("GeraDadosPrincipais")]
-        public IActionResult GeraDadosPrincipais(PrincipalViewModel principalViewModel)
+        public async Task<IActionResult> GeraDadosPrincipais(PrincipalViewModel principalViewModel)
         {
             try
             {
-                GeraClasse geraClasse = new GeraClasse()
+                await _utilsWeb.RetornaDescricaoTabelas(new GeraClasse()
                 {
                     MetadadosBase64 = _conversor.CodificaParaBase64(principalViewModel.Metadados),
                     BancodeDadosBase64 = _conversor.CodificaParaBase64(principalViewModel.TipoBancoDeDados),
                     EstiloFormularioBase64 = _conversor.CodificaParaBase64(principalViewModel.TipoEstiloFormulario),
                     IdeDesenvolvimentoBase64 = _conversor.CodificaParaBase64(principalViewModel.TipoIdeDesenvolvimento)
-                };
+                });
 
-                /*metadata = _utilsApi.RetornaDescricaoTabelas("http://localhost:3001/Principal", metadata);*/
+                // Version se vai carregar uma var list e passar pra Model.
+                // Colocar aqui um redirect para a proxima view Redirect(ex.Message);
             }
             catch (Exception ex)
             {
-               Redirect(ex.Message);
+                Redirect(ex.Message);
             }
 
             return null;
