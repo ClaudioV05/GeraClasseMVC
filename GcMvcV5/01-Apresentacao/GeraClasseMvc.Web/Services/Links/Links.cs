@@ -24,16 +24,16 @@ namespace GeraClasseMvc.Web.Services
         /// Propriedade de Injeção de dependência para IHttpClientFactory.
         /// </summary>
         private readonly IHttpClientFactory _httpClient;
-        /// <summary>
-        /// Constantes de configuração.
-        /// </summary>
+ 
+        #region Constantes de configuração.
         private const string NOME_HTTPCLIENT = "GeraClasseApi";
         private const string MIME_TYPE_DEFAULT = "application/json";
-        /// <summary>
-        /// Endpoint da classe Principal.
-        /// </summary>
+        #endregion Constantes de configuração.
+
+        #region Endpoint da classe Principal.
         private const string ACTION_LISTAGEM = "Listagem";
         private const string ACTION_LISTAGEM_TABELAS = "ListagemDescricaoTabelas";
+        #endregion Endpoint da classe Principal.
 
         public Links(IHttpClientFactory httpClient)
         {

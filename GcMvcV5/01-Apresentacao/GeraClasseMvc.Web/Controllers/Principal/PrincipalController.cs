@@ -9,10 +9,10 @@ namespace GeraClasseMvc.Web.Controllers.Principal
 {
     public class PrincipalController : Controller
     {
-        private readonly IServicesPrincipal _servicesPrincipal;
+        private readonly IServicesWebPrincipal _servicesPrincipal;
         private readonly IConversor _conversor;
 
-        public PrincipalController(IServicesPrincipal servicesPrincipal, IConversor conversor)
+        public PrincipalController(IServicesWebPrincipal servicesPrincipal, IConversor conversor)
         {
             _servicesPrincipal = servicesPrincipal;
             _conversor = conversor;

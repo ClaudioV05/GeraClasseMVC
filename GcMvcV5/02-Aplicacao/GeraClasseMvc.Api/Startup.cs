@@ -24,7 +24,7 @@ namespace GeraClasseMvc.Api
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddScoped<IMetodosGenericos, MetodosGenericos>();
+            services.AddScoped<IServicesApiPrincipal, ServicesApiPrincipal>();
 
             ConfiguraSwagger(services);
 
@@ -87,8 +87,6 @@ namespace GeraClasseMvc.Api
                 {
                     c.IncludeXmlComments(diretorioArquivoXml);
                 }
-
-                c.IncludeXmlComments(diretorioArquivoXml);
             });
         }
         #endregion Configura Swagger.

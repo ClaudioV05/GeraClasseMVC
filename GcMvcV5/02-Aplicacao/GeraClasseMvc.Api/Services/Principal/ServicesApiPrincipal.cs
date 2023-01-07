@@ -5,13 +5,13 @@ using System.Collections.Generic;
 
 namespace GeraClasseMvc.Api.Services
 {
-    public class MetodosGenericos : IMetodosGenericos
+    public class ServicesApiPrincipal : IServicesApiPrincipal
     {
         private readonly BancodeDados _bancodeDados;
         private readonly EstiloFormulario _estiloFormulario;
         private readonly IdeDesenvolvimento _ideDesenvolvimento;
 
-        public MetodosGenericos()
+        public ServicesApiPrincipal()
         {
             _bancodeDados = new BancodeDados();
             _estiloFormulario = new EstiloFormulario();

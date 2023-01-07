@@ -19,5 +19,12 @@
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Services\EscolheCampos\" />
+    <Folder Include="Services\EscolheTabelas\" />
+    <Folder Include="Services\Interfaces\EscolheCampos\" />
+    <Folder Include="Services\Interfaces\EscolheTabelas\" />
+  </ItemGroup>
+
 
 </Project>
