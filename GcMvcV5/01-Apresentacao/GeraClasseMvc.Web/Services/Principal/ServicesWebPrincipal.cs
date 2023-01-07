@@ -8,9 +8,9 @@ using System.Threading.Tasks;
 namespace GeraClasseMvc.Web.Services
 {
     /// <summary>
-    /// Entidade ServicesPrincipal referente aos utilitários da classe principal.
+    /// Entidade ServicesWebPrincipal referente aos utilitários da classe principal.
     /// </summary>
-    public class ServicesPrincipal : IServicesPrincipal
+    public class ServicesWebPrincipal : IServicesWebPrincipal
     {
         /// <summary>
         /// Propriedade de Injeção de dependência para IConfiguration.
@@ -49,7 +49,7 @@ namespace GeraClasseMvc.Web.Services
         /// </summary>
         public List<SelectListItem> ListaDeBancoDeDados { get; set; }
 
-        public ServicesPrincipal(IConfiguration configuration, ILinks links)
+        public ServicesWebPrincipal(IConfiguration configuration, ILinks links)
         {
             _configuration = configuration;
             _links = links;

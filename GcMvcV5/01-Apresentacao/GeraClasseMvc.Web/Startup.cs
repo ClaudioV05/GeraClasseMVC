@@ -29,7 +29,7 @@ namespace GeraClasseMvc.Web
             services.AddHttpClient("GeraClasseApi", c => c.BaseAddress = new Uri(Configuration["Uri:GeraClasseMvcApi"]));
 
             services.AddScoped<ILinks, Links>();
-            services.AddScoped<IServicesPrincipal, ServicesPrincipal>();
+            services.AddScoped<IServicesWebPrincipal, ServicesWebPrincipal>();
             #region Injeção de dependência de Utils.
             services.AddScoped<IConversor, Conversor>();
             #endregion Injeção de dependência de Utils.

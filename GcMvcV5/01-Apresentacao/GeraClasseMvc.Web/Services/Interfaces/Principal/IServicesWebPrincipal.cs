@@ -5,9 +5,9 @@ using System.Threading.Tasks;
 namespace GeraClasseMvc.Web
 {
     /// <summary>
-    /// Interface IServicesPrincipal referente aos utilitários da classe principal.
+    /// Interface IServicesWebPrincipal referente aos utilitários da classe principal.
     /// </summary>
-    public interface IServicesPrincipal
+    public interface IServicesWebPrincipal
     {
         /// <summary>
         /// Descrição do nome da versão da aplicação.
