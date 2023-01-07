@@ -25,16 +25,14 @@ namespace GeraClasseMvc.Web
         {
             services.AddControllersWithViews();
 
-            // Adiciona o IHttpClientFactory e os serviços relacionados ao container para assim poder 
-            // Injetar a instancia no construtor.
-            services.AddHttpClient("GeraClasseApi", c =>
-            {
-                c.BaseAddress = new Uri(Configuration["Uri:GeraClasseMvcApi"]);
-            });
+            // Adiciona o IHttpClientFactory e os serviços relacionados ao container DI.
+            services.AddHttpClient("GeraClasseApi", c => c.BaseAddress = new Uri(Configuration["Uri:GeraClasseMvcApi"]));
 
-            services.AddScoped<ILinksApi, LinksApi>();
-            services.AddScoped<IUtilsMvcWebPrincipal, UtilsMvcWebPrincipal>();
+            services.AddScoped<ILinks, Links>();
+            services.AddScoped<IServicesPrincipal, ServicesPrincipal>();
+            #region Injeção de dependência de Utils.
             services.AddScoped<IConversor, Conversor>();
+            #endregion Injeção de dependência de Utils.
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -59,9 +57,7 @@ namespace GeraClasseMvc.Web
 
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapControllerRoute(
-                   name: "default",
-                   pattern: "{controller=Principal}/{action=GeraDadosPrincipais}");
+                endpoints.MapControllerRoute(name: "default", pattern: "{controller=Principal}/{action=GeraDadosPrincipais}");
             });
         }
     }

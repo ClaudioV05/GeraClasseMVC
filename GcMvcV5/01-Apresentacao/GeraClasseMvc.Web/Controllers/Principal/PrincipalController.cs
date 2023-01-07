@@ -9,11 +9,12 @@ namespace GeraClasseMvc.Web.Controllers.Principal
 {
     public class PrincipalController : Controller
     {
-        private readonly IUtilsMvcWebPrincipal _utilsWeb;
+        private readonly IServicesPrincipal _servicesPrincipal;
         private readonly IConversor _conversor;
-        public PrincipalController(IUtilsMvcWebPrincipal utilsWeb, IConversor conversor)
+
+        public PrincipalController(IServicesPrincipal servicesPrincipal, IConversor conversor)
         {
-            _utilsWeb = utilsWeb;
+            _servicesPrincipal = servicesPrincipal;
             _conversor = conversor;
         }
 
@@ -24,14 +25,14 @@ namespace GeraClasseMvc.Web.Controllers.Principal
             PrincipalViewModel principalViewModel = new PrincipalViewModel();
             try
             {
-                await _utilsWeb.CarregarPropriedadeListaBancoDeDados();
-                await _utilsWeb.CarregarPropriedadeListaEstiloFormulario();
-                await _utilsWeb.CarregarPropriedadeListaIdeDesenvolvimento();
+                await _servicesPrincipal.CarregarPropriedadeListaBancoDeDados();
+                await _servicesPrincipal.CarregarPropriedadeListaEstiloFormulario();
+                await _servicesPrincipal.CarregarPropriedadeListaIdeDesenvolvimento();
 
                 CarregarDadosViewModelListagem(ref principalViewModel);
                 CarregaDadosViewModelTemplateGeral();
 
-                principalViewModel.InformacaoTextArea = _utilsWeb.InformacaoTextArea;
+                principalViewModel.InformacaoTextArea = _servicesPrincipal.InformacaoTextArea;
             }
             catch (Exception ex)
             {
@@ -47,7 +48,7 @@ namespace GeraClasseMvc.Web.Controllers.Principal
         {
             try
             {
-                await _utilsWeb.RetornaDescricaoTabelas(new GeraClasse()
+                await _servicesPrincipal.RetornaDescricaoTabelas(new GeraClasse()
                 {
                     MetadadosBase64 = _conversor.CodificaParaBase64(principalViewModel.Metadados),
                     BancodeDadosBase64 = _conversor.CodificaParaBase64(principalViewModel.TipoBancoDeDados),
@@ -69,16 +70,16 @@ namespace GeraClasseMvc.Web.Controllers.Principal
         #region Métodos Genéricos
         private void CarregaDadosViewModelTemplateGeral()
         {
-            ViewData["NomeAplicacao"] = _utilsWeb.NomeAplicacao;
-            ViewData["NomeVersaoAplicacao"] = _utilsWeb.NomeVersaoAplicacao;
-            ViewData["AnoVersaoAplicacao"] = _utilsWeb.AnoVersaoAplicacao;
+            ViewData["NomeAplicacao"] = _servicesPrincipal.NomeAplicacao;
+            ViewData["NomeVersaoAplicacao"] = _servicesPrincipal.NomeVersaoAplicacao;
+            ViewData["AnoVersaoAplicacao"] = _servicesPrincipal.AnoVersaoAplicacao;
         }
 
         private void CarregarDadosViewModelListagem(ref PrincipalViewModel principalViewModel)
         {
-            principalViewModel.ListaDeBancoDeDados = _utilsWeb.ListaDeBancoDeDados;
-            principalViewModel.ListaDeEstiloFormulario = _utilsWeb.ListaDeEstiloFormulario;
-            principalViewModel.ListaDeIdeDesenvolvimento = _utilsWeb.ListaDeIdeDesenvolvimento;
+            principalViewModel.ListaDeBancoDeDados = _servicesPrincipal.ListaDeBancoDeDados;
+            principalViewModel.ListaDeEstiloFormulario = _servicesPrincipal.ListaDeEstiloFormulario;
+            principalViewModel.ListaDeIdeDesenvolvimento = _servicesPrincipal.ListaDeIdeDesenvolvimento;
         }
         #endregion Métodos Genéricos
     }

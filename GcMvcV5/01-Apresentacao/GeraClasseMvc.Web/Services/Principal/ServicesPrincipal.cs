@@ -1,5 +1,4 @@
-﻿using GeraClasseMvc.Api.Models;
-using GeraClasseMvc.Web.Services.Interfaces;
+﻿using GeraClasseMvc.Web.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.Extensions.Configuration;
 using System;
@@ -9,9 +8,9 @@ using System.Threading.Tasks;
 namespace GeraClasseMvc.Web.Services
 {
     /// <summary>
-    /// Entidade UtilsMvcWebPrincipal.
+    /// Entidade ServicesPrincipal referente aos utilitários da classe principal.
     /// </summary>
-    public class UtilsMvcWebPrincipal : IUtilsMvcWebPrincipal
+    public class ServicesPrincipal : IServicesPrincipal
     {
         /// <summary>
         /// Propriedade de Injeção de dependência para IConfiguration.
@@ -20,7 +19,7 @@ namespace GeraClasseMvc.Web.Services
         /// <summary>
         /// Propriedade de Injeção de dependência para ILinksApi.
         /// </summary>
-        private readonly ILinksApi _linksApi;
+        private readonly ILinks _links;
         /// <summary>
         /// Propriedade que contém o nome da aplicação.
         /// </summary>
@@ -50,10 +49,10 @@ namespace GeraClasseMvc.Web.Services
         /// </summary>
         public List<SelectListItem> ListaDeBancoDeDados { get; set; }
 
-        public UtilsMvcWebPrincipal(IConfiguration configuration, ILinksApi linksApi)
+        public ServicesPrincipal(IConfiguration configuration, ILinks links)
         {
             _configuration = configuration;
-            _linksApi = linksApi;
+            _links = links;
 
             this.NomeAplicacao = CarregarPropriedadeNomeAplicacao();
             this.NomeVersaoAplicacao = CarregarPropriedadeNomeVersaoAplicacao();
@@ -99,7 +98,7 @@ namespace GeraClasseMvc.Web.Services
         #region Carregar Propriedade Lista Banco de Dados.
         public async Task CarregarPropriedadeListaBancoDeDados()
         {
-            var listaObjetos = await _linksApi.CarregaObjetos("BancosDeDados");
+            var listaObjetos = await _links.CarregaObjetos("BancosDeDados");
             this.ListaDeBancoDeDados = CarregaObjetosSelectListItem(listaObjetos);
         }
         #endregion Carregar Propriedade Lista Banco de Dados.
@@ -107,7 +106,7 @@ namespace GeraClasseMvc.Web.Services
         #region Carregar Propriedade Lista Estilo Formulário.
         public async Task CarregarPropriedadeListaEstiloFormulario()
         {
-            var listaObjetos = await _linksApi.CarregaObjetos("EstiloFormulario");
+            var listaObjetos = await _links.CarregaObjetos("EstiloFormulario");
             this.ListaDeEstiloFormulario = CarregaObjetosSelectListItem(listaObjetos);
         }
         #endregion Carregar Propriedade Lista Estilo Formulário.
@@ -115,15 +114,18 @@ namespace GeraClasseMvc.Web.Services
         #region Carregar Propriedade Lista IDE Desenvolvimento.
         public async Task CarregarPropriedadeListaIdeDesenvolvimento()
         {
-            var listaObjetos = await _linksApi.CarregaObjetos("IdeDesenvolvimento");
+            var listaObjetos = await _links.CarregaObjetos("IdeDesenvolvimento");
             this.ListaDeIdeDesenvolvimento = CarregaObjetosSelectListItem(listaObjetos);
         }
         #endregion Carregar Propriedade Lista IDE Desenvolvimento.
 
-        public async Task<List<string>> RetornaDescricaoTabelas(GeraClasse geraClasse)
+        #region Retorna Descrição das Tabelas.
+        public async Task<List<string>> RetornaDescricaoTabelas(object objeto)
         {
-            return await _linksApi.RetornaDescricaoTabelas(geraClasse);
+            return await _links.RetornaDescricaoTabelas(objeto);
         }
+        #endregion Retorna Descrição das Tabelas.
+
         #region Carregar Lista de items da IDE de Desenvolvimento, Estilo do Formulário e Banco de Dados.
         public List<SelectListItem> CarregaObjetosSelectListItem(List<string> items)
         {

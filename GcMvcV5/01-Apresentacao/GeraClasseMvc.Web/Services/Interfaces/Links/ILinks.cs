@@ -1,13 +1,13 @@
-﻿using GeraClasseMvc.Api.Models;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using System.Net.Http;
 using System.Threading.Tasks;
 
 namespace GeraClasseMvc.Web.Services.Interfaces
 {
     /// <summary>
-    /// Interface ILinksApi Responsável pela comunicação entre o Front-End e o API.
+    /// Interface ILinks Responsável pela comunicação entre o Front-End e o API do GeraClasse.
     /// </summary>
-    public interface ILinksApi
+    public interface ILinks
     {
         /// <summary>
         /// Método genérico para realizar chamadas via httpclient e carregar as propriedade de listagem.
@@ -18,8 +18,16 @@ namespace GeraClasseMvc.Web.Services.Interfaces
         /// <summary>
         /// Método responsável por retornar todas as tabelas contidas no metadata.
         /// </summary>
-        /// <param name="geraClasse"></param>
+        /// <param name="objeto"></param>
         /// <returns>Listage dos nomes das tabelas.</returns>
-        Task<List<string>> RetornaDescricaoTabelas(GeraClasse geraClasse);
+        Task<List<string>> RetornaDescricaoTabelas(object objeto);
+        /// <summary>
+        /// Inicializa Instâcia de HTTPClIENT.
+        /// </summary
+        HttpClient InicializaInstacia();
+        /// <summary>
+        /// Converte um objeto baseado em classe para o tipo StringContent.
+        /// </summary>
+        StringContent ObjetoParaStringContent(HttpClient httpClient, object objeto);
     }
 }
